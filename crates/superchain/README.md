@@ -18,14 +18,14 @@ Add the following to your `Cargo.toml`.
 
 ```toml
 [dependencies]
-superchain = "0.1"
+superchain = "0.2"
 ```
 
 To make make `superchain` `no_std`, toggle `default-features` off like so.
 
 ```toml
 [dependencies]
-superchain = { version = "0.1", default-features = false }
+superchain = { version = "0.2", default-features = false }
 ```
 
 ## Example
