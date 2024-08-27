@@ -1,4 +1,4 @@
-name: Release Rust Crates
+name: Release Crates
 
 on:
   workflow_dispatch:
