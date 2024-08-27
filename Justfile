@@ -56,7 +56,14 @@ test-features *args='':
 test-docs:
   cargo test --doc --all --locked
 
-# Release the crate
-release:
-  cargo release publish --execute --no-confirm
+# Release the primitives crate
+release-primitives:
+  cargo release publish --package superchain-primitives --execute --no-confirm
 
+# Release the registry crate
+release-registry:
+  cargo release publish --package superchain-registry --execute --no-confirm
+
+# Release the superchain crate
+release-superchain:
+  cargo release publish --package superchain --execute --no-confirm
