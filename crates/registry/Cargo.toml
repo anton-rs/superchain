@@ -1,0 +1,27 @@
+[package]
+name = "superchain-registry"
+description = "Bindings for the Superchain Registry"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+# Misc
+lazy_static.workspace = true
+hashbrown.workspace = true
+
+# Workspace Dependencies
+superchain-primitives = { workspace = true, features = ["serde"] }
+
+# Serialization
+serde.workspace = true
+toml.workspace = true
+
+[dev-dependencies]
+alloy-primitives.workspace = true
+
+[features]
+default = ["std"]
+std = ["superchain-primitives/std"]

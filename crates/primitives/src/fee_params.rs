@@ -87,4 +87,3 @@ pub const OP_CANYON_BASE_FEE_PARAMS: BaseFeeParams = BaseFeeParams {
     max_change_denominator: OP_MAINNET_EIP1559_BASE_FEE_MAX_CHANGE_DENOMINATOR_CANYON,
     elasticity_multiplier: OP_MAINNET_EIP1559_DEFAULT_ELASTICITY_MULTIPLIER,
 };
-
