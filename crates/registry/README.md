@@ -14,7 +14,7 @@ Add the following to your `Cargo.toml`.
 
 ```toml
 [dependencies]
-superchain-registry = "0.2"
+superchain-registry = "0.3"
 ```
 
 To disable `std` and make `superchain-registry` `no_std` compatible,
@@ -22,7 +22,7 @@ simply toggle `default-features` off.
 
 ```toml
 [dependencies]
-superchain-registry = { version = "0.2", default-features = false }
+superchain-registry = { version = "0.3", default-features = false }
 ```
 
 ## Example

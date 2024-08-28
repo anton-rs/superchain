@@ -17,19 +17,19 @@ Add the following to your `Cargo.toml`.
 
 ```toml
 [dependencies]
-superchain-primitives = "0.2"
+superchain-primitives = "0.3"
 ```
 
 To disable default feature flags, disable the `default-features` field like so.
 
 ```toml
-superchain-primitives = { version = "0.2", default-features = false }
+superchain-primitives = { version = "0.3", default-features = false }
 ```
 
 Features can then be enabled individually.
 
 ```toml
-superchain-primitives = { version = "0.2", default-features = false, features = [ "std" ] }
+superchain-primitives = { version = "0.3", default-features = false, features = [ "std" ] }
 ```
 
 ## Example
