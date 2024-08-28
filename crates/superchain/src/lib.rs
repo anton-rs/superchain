@@ -10,8 +10,8 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(not(test), warn(unused_crate_dependencies))]
 
-pub use superchain_primitives::*;
 pub use superchain_primitives as primitives;
+pub use superchain_primitives::*;
 
 #[cfg(feature = "serde")]
 pub use superchain_registry as registry;
