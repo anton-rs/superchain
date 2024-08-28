@@ -10,12 +10,11 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(not(test), warn(unused_crate_dependencies))]
 
-/// Re-export types from [superchain_primitives].
+pub use superchain_primitives as primitives;
 pub use superchain_primitives::*;
 
-/// Re-export [superchain_registry].
 #[cfg(feature = "serde")]
-pub use superchain_registry;
+pub use superchain_registry as registry;
 
 #[cfg(feature = "serde")]
 pub use superchain_registry::{
