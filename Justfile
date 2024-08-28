@@ -11,6 +11,10 @@ default:
 # Runs everything needed for ci
 ci: fmt lint tests
 
+# Generate file bindings for the superchain-registry
+bind:
+  ./scripts/bind.sh
+
 # Run all tests
 tests: test test-features test-docs
 
