@@ -21,8 +21,12 @@ anyhow.workspace = true
 # `serde` feature flag dependencies
 serde = { workspace = true, optional = true }
 serde_repr = { workspace = true, optional = true }
+serde_json = { workspace = true, optional = true }
+
+[dev-dependencies]
+toml.workspace = true
 
 [features]
 default = ["std", "serde"]
 std = []
-serde = ["dep:serde", "dep:serde_repr", "alloy-eips/serde", "alloy-consensus/serde", "alloy-primitives/serde"]
+serde = ["dep:serde", "dep:serde_repr", "dep:serde_json", "alloy-eips/serde", "alloy-consensus/serde", "alloy-primitives/serde"]

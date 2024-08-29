@@ -92,11 +92,11 @@ mod tests {
             batch_inbox_addr: address!("ff00000000000000000000000000000000008453"),
             genesis: ChainGenesis {
                 l1: BlockID {
-                    number: 17481768,
+                    number: uint!(17481768_U64),
                     hash: b256!("5c13d307623a926cd31415036c8b7fa14572f9dac64528e857a470511fc30771"),
                 },
                 l2: BlockID {
-                    number: 0,
+                    number: uint!(0_U64),
                     hash: b256!("f712aa9241cc24369b143cf6dce85f0902a9731e70d66818a3a5845b296c73dd"),
                 },
                 l2_time: 1686789347,

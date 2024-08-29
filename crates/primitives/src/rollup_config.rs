@@ -334,11 +334,11 @@ pub const OP_MAINNET_CONFIG: RollupConfig = RollupConfig {
     genesis: ChainGenesis {
         l1: BlockID {
             hash: b256!("438335a20d98863a4c0c97999eb2481921ccd28553eac6f913af7c12aec04108"),
-            number: 17_422_590_u64,
+            number: uint!(17_422_590_U64),
         },
         l2: BlockID {
             hash: b256!("dbf6a80fef073de06add9b0d14026d6e5a86c85f6d102c36d3d8e9cf89c2afd3"),
-            number: 105_235_063_u64,
+            number: uint!(105_235_063_U64),
         },
         l2_time: 1_686_068_903_u64,
         system_config: Some(SystemConfig {
@@ -381,11 +381,11 @@ pub const OP_SEPOLIA_CONFIG: RollupConfig = RollupConfig {
     genesis: ChainGenesis {
         l1: BlockID {
             hash: b256!("48f520cf4ddaf34c8336e6e490632ea3cf1e5e93b0b2bc6e917557e31845371b"),
-            number: 4071408,
+            number: uint!(4071408_U64),
         },
         l2: BlockID {
             hash: b256!("102de6ffb001480cc9b8b548fd05c34cd4f46ae4aa91759393db90ea0409887d"),
-            number: 0,
+            number: uint!(0_U64),
         },
         l2_time: 1691802540,
         system_config: Some(SystemConfig {
@@ -428,11 +428,11 @@ pub const BASE_MAINNET_CONFIG: RollupConfig = RollupConfig {
     genesis: ChainGenesis {
         l1: BlockID {
             hash: b256!("5c13d307623a926cd31415036c8b7fa14572f9dac64528e857a470511fc30771"),
-            number: 17_481_768_u64,
+            number: uint!(17_481_768_U64),
         },
         l2: BlockID {
             hash: b256!("f712aa9241cc24369b143cf6dce85f0902a9731e70d66818a3a5845b296c73dd"),
-            number: 0_u64,
+            number: uint!(0_U64),
         },
         l2_time: 1686789347_u64,
         system_config: Some(SystemConfig {
@@ -475,11 +475,11 @@ pub const BASE_SEPOLIA_CONFIG: RollupConfig = RollupConfig {
     genesis: ChainGenesis {
         l1: BlockID {
             hash: b256!("cac9a83291d4dec146d6f7f69ab2304f23f5be87b1789119a0c5b1e4482444ed"),
-            number: 4370868,
+            number: uint!(4370868_U64),
         },
         l2: BlockID {
             hash: b256!("0dcc9e089e30b90ddfc55be9a37dd15bc551aeee999d2e2b51414c54eaf934e4"),
-            number: 0,
+            number: uint!(0_U64),
         },
         l2_time: 1695768288,
         system_config: Some(SystemConfig {
