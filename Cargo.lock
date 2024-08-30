@@ -26,10 +26,10 @@ version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7198a527b4c4762cb88d54bcaeb0428f4298b72552c9c8ec4af614b4a4990c59"
 dependencies = [
- "alloy-eips",
+ "alloy-eips 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "alloy-primitives",
  "alloy-rlp",
- "alloy-serde",
+ "alloy-serde 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
 ]
 
@@ -65,10 +65,24 @@ dependencies = [
  "alloy-eip7702",
  "alloy-primitives",
  "alloy-rlp",
- "alloy-serde",
+ "alloy-serde 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "c-kzg",
  "serde",
  "sha2",
+]
+
+[[package]]
+name = "alloy-eips"
+version = "0.3.0"
+source = "git+https://github.com/refcell/alloy?branch=rf/fix/alloy-eips#777783a3cca6157e41a72e0d5b668ff28aa36816"
+dependencies = [
+ "alloy-eip2930",
+ "alloy-eip7702",
+ "alloy-primitives",
+ "alloy-rlp",
+ "alloy-serde 0.3.0 (git+https://github.com/refcell/alloy?branch=rf/fix/alloy-eips)",
+ "c-kzg",
+ "serde",
 ]
 
 [[package]]
@@ -78,7 +92,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "210f4b358d724f85df8adaec753c583defb58169ad3cad3d48c80d1a25a6ff0e"
 dependencies = [
  "alloy-primitives",
- "alloy-serde",
+ "alloy-serde 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
 ]
 
@@ -126,6 +140,16 @@ name = "alloy-serde"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bfd260ede54f0b53761fdd04133acc10ae70427f66a69aa9590529bbd066cd58"
+dependencies = [
+ "alloy-primitives",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "alloy-serde"
+version = "0.3.0"
+source = "git+https://github.com/refcell/alloy?branch=rf/fix/alloy-eips#777783a3cca6157e41a72e0d5b668ff28aa36816"
 dependencies = [
  "alloy-primitives",
  "serde",
@@ -701,7 +725,7 @@ name = "superchain-primitives"
 version = "0.3.2"
 dependencies = [
  "alloy-consensus",
- "alloy-eips",
+ "alloy-eips 0.3.0 (git+https://github.com/refcell/alloy?branch=rf/fix/alloy-eips)",
  "alloy-genesis",
  "alloy-primitives",
  "alloy-sol-types",
