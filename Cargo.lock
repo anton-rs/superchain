@@ -74,13 +74,13 @@ dependencies = [
 [[package]]
 name = "alloy-eips"
 version = "0.3.0"
-source = "git+https://github.com/refcell/alloy?branch=rf/fix/alloy-eips#777783a3cca6157e41a72e0d5b668ff28aa36816"
+source = "git+https://github.com/alloy-rs/alloy#24e97da7fa86d6cd49b418a1c89702648c36d36b"
 dependencies = [
  "alloy-eip2930",
  "alloy-eip7702",
  "alloy-primitives",
  "alloy-rlp",
- "alloy-serde 0.3.0 (git+https://github.com/refcell/alloy?branch=rf/fix/alloy-eips)",
+ "alloy-serde 0.3.0 (git+https://github.com/alloy-rs/alloy)",
  "c-kzg",
  "serde",
 ]
@@ -149,7 +149,7 @@ dependencies = [
 [[package]]
 name = "alloy-serde"
 version = "0.3.0"
-source = "git+https://github.com/refcell/alloy?branch=rf/fix/alloy-eips#777783a3cca6157e41a72e0d5b668ff28aa36816"
+source = "git+https://github.com/alloy-rs/alloy#24e97da7fa86d6cd49b418a1c89702648c36d36b"
 dependencies = [
  "alloy-primitives",
  "serde",
@@ -725,7 +725,7 @@ name = "superchain-primitives"
 version = "0.3.2"
 dependencies = [
  "alloy-consensus",
- "alloy-eips 0.3.0 (git+https://github.com/refcell/alloy?branch=rf/fix/alloy-eips)",
+ "alloy-eips 0.3.0 (git+https://github.com/alloy-rs/alloy)",
  "alloy-genesis",
  "alloy-primitives",
  "alloy-sol-types",
