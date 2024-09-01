@@ -18,11 +18,20 @@ alloy-eips.workspace = true
 # Misc
 anyhow.workspace = true
 
-# `serde` feature flag dependencies
+# `serde` feature dependencies
 serde = { workspace = true, optional = true }
 serde_repr = { workspace = true, optional = true }
+
+# `arbitrary` feature dependencies
+arbitrary = { workspace = true, optional = true }
+
+[dev-dependencies]
+arbtest.workspace = true
+arbitrary.workspace = true
+alloy-primitives = { workspace = true, features = ["arbitrary"] }
 
 [features]
 default = ["std", "serde"]
 std = []
+arbitrary = ["dep:arbitrary", "alloy-primitives/arbitrary"]
 serde = ["dep:serde", "dep:serde_repr", "alloy-eips/serde", "alloy-consensus/serde", "alloy-primitives/serde"]
