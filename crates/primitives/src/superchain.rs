@@ -9,6 +9,7 @@ use crate::HardForkConfiguration;
 /// A superchain configuration.
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct Superchain {
     /// Superchain identifier, without capitalization or display changes.
     pub name: String,
@@ -21,6 +22,7 @@ pub struct Superchain {
 /// A superchain configuration file format
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct SuperchainConfig {
     /// Superchain name (e.g. "Mainnet")
     #[cfg_attr(feature = "serde", serde(rename = "Name"))]
@@ -42,6 +44,7 @@ pub struct SuperchainConfig {
 /// Superchain L1 anchor information
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct SuperchainL1Info {
     /// L1 chain ID
     #[cfg_attr(feature = "serde", serde(rename = "ChainID"))]
@@ -60,6 +63,7 @@ pub struct SuperchainL1Info {
     feature = "serde",
     derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr)
 )]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 #[repr(u8)]
 pub enum SuperchainLevel {
     /// Frontier chains are chains with customizations beyond the

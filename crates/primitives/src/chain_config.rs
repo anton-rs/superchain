@@ -9,6 +9,7 @@ use alloy_primitives::Address;
 /// AltDA configuration.
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct AltDAConfig {
     /// AltDA challenge address
     pub da_challenge_address: Option<Address>,
@@ -21,6 +22,7 @@ pub struct AltDAConfig {
 /// Hardfork configuration.
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct HardForkConfiguration {
     /// Canyon hardfork activation time
     pub canyon_time: Option<u64>,
@@ -39,6 +41,7 @@ pub struct HardForkConfiguration {
 /// A chain configuration.
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct ChainConfig {
     /// Chain name (e.g. "Base")
     #[cfg_attr(feature = "serde", serde(rename = "Name"))]
