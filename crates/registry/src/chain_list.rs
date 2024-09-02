@@ -57,7 +57,7 @@ pub mod tests {
     #[test]
     fn read_chain_list_file() {
         let chain_list = include_str!("../etc/chainList.toml");
-        let chains: ChainList = toml::from_str(chain_list).unwrap();
+        let chains: ChainList = basic_toml::from_str(chain_list).unwrap();
         let base_chain = chains.chains.iter().find(|c| c.name == "Base").unwrap();
         assert_eq!(base_chain.chain_id, 8453);
     }

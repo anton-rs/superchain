@@ -124,7 +124,8 @@ alloy-consensus = { version = "0.3", default-features = false }
 alloy-eips = { version = "0.3", default-features = false }
 
 # Serialization
-toml = { version = "0.8.14" }
+basic-toml = "0.1.9"
+# toml = { version = "0.8.14", default-features = false }
 serde_repr = "0.1"
 serde = { version = "1.0.203", default-features = false, features = ["derive", "alloc"] }
 
