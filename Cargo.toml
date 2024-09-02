@@ -1,5 +1,5 @@
 [workspace.package]
-version = "0.3.2"
+version = "0.3.3"
 edition = "2021"
 rust-version = "1.80"
 authors = ["anton-rs"]
@@ -113,8 +113,8 @@ incremental = false
 
 [workspace.dependencies]
 # Workspace
-superchain-registry = { path = "crates/registry", version = "0.3.2", default-features = false }
-superchain-primitives = { path = "crates/primitives", version = "0.3.2", default-features = false }
+superchain-registry = { path = "crates/registry", version = "0.3.3", default-features = false }
+superchain-primitives = { path = "crates/primitives", version = "0.3.3", default-features = false }
 
 # Alloy
 alloy-sol-types = { version = "0.8.0", default-features = false }

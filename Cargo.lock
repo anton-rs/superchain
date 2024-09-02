@@ -690,7 +690,7 @@ checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
 
 [[package]]
 name = "superchain"
-version = "0.3.2"
+version = "0.3.3"
 dependencies = [
  "superchain-primitives",
  "superchain-registry",
@@ -698,7 +698,7 @@ dependencies = [
 
 [[package]]
 name = "superchain-primitives"
-version = "0.3.2"
+version = "0.3.3"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -712,7 +712,7 @@ dependencies = [
 
 [[package]]
 name = "superchain-registry"
-version = "0.3.2"
+version = "0.3.3"
 dependencies = [
  "alloy-primitives",
  "hashbrown",
