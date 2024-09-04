@@ -6,6 +6,7 @@ use core::fmt::Display;
 /// Block identifier.
 #[derive(Debug, Clone, Copy, Eq, Hash, PartialEq, Default)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "serde", serde(rename_all = "PascalCase"))]
 pub struct BlockID {
     /// Block hash
     pub hash: B256,

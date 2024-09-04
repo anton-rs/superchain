@@ -11,6 +11,7 @@ pub struct ChainList {
 
 /// A Chain Definition.
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Chain {
     /// The name of the chain.
     pub name: String,
@@ -24,6 +25,8 @@ pub struct Chain {
     pub explorers: Vec<String>,
     /// The Superchain Level.
     pub superchain_level: u64,
+    /// The data avilability type.
+    pub data_availability_type: String,
     /// The Superchain Parent.
     pub parent: SuperchainParent,
 }
@@ -56,9 +59,9 @@ pub mod tests {
 
     #[test]
     fn read_chain_list_file() {
-        let chain_list = include_str!("../etc/chainList.toml");
-        let chains: ChainList = toml::from_str(chain_list).unwrap();
-        let base_chain = chains.chains.iter().find(|c| c.name == "Base").unwrap();
+        let chain_list = include_str!("../etc/chainList.json");
+        let chains: Vec<Chain> = serde_json::from_str(chain_list).unwrap();
+        let base_chain = chains.iter().find(|c| c.name == "Base").unwrap();
         assert_eq!(base_chain.chain_id, 8453);
     }
 }

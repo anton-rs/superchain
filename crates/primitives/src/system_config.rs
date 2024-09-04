@@ -19,6 +19,7 @@ pub const CONFIG_UPDATE_EVENT_VERSION_0: B256 = B256::ZERO;
 #[cfg_attr(feature = "serde", serde(rename_all = "camelCase"))]
 pub struct SystemConfig {
     /// Batcher address
+    #[cfg_attr(feature = "serde", serde(rename = "batcherAddr"))]
     pub batcher_address: Address,
     /// Fee overhead value
     pub overhead: U256,
