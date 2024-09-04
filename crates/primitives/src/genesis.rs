@@ -7,6 +7,7 @@ use alloy_primitives::Bytes;
 /// Chain genesis information.
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct ChainGenesis {
     /// L1 genesis block
     #[cfg_attr(feature = "serde", serde(rename = "L1"))]

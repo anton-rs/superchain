@@ -17,6 +17,7 @@ pub const CONFIG_UPDATE_EVENT_VERSION_0: B256 = B256::ZERO;
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[cfg_attr(feature = "serde", serde(rename_all = "camelCase"))]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct SystemConfig {
     /// Batcher address
     #[cfg_attr(feature = "serde", serde(rename = "batcherAddr"))]
@@ -219,6 +220,7 @@ impl SystemConfig {
 /// System accounts
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct SystemAccounts {
     /// The address that can deposit attributes
     pub attributes_depositor: Address,
