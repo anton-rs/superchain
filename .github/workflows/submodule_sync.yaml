@@ -35,7 +35,7 @@ jobs:
           body: |
             ### Description
             
-            Automated PR to updates git submodules.
+            Automated PR to update git submodules.
           labels: |
             A-submodules
             C-bot
