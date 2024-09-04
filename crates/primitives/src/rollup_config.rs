@@ -26,6 +26,7 @@ pub const FJORD_MAX_SEQUENCER_DRIFT: u64 = 1800;
 /// The channel timeout once the Granite hardfork is active.
 pub const GRANITE_CHANNEL_TIMEOUT: u64 = 50;
 
+#[cfg(feature = "serde")]
 fn default_granite_channel_timeout() -> u64 {
     GRANITE_CHANNEL_TIMEOUT
 }

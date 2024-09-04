@@ -34,5 +34,5 @@ alloy-primitives = { workspace = true, features = ["arbitrary"] }
 [features]
 default = ["std", "serde"]
 std = []
-arbitrary = ["dep:arbitrary", "alloy-primitives/arbitrary"]
+arbitrary = ["std", "dep:arbitrary", "alloy-primitives/arbitrary"]
 serde = ["dep:serde", "dep:serde_repr", "alloy-eips/serde", "alloy-consensus/serde", "alloy-primitives/serde"]

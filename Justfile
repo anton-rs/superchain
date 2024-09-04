@@ -3,6 +3,7 @@ alias t := tests
 alias l := lint
 alias f := fmt
 alias b := build
+alias h := hack
 
 # default recipe to display help information
 default:
@@ -21,6 +22,10 @@ bind:
 
 # Run all tests
 tests: test test-features test-docs
+
+# Runs `cargo hack check` against the workspace
+hack:
+  cargo hack check --feature-powerset --no-dev-deps
 
 # Formats
 fmt: fmt-fix fmt-check
