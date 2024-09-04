@@ -1442,6 +1442,7 @@ dependencies = [
  "arbitrary",
  "arbtest",
  "serde",
+ "serde_json",
  "serde_repr",
 ]
 
