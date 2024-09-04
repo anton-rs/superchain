@@ -13,15 +13,15 @@ lazy_static.workspace = true
 hashbrown.workspace = true
 
 # Workspace Dependencies
-superchain-primitives = { workspace = true, features = ["serde"] }
+superchain-primitives = { workspace = true, default-features = false, features = ["serde"] }
 
 # Serialization
 serde.workspace = true
-basic-toml.workspace = true
+serde_json.workspace = true
 
 [dev-dependencies]
 alloy-primitives.workspace = true
 
 [features]
 default = ["std"]
-std = ["superchain-primitives/std"]
+std = ["superchain-primitives/std", "serde_json/std"]

@@ -117,8 +117,8 @@ superchain-registry = { path = "crates/registry", version = "0.3.3", default-fea
 superchain-primitives = { path = "crates/primitives", version = "0.3.3", default-features = false }
 
 # Alloy
-alloy-sol-types = { version = "0.8.0", default-features = false }
-alloy-primitives = { version = "0.8.0", default-features = false }
+alloy-sol-types = { version = "0.8", default-features = false }
+alloy-primitives = { version = "0.8", default-features = false }
 alloy-genesis = { version = "0.3", default-features = false }
 alloy-consensus = { version = "0.3", default-features = false }
 alloy-eips = { version = "0.3", default-features = false }
@@ -127,6 +127,7 @@ alloy-eips = { version = "0.3", default-features = false }
 basic-toml = "0.1.9"
 serde_repr = "0.1"
 serde = { version = "1.0.203", default-features = false, features = ["derive", "alloc"] }
+serde_json = { version = "1.0.66", default-features = false, features = ["raw_value"] }
 
 # Misc
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }

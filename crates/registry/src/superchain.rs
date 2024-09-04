@@ -1,6 +1,6 @@
 //! Contains the full superchain data.
 
-use super::{Chain, ChainConfig, ChainList, HashMap, RollupConfig, Superchain};
+use super::{Chain, ChainConfig, HashMap, RollupConfig, Superchain};
 use alloc::vec::Vec;
 
 /// A list of Hydrated Superchain Configs.
@@ -25,20 +25,20 @@ pub struct Registry {
 
 impl Registry {
     /// Read the chain list.
-    pub fn read_chain_list() -> ChainList {
-        let chain_list = include_str!("../etc/chainList.toml");
-        basic_toml::from_str(chain_list).expect("Failed to read chain list")
+    pub fn read_chain_list() -> Vec<Chain> {
+        let chain_list = include_str!("../etc/chainList.json");
+        serde_json::from_str(chain_list).expect("Failed to read chain list")
     }
 
     /// Read superchain configs.
     pub fn read_superchain_configs() -> Superchains {
-        let superchain_configs = include_str!("../etc/configs.toml");
-        basic_toml::from_str(superchain_configs).expect("Failed to read superchain configs")
+        let superchain_configs = include_str!("../etc/configs.json");
+        serde_json::from_str(superchain_configs).expect("Failed to read superchain configs")
     }
 
     /// Initialize the superchain configurations from the chain list.
     pub fn from_chain_list() -> Self {
-        let chains = Self::read_chain_list().chains;
+        let chains = Self::read_chain_list();
         let superchains = Self::read_superchain_configs();
         let mut op_chains = HashMap::new();
         let mut rollup_configs = HashMap::new();
@@ -109,7 +109,7 @@ mod tests {
                     ..Default::default()
                 }),
             },
-            superchain: String::from(""),
+            superchain: String::from("mainnet"),
             chain: String::from(""),
             hardfork_configuration: HardForkConfiguration {
                 canyon_time: Some(1704992401),

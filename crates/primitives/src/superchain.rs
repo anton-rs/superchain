@@ -23,12 +23,16 @@ pub struct Superchain {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct SuperchainConfig {
     /// Superchain name (e.g. "Mainnet")
+    #[cfg_attr(feature = "serde", serde(rename = "Name"))]
     pub name: String,
     /// Superchain L1 anchor information
+    #[cfg_attr(feature = "serde", serde(rename = "L1"))]
     pub l1: SuperchainL1Info,
     /// Optional addresses for the superchain-wide default protocol versions contract.
+    #[cfg_attr(feature = "serde", serde(rename = "ProtocolVersionsAddr"))]
     pub protocol_versions_addr: Option<Address>,
     /// Optional address for the superchain-wide default superchain config contract.
+    #[cfg_attr(feature = "serde", serde(rename = "SuperchainConfigAddr"))]
     pub superchain_config_addr: Option<Address>,
     /// Hardfork Configuration. These values may be overridden by individual chains.
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -40,10 +44,13 @@ pub struct SuperchainConfig {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct SuperchainL1Info {
     /// L1 chain ID
+    #[cfg_attr(feature = "serde", serde(rename = "ChainID"))]
     pub chain_id: u64,
     /// L1 chain public RPC endpoint
+    #[cfg_attr(feature = "serde", serde(rename = "PublicRPC"))]
     pub public_rpc: String,
     /// L1 chain explorer RPC endpoint
+    #[cfg_attr(feature = "serde", serde(rename = "Explorer"))]
     pub explorer: String,
 }
 

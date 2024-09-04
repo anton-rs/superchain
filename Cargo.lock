@@ -203,15 +203,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0c4b4d0bd25bd0b74681c0ad21497610ce1b7c91b1022cd21c80c6fbdd9476b0"
 
 [[package]]
-name = "basic-toml"
-version = "0.1.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "823388e228f614e9558c6804262db37960ec8821856535f5c3f59913140558f8"
-dependencies = [
- "serde",
-]
-
-[[package]]
 name = "bitflags"
 version = "2.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -724,10 +715,10 @@ name = "superchain-registry"
 version = "0.3.3"
 dependencies = [
  "alloy-primitives",
- "basic-toml",
  "hashbrown",
  "lazy_static",
  "serde",
+ "serde_json",
  "superchain-primitives",
 ]
 

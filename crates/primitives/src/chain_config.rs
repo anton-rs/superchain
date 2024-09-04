@@ -41,31 +41,39 @@ pub struct HardForkConfiguration {
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ChainConfig {
     /// Chain name (e.g. "Base")
+    #[cfg_attr(feature = "serde", serde(rename = "Name"))]
     pub name: String,
     /// Chain ID
+    #[cfg_attr(feature = "serde", serde(rename = "l2_chain_id"))]
     pub chain_id: u64,
     /// L1 chain ID
     #[cfg_attr(feature = "serde", serde(skip))]
     pub l1_chain_id: u64,
     /// Chain public RPC endpoint
+    #[cfg_attr(feature = "serde", serde(rename = "PublicRPC"))]
     pub public_rpc: String,
     /// Chain sequencer RPC endpoint
+    #[cfg_attr(feature = "serde", serde(rename = "SequencerRPC"))]
     pub sequencer_rpc: String,
     /// Chain explorer HTTP endpoint
+    #[cfg_attr(feature = "serde", serde(rename = "Explorer"))]
     pub explorer: String,
     /// Level of integration with the superchain.
+    #[cfg_attr(feature = "serde", serde(rename = "SuperchainLevel"))]
     pub superchain_level: SuperchainLevel,
     /// Time of opt-in to the Superchain.
     /// If superchain_time is set, hardforks times after superchain_time
     /// will be inherited from the superchain-wide config.
+    #[cfg_attr(feature = "serde", serde(rename = "SuperchainTime"))]
     pub superchain_time: Option<u64>,
     /// Chain-specific batch inbox address
+    #[cfg_attr(feature = "serde", serde(rename = "batch_inbox_address"))]
     pub batch_inbox_addr: Address,
     /// Chain-specific genesis information
     pub genesis: ChainGenesis,
     /// Superchain is a simple string to identify the superchain.
     /// This is implied by directory structure, and not encoded in the config file itself.
-    #[cfg_attr(feature = "serde", serde(skip))]
+    #[cfg_attr(feature = "serde", serde(rename = "Superchain"))]
     pub superchain: String,
     /// Chain is a simple string to identify the chain, within its superchain context.
     /// This matches the resource filename, it is not encoded in the config file itself.
@@ -77,6 +85,7 @@ pub struct ChainConfig {
     /// Optional AltDA feature
     pub alt_da: Option<AltDAConfig>,
     /// Addresses
+    #[cfg_attr(feature = "serde", serde(rename = "Addresses"))]
     pub addresses: Option<AddressList>,
 }
 
