@@ -135,7 +135,7 @@ Add the following to your `Cargo.toml`.
 
 ```toml
 [dependencies]
-superchain = "0.2"
+superchain = "0.3"
 ```
 
 To make `superchain` `no_std`, toggle `default-features` off like so.
@@ -147,7 +147,7 @@ To make `superchain` `no_std`, toggle `default-features` off like so.
 
 ```toml
 [dependencies]
-superchain = { version = "0.2", default-features = false }
+superchain = { version = "0.3", default-features = false }
 ```
 
 The re-exported [`superchain-registry`][src] exposes lazily defined mappings
