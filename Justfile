@@ -11,6 +11,10 @@ default:
 # Runs everything needed for ci
 ci: fmt lint tests
 
+# Updates the git submodule source
+source:
+  git submodule update --remote
+
 # Generate file bindings for the superchain-registry
 bind:
   ./scripts/bind.sh
