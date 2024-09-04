@@ -270,6 +270,24 @@ mod test {
     }
 
     #[test]
+    fn test_system_config_serde() {
+        let sc_str = r#"{
+          "batcherAddr": "0x6887246668a3b87F54DeB3b94Ba47a6f63F32985",
+          "overhead": "0x00000000000000000000000000000000000000000000000000000000000000bc",
+          "scalar": "0x00000000000000000000000000000000000000000000000000000000000a6fe0",
+          "gasLimit": 30000000
+        }"#;
+        let system_config: SystemConfig = serde_json::from_str(sc_str).unwrap();
+        assert_eq!(
+            system_config.batcher_address,
+            address!("6887246668a3b87F54DeB3b94Ba47a6f63F32985")
+        );
+        assert_eq!(system_config.overhead, U256::from(0xbc));
+        assert_eq!(system_config.scalar, U256::from(0xa6fe0));
+        assert_eq!(system_config.gas_limit, 30000000);
+    }
+
+    #[test]
     fn test_system_config_update_batcher_log() {
         const UPDATE_TYPE: B256 =
             b256!("0000000000000000000000000000000000000000000000000000000000000000");
