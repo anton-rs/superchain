@@ -23,18 +23,15 @@ pub struct Superchain {
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
+#[cfg_attr(feature = "serde", serde(rename_all = "PascalCase"))]
 pub struct SuperchainConfig {
     /// Superchain name (e.g. "Mainnet")
-    #[cfg_attr(feature = "serde", serde(rename = "Name"))]
     pub name: String,
     /// Superchain L1 anchor information
-    #[cfg_attr(feature = "serde", serde(rename = "L1"))]
     pub l1: SuperchainL1Info,
     /// Optional addresses for the superchain-wide default protocol versions contract.
-    #[cfg_attr(feature = "serde", serde(rename = "ProtocolVersionsAddr"))]
     pub protocol_versions_addr: Option<Address>,
     /// Optional address for the superchain-wide default superchain config contract.
-    #[cfg_attr(feature = "serde", serde(rename = "SuperchainConfigAddr"))]
     pub superchain_config_addr: Option<Address>,
     /// Hardfork Configuration. These values may be overridden by individual chains.
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -45,6 +42,7 @@ pub struct SuperchainConfig {
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
+#[cfg_attr(feature = "serde", serde(rename_all = "PascalCase"))]
 pub struct SuperchainL1Info {
     /// L1 chain ID
     #[cfg_attr(feature = "serde", serde(rename = "ChainID"))]
@@ -53,7 +51,6 @@ pub struct SuperchainL1Info {
     #[cfg_attr(feature = "serde", serde(rename = "PublicRPC"))]
     pub public_rpc: String,
     /// L1 chain explorer RPC endpoint
-    #[cfg_attr(feature = "serde", serde(rename = "Explorer"))]
     pub explorer: String,
 }
 
@@ -73,4 +70,80 @@ pub enum SuperchainLevel {
     /// standard OP Stack configuration and are considered "vanilla".
     #[default]
     Standard = 1,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use alloy_primitives::address;
+
+    fn ref_config() -> SuperchainConfig {
+        SuperchainConfig {
+            name: "Mainnet".to_string(),
+            l1: SuperchainL1Info {
+                chain_id: 1,
+                public_rpc: "https://ethereum-rpc.publicnode.com".to_string(),
+                explorer: "https://etherscan.io".to_string(),
+            },
+            protocol_versions_addr: Some(address!("8062AbC286f5e7D9428a0Ccb9AbD71e50d93b935")),
+            superchain_config_addr: Some(address!("95703e0982140D16f8ebA6d158FccEde42f04a4C")),
+            hardfork_defaults: HardForkConfiguration::default(),
+        }
+    }
+
+    #[test]
+    fn test_superchain_l1_info_serde() {
+        let l1_str = r#"{
+            "ChainID": 1,
+            "PublicRPC": "https://ethereum-rpc.publicnode.com",
+            "Explorer": "https://etherscan.io"
+          }"#;
+        let l1: SuperchainL1Info = serde_json::from_str(l1_str).unwrap();
+        assert_eq!(
+            l1,
+            SuperchainL1Info {
+                chain_id: 1,
+                public_rpc: "https://ethereum-rpc.publicnode.com".to_string(),
+                explorer: "https://etherscan.io".to_string(),
+            }
+        );
+    }
+
+    #[test]
+    fn test_superchain_config_serde() {
+        let cfg_str = r#"{
+            "Name": "Mainnet",
+            "L1": {
+              "ChainID": 1,
+              "PublicRPC": "https://ethereum-rpc.publicnode.com",
+              "Explorer": "https://etherscan.io"
+            },
+            "ProtocolVersionsAddr": "0x8062AbC286f5e7D9428a0Ccb9AbD71e50d93b935",
+            "SuperchainConfigAddr": "0x95703e0982140D16f8ebA6d158FccEde42f04a4C"
+          }"#;
+        let cfg: SuperchainConfig = serde_json::from_str(cfg_str).unwrap();
+        assert_eq!(cfg, ref_config());
+    }
+
+    #[test]
+    fn test_superchain_serde() {
+        let superchain_str = r#"{
+            "name": "Mainnet",
+            "config": {
+              "Name": "Mainnet",
+              "L1": {
+                "ChainID": 1,
+                "PublicRPC": "https://ethereum-rpc.publicnode.com",
+                "Explorer": "https://etherscan.io"
+              },
+              "ProtocolVersionsAddr": "0x8062AbC286f5e7D9428a0Ccb9AbD71e50d93b935",
+              "SuperchainConfigAddr": "0x95703e0982140D16f8ebA6d158FccEde42f04a4C"
+            },
+            "chains": []
+          }"#;
+        let superchain: Superchain = serde_json::from_str(superchain_str).unwrap();
+        assert_eq!(superchain.name, "Mainnet");
+        assert_eq!(superchain.config, ref_config());
+        assert!(superchain.chains.is_empty());
+    }
 }
