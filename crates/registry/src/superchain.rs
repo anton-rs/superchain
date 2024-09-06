@@ -100,7 +100,6 @@ mod tests {
                     hash: b256!("f712aa9241cc24369b143cf6dce85f0902a9731e70d66818a3a5845b296c73dd"),
                 },
                 l2_time: 1686789347,
-                extra_data: None,
                 system_config: Some(SystemConfig {
                     batcher_address: address!("5050F69a9786F081509234F1a7F4684b5E5b76C9"),
                     overhead: uint!(0xbc_U256),
