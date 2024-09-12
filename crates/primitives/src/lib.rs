@@ -12,8 +12,11 @@
 
 extern crate alloc;
 
-/// Re-export the Genesis type from [alloy_genesis].
+/// Re-export the [Genesis] type from [alloy_genesis].
 pub use alloy_genesis::Genesis;
+
+/// Re-export the [BlockNumHash] type from [alloy_eips].
+pub use alloy_eips::eip1898::BlockNumHash;
 
 pub mod superchain;
 pub use superchain::{Superchain, SuperchainConfig, SuperchainL1Info, SuperchainLevel};
@@ -47,9 +50,6 @@ pub use chain_config::{AltDAConfig, ChainConfig, HardForkConfiguration};
 
 pub mod genesis;
 pub use genesis::ChainGenesis;
-
-pub mod block;
-pub use block::BlockID;
 
 pub mod system_config;
 pub use system_config::SystemConfig;

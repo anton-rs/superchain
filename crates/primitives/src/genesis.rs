@@ -1,17 +1,16 @@
 //! Genesis types.
 
-use crate::BlockID;
 use crate::SystemConfig;
+use alloy_eips::eip1898::BlockNumHash;
 
 /// Chain genesis information.
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct ChainGenesis {
     /// L1 genesis block
-    pub l1: BlockID,
+    pub l1: BlockNumHash,
     /// L2 genesis block
-    pub l2: BlockID,
+    pub l2: BlockNumHash,
     /// Timestamp of the L2 genesis block
     pub l2_time: u64,
     /// Optional System configuration
@@ -25,11 +24,11 @@ mod tests {
 
     fn ref_genesis() -> ChainGenesis {
         ChainGenesis {
-            l1: BlockID {
+            l1: BlockNumHash {
                 hash: b256!("438335a20d98863a4c0c97999eb2481921ccd28553eac6f913af7c12aec04108"),
                 number: 17422590,
             },
-            l2: BlockID {
+            l2: BlockNumHash {
                 hash: b256!("dbf6a80fef073de06add9b0d14026d6e5a86c85f6d102c36d3d8e9cf89c2afd3"),
                 number: 105235063,
             },

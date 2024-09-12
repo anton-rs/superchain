@@ -1,10 +1,10 @@
 //! Rollup Config Types
 
 use alloy_eips::eip1559::BaseFeeParams;
+use alloy_eips::eip1898::BlockNumHash;
 use alloy_primitives::{address, b256, uint, Address};
 use anyhow::{anyhow, Result};
 
-use crate::block::BlockID;
 use crate::chain_config::ChainConfig;
 use crate::fee_params::{
     base_fee_params, canyon_base_fee_params, BASE_SEPOLIA_BASE_FEE_PARAMS,
@@ -334,11 +334,11 @@ impl RollupConfig {
 /// The [RollupConfig] for OP Mainnet.
 pub const OP_MAINNET_CONFIG: RollupConfig = RollupConfig {
     genesis: ChainGenesis {
-        l1: BlockID {
+        l1: BlockNumHash {
             hash: b256!("438335a20d98863a4c0c97999eb2481921ccd28553eac6f913af7c12aec04108"),
             number: 17_422_590_u64,
         },
-        l2: BlockID {
+        l2: BlockNumHash {
             hash: b256!("dbf6a80fef073de06add9b0d14026d6e5a86c85f6d102c36d3d8e9cf89c2afd3"),
             number: 105_235_063_u64,
         },
@@ -380,11 +380,11 @@ pub const OP_MAINNET_CONFIG: RollupConfig = RollupConfig {
 /// The [RollupConfig] for OP Sepolia.
 pub const OP_SEPOLIA_CONFIG: RollupConfig = RollupConfig {
     genesis: ChainGenesis {
-        l1: BlockID {
+        l1: BlockNumHash {
             hash: b256!("48f520cf4ddaf34c8336e6e490632ea3cf1e5e93b0b2bc6e917557e31845371b"),
             number: 4071408,
         },
-        l2: BlockID {
+        l2: BlockNumHash {
             hash: b256!("102de6ffb001480cc9b8b548fd05c34cd4f46ae4aa91759393db90ea0409887d"),
             number: 0,
         },
@@ -426,11 +426,11 @@ pub const OP_SEPOLIA_CONFIG: RollupConfig = RollupConfig {
 /// The [RollupConfig] for Base Mainnet.
 pub const BASE_MAINNET_CONFIG: RollupConfig = RollupConfig {
     genesis: ChainGenesis {
-        l1: BlockID {
+        l1: BlockNumHash {
             hash: b256!("5c13d307623a926cd31415036c8b7fa14572f9dac64528e857a470511fc30771"),
             number: 17_481_768_u64,
         },
-        l2: BlockID {
+        l2: BlockNumHash {
             hash: b256!("f712aa9241cc24369b143cf6dce85f0902a9731e70d66818a3a5845b296c73dd"),
             number: 0_u64,
         },
@@ -472,11 +472,11 @@ pub const BASE_MAINNET_CONFIG: RollupConfig = RollupConfig {
 /// The [RollupConfig] for Base Sepolia.
 pub const BASE_SEPOLIA_CONFIG: RollupConfig = RollupConfig {
     genesis: ChainGenesis {
-        l1: BlockID {
+        l1: BlockNumHash {
             hash: b256!("cac9a83291d4dec146d6f7f69ab2304f23f5be87b1789119a0c5b1e4482444ed"),
             number: 4370868,
         },
-        l2: BlockID {
+        l2: BlockNumHash {
             hash: b256!("0dcc9e089e30b90ddfc55be9a37dd15bc551aeee999d2e2b51414c54eaf934e4"),
             number: 0,
         },
@@ -664,11 +664,11 @@ mod tests {
         assert_eq!(
             config.genesis,
             ChainGenesis {
-                l1: BlockID {
+                l1: BlockNumHash {
                     hash: b256!("481724ee99b1f4cb71d826e2ec5a37265f460e9b112315665c977f4050b0af54"),
                     number: 10
                 },
-                l2: BlockID {
+                l2: BlockNumHash {
                     hash: b256!("88aedfbf7dea6bfa2c4ff315784ad1a7f145d8f650969359c003bbed68c87631"),
                     number: 0
                 },

@@ -9,7 +9,6 @@ use crate::HardForkConfiguration;
 /// A superchain configuration.
 #[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[cfg_attr(any(test, feature = "arbitrary"), derive(arbitrary::Arbitrary))]
 pub struct Superchain {
     /// Superchain identifier, without capitalization or display changes.
     pub name: String,
