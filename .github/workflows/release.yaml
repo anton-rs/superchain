@@ -17,12 +17,6 @@ jobs:
         run: cargo login $CARGO_REGISTRY_TOKEN
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
-      - name: Release superchain-primitives crate
-        run: just release-primitives
-        continue-on-error: true
-      - name: Release superchain-registry crate
-        run: just release-registry 
-        continue-on-error: true
       - name: Release superchain crate
         run: just release-superchain
         continue-on-error: true

@@ -1,7 +1,52 @@
 //! Contains the full superchain data.
 
-use super::{Chain, ChainConfig, HashMap, RollupConfig, Superchain};
-use alloc::vec::Vec;
+use super::Chain;
+use alloc::{string::String, vec::Vec};
+use alloy_primitives::Address;
+use hashbrown::HashMap;
+use op_alloy_genesis::{chain::HardForkConfiguration, ChainConfig, RollupConfig};
+
+/// A superchain configuration.
+#[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
+pub struct Superchain {
+    /// Superchain identifier, without capitalization or display changes.
+    pub name: String,
+    /// Superchain configuration file contents.
+    pub config: SuperchainConfig,
+    /// Chain IDs of chains that are part of this superchain.
+    pub chains: Vec<ChainConfig>,
+}
+
+/// A superchain configuration file format
+#[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct SuperchainConfig {
+    /// Superchain name (e.g. "Mainnet")
+    pub name: String,
+    /// Superchain L1 anchor information
+    pub l1: SuperchainL1Info,
+    /// Optional addresses for the superchain-wide default protocol versions contract.
+    pub protocol_versions_addr: Option<Address>,
+    /// Optional address for the superchain-wide default superchain config contract.
+    pub superchain_config_addr: Option<Address>,
+    /// Hardfork Configuration. These values may be overridden by individual chains.
+    #[serde(flatten)]
+    pub hardfork_defaults: HardForkConfiguration,
+}
+
+/// Superchain L1 anchor information
+#[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct SuperchainL1Info {
+    /// L1 chain ID
+    #[serde(rename = "ChainID")]
+    pub chain_id: u64,
+    /// L1 chain public RPC endpoint
+    #[serde(rename = "PublicRPC")]
+    pub public_rpc: String,
+    /// L1 chain explorer RPC endpoint
+    pub explorer: String,
+}
 
 /// A list of Hydrated Superchain Configs.
 #[derive(Debug, Clone, Default, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
@@ -49,7 +94,7 @@ impl Registry {
                 if let Some(a) = &mut chain_config.addresses {
                     a.zero_proof_addresses();
                 }
-                let mut rollup = superchain_primitives::load_op_stack_rollup_config(&chain_config);
+                let mut rollup = chain_config.load_op_stack_rollup_config();
                 rollup.protocol_versions_address = superchain
                     .config
                     .protocol_versions_addr
@@ -71,9 +116,11 @@ impl Registry {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use alloy_eips::BlockNumHash;
     use alloy_primitives::{address, b256, uint};
-    use superchain_primitives::{
-        AddressList, BlockID, ChainGenesis, HardForkConfiguration, SuperchainLevel, SystemConfig,
+    use op_alloy_genesis::{
+        chain::{HardForkConfiguration, SuperchainLevel},
+        AddressList, ChainGenesis, SystemConfig,
     };
 
     #[test]
@@ -91,11 +138,11 @@ mod tests {
             superchain_level: SuperchainLevel::Frontier,
             batch_inbox_addr: address!("ff00000000000000000000000000000000008453"),
             genesis: ChainGenesis {
-                l1: BlockID {
+                l1: BlockNumHash {
                     number: 17481768,
                     hash: b256!("5c13d307623a926cd31415036c8b7fa14572f9dac64528e857a470511fc30771"),
                 },
-                l2: BlockID {
+                l2: BlockNumHash {
                     number: 0,
                     hash: b256!("f712aa9241cc24369b143cf6dce85f0902a9731e70d66818a3a5845b296c73dd"),
                 },
@@ -145,7 +192,7 @@ mod tests {
 
     #[test]
     fn test_read_rollup_configs() {
-        use superchain_primitives::OP_MAINNET_CONFIG;
+        use op_alloy_genesis::rollup::OP_MAINNET_CONFIG;
         let superchains = Registry::from_chain_list();
         assert_eq!(
             *superchains.rollup_configs.get(&10).unwrap(),
