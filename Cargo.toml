@@ -26,9 +26,6 @@ panic = "unwind"
 codegen-units = 1
 incremental = false
 
-[patch.crates-io]
-alloy-eips = { git = "https://github.com/alloy-rs/alloy", branch = "main" }
-
 [workspace.dependencies]
 # Workspace
 superchain-registry = { path = "crates/registry", version = "0.4", default-features = false }
