@@ -1,14 +1,13 @@
 //! Contains the full superchain data.
 
 use super::Chain;
-use op_alloy_genesis::{ChainConfig, RollupConfig, chain::HardForkConfiguration};
-use hashbrown::HashMap;
-use alloc::vec::Vec;
+use alloc::{string::String, vec::Vec};
 use alloy_primitives::Address;
+use hashbrown::HashMap;
+use op_alloy_genesis::{chain::HardForkConfiguration, ChainConfig, RollupConfig};
 
 /// A superchain configuration.
-#[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
-#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Superchain {
     /// Superchain identifier, without capitalization or display changes.
     pub name: String,
@@ -19,8 +18,7 @@ pub struct Superchain {
 }
 
 /// A superchain configuration file format
-#[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
-#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct SuperchainConfig {
     /// Superchain name (e.g. "Mainnet")
@@ -37,8 +35,7 @@ pub struct SuperchainConfig {
 }
 
 /// Superchain L1 anchor information
-#[derive(Debug, Clone, Default, Hash, Eq, PartialEq)]
-#[derive(serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct SuperchainL1Info {
     /// L1 chain ID
@@ -122,7 +119,8 @@ mod tests {
     use alloy_eips::BlockNumHash;
     use alloy_primitives::{address, b256, uint};
     use op_alloy_genesis::{
-        AddressList, ChainGenesis, chain::{HardForkConfiguration, SuperchainLevel}, SystemConfig,
+        chain::{HardForkConfiguration, SuperchainLevel},
+        AddressList, ChainGenesis, SystemConfig,
     };
 
     #[test]
