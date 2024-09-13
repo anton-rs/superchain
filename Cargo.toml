@@ -26,7 +26,7 @@ incremental = false
 # Alloy
 alloy-primitives = { version = "0.8", default-features = false }
 alloy-eips = { version = "0.3", default-features = false }
-op-alloy-genesis = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
+op-alloy-genesis = { version = "0.2", default-features = false }
 
 # Serialization
 serde = { version = "1.0.203", default-features = false, features = ["derive", "alloc"] }
