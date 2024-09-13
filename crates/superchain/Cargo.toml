@@ -7,28 +7,19 @@ license.workspace = true
 authors.workspace = true
 repository.workspace = true
 
-[package.metadata.docs.rs]
-all-features = true
-rustdoc-args = ["--cfg", "docsrs"]
-
 [dependencies]
-superchain-primitives.workspace = true
+# Alloy
+alloy-primitives.workspace = true
+op-alloy-genesis = { workspace = true, features = ["serde"] }
 
-# `serde` is optional, but enabled by default
-# Since superchain-registry requires `serde`, we mark it as optional
-superchain-registry = { workspace = true, optional = true }
+# Misc
+lazy_static.workspace = true
+hashbrown.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
 
 [features]
-default = ["serde", "std"]
-
-serde = [
-  "dep:superchain-registry",
-  "superchain-primitives/serde",
-]
-
-std = [
-  "serde",
-  "dep:superchain-registry",
-  "superchain-registry/std",
-  "superchain-primitives/std",
-]
+default = ["std"]
+std = ["op-alloy-genesis/std", "serde_json/std"]

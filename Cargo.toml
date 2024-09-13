@@ -1,5 +1,5 @@
 [workspace.package]
-version = "0.4.0"
+version = "0.5.0"
 edition = "2021"
 rust-version = "1.80"
 authors = ["refcell", "clabby"]
@@ -9,11 +9,7 @@ keywords = ["ethereum", "crypto", "optimism"]
 categories = ["cryptography", "cryptography::cryptocurrencies"]
 
 [workspace]
-members = [
-  "crates/superchain",
-  "crates/primitives",
-  "crates/registry",
-]
+members = ["crates/superchain"]
 
 # Explicitly set the resolver to version 2, which is the default for packages with edition >= 2021
 # https://doc.rust-lang.org/edition-guide/rust-2021/default-cargo-resolver.html
@@ -27,31 +23,18 @@ codegen-units = 1
 incremental = false
 
 [workspace.dependencies]
-# Workspace
-superchain-registry = { path = "crates/registry", version = "0.4", default-features = false }
-superchain-primitives = { path = "crates/primitives", version = "0.4", default-features = false }
-
 # Alloy
-alloy-sol-types = { version = "0.8", default-features = false }
 alloy-primitives = { version = "0.8", default-features = false }
-alloy-genesis = { version = "0.3", default-features = false }
-alloy-consensus = { version = "0.3", default-features = false }
 alloy-eips = { version = "0.3", default-features = false }
-alloy-serde = { version = "0.3", default-features = false }
+op-alloy-genesis = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
 
 # Serialization
-serde_repr = "0.1"
 serde = { version = "1.0.203", default-features = false, features = ["derive", "alloc"] }
 serde_json = { version = "1.0.66", default-features = false, features = ["raw_value"] }
-
-# Testing
-arbtest = "0.3"
-arbitrary = { version = "1", features = ["derive"] }
 
 # Misc
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
 hashbrown = { version = "0.14.3", features = ["serde"] }
-anyhow = { version = "1.0.86", default-features = false }
 
 [workspace.lints.rust]
 missing_debug_implementations = "warn"
