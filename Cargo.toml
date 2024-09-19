@@ -1,5 +1,7 @@
-[workspace.package]
-version = "0.5.0"
+[package]
+name = "superchain"
+description = "The Superchain Registry"
+version = "0.5.1"
 edition = "2021"
 rust-version = "1.80"
 authors = ["refcell", "clabby"]
@@ -7,9 +9,6 @@ license = "MIT"
 repository = "https://github.com/anton-rs/superchain"
 keywords = ["ethereum", "crypto", "optimism"]
 categories = ["cryptography", "cryptography::cryptocurrencies"]
-
-[workspace]
-members = ["crates/superchain"]
 
 # Explicitly set the resolver to version 2, which is the default for packages with edition >= 2021
 # https://doc.rust-lang.org/edition-guide/rust-2021/default-cargo-resolver.html
@@ -22,35 +21,42 @@ panic = "unwind"
 codegen-units = 1
 incremental = false
 
-[workspace.dependencies]
+[dependencies]
 # Alloy
 alloy-primitives = { version = "0.8", default-features = false }
-alloy-eips = { version = "0.3", default-features = false }
-op-alloy-genesis = { version = "0.2", default-features = false }
-
-# Serialization
-serde = { version = "1.0.203", default-features = false, features = ["derive", "alloc"] }
-serde_json = { version = "1.0.66", default-features = false, features = ["raw_value"] }
+op-alloy-genesis = { version = "0.2", default-features = false, features = ["serde"] }
 
 # Misc
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
 hashbrown = { version = "0.14.3", features = ["serde"] }
 
-[workspace.lints.rust]
+# Serialization
+serde = { version = "1.0.203", default-features = false, features = ["derive", "alloc"] }
+serde_json = { version = "1.0.66", default-features = false, features = ["raw_value"] }
+
+[dev-dependencies]
+alloy-eips = { version = "0.3", default-features = false }
+
+[features]
+default = ["std"]
+std = ["op-alloy-genesis/std", "serde_json/std"]
+
+
+## ------ 
+## ------ Lints
+## ------
+
+[lints.rust]
 missing_debug_implementations = "warn"
 missing_docs = "warn"
 rust-2018-idioms = { level = "deny", priority = -1 }
 unreachable-pub = "warn"
 unused-must-use = "deny"
 
-[workspace.lints.rustdoc]
+[lints.rustdoc]
 all = "warn"
 
-[workspace.metadata.docs.rs]
-all-features = true
-rustdoc-args = ["--cfg", "docsrs"]
-
-[workspace.lints.clippy]
+[lints.clippy]
 # These are some of clippy's nursery (i.e., experimental) lints that we like.
 # By default, nursery lints are allowed. Some of the lints below have made good
 # suggestions which we fixed. The others didn't have any findings, so we can
