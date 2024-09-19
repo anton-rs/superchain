@@ -18,5 +18,5 @@ jobs:
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
       - name: Release superchain crate
-        run: just release-superchain
+        run: just release
         continue-on-error: true

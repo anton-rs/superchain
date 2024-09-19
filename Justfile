@@ -18,24 +18,24 @@ source:
 
 # Generate file bindings for the superchain-registry
 bind:
-  ./scripts/bind.sh
+  ./etc/bind.sh
 
 # Run all tests
 tests: test test-features test-docs
 
-# Runs `cargo hack check` against the workspace
+# Runs `cargo hack check`
 hack:
   cargo hack check --feature-powerset --no-dev-deps
 
 # Formats
 fmt: fmt-fix fmt-check
 
-# Lint the workspace for all available targets
+# Lint for all available targets
 lint: lint-source lint-source-features lint-docs
 
 # Build for the native target
 build *args='':
-  cargo build --workspace --all $@
+  cargo build --all $@
 
 # Fixes the formatting
 fmt-fix:
@@ -45,11 +45,11 @@ fmt-fix:
 fmt-check:
   cargo +nightly fmt --all -- --check
 
-# Lint the workspace
+# Lints
 lint-source: fmt-check
   cargo +nightly clippy --all --all-targets -- -D warnings
 
-# Lint the workspace
+# Lints
 lint-source-features: fmt-check
   cargo +nightly clippy --all --all-features --all-targets -- -D warnings
 
@@ -69,6 +69,6 @@ test-features *args='':
 test-docs:
   cargo test --doc --all --locked
 
-# Release the superchain crate
-release-superchain:
-  cargo release publish --package superchain --execute --no-confirm
+# Publish the superchain crate
+release:
+  cargo release publish --execute --no-confirm

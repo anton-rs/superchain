@@ -88,8 +88,8 @@ impl Registry {
         let mut op_chains = HashMap::new();
         let mut rollup_configs = HashMap::new();
 
-        for superchain in superchains.superchains.into_iter() {
-            for mut chain_config in superchain.chains.into_iter() {
+        for superchain in superchains.superchains {
+            for mut chain_config in superchain.chains {
                 chain_config.l1_chain_id = superchain.config.l1.chain_id;
                 if let Some(a) = &mut chain_config.addresses {
                     a.zero_proof_addresses();
@@ -156,7 +156,7 @@ mod tests {
                 }),
             },
             superchain: String::from("mainnet"),
-            chain: String::from(""),
+            chain: String::new(),
             hardfork_configuration: HardForkConfiguration {
                 canyon_time: Some(1704992401),
                 delta_time: Some(1708560000),
