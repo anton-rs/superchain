@@ -479,7 +479,7 @@ checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
 [[package]]
 name = "op-alloy-genesis"
 version = "0.2.12"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/feat/optimism-base-fee-params#7bbe1474b5d990b316ce63de6986144b50a13986"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#ddd4ebd14ce7c0bb56a7a6e693c848e7e069bbd2"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",

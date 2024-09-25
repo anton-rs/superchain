@@ -22,7 +22,7 @@ codegen-units = 1
 incremental = false
 
 [patch.crates-io]
-op-alloy-genesis = { git = "https://github.com/alloy-rs/op-alloy", branch = "rf/feat/optimism-base-fee-params" }
+op-alloy-genesis = { git = "https://github.com/alloy-rs/op-alloy", branch = "main" }
 
 [dependencies]
 # Alloy
