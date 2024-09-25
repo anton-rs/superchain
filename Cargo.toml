@@ -21,6 +21,9 @@ panic = "unwind"
 codegen-units = 1
 incremental = false
 
+[patch.crates-io]
+op-alloy-genesis = { git = "https://github.com/alloy-rs/op-alloy", branch = "rf/feat/optimism-base-fee-params" }
+
 [dependencies]
 # Alloy
 alloy-primitives = { version = "0.8", default-features = false }

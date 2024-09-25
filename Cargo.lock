@@ -479,8 +479,7 @@ checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
 [[package]]
 name = "op-alloy-genesis"
 version = "0.2.12"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6e1b8a9b70da0e027242ec1762f0f3a386278b6291d00d12ff5a64929dc19f68"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/feat/optimism-base-fee-params#7bbe1474b5d990b316ce63de6986144b50a13986"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
