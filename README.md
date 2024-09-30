@@ -8,9 +8,10 @@
 
 <p align="center">
   <a href="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml"><img src="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml/badge.svg?label=ci" alt="CI"></a>
-  <img src="https://img.shields.io/badge/License-MIT-green.svg?label=license&labelColor=2a2f35" alt="License">
+  <a href="https://crates.io/crates/superchain"><img src="https://img.shields.io/crates/v/superchain.svg" alt="Superchain Crate"></a>
+  <a href="https://github.com/anton-rs/superchain?tab=MIT-1-ov-file"><img src="https://img.shields.io/badge/License-MIT-green.svg?label=license&labelColor=2a2f35" alt="License"></a>
   <a href="https://docs.optimism.io/"><img src="https://img.shields.io/badge/Docs-optimism.io-854a15?logo=mdBook&labelColor=2a2f35" alt="OP Stack Docs"></a>
-  <a href="https://github.com/ethereum-optimism/monorepo"><img src="https://img.shields.io/badge/OP%20Stack-config-red?labelColor=2a2f35" alt="OP Stack"></a>
+  <!-- <a href="https://github.com/ethereum-optimism/monorepo"><img src="https://img.shields.io/badge/OP%20Stack-config-red?labelColor=2a2f35" alt="OP Stack"></a> -->
 </p>
 
 <p align="center">
@@ -44,7 +45,7 @@ various chains into instantiated objects, the [`superchain`][sc] crate requires
 as a dependency to a `Cargo.toml`.
 
 ```toml
-superchain = "0.6"
+superchain = "0.7"
 ```
 
 [`superchain`][sc] declares lazy evaluated statics that expose `ChainConfig`s, `RollupConfig`s,
@@ -74,14 +75,14 @@ Add the following to your `Cargo.toml`.
 
 ```toml
 [dependencies]
-superchain = "0.6"
+superchain = "0.7"
 ```
 
 To make `superchain` `no_std`, toggle `default-features` off like so.
 
 ```toml
 [dependencies]
-superchain = { version = "0.6", default-features = false }
+superchain = { version = "0.7", default-features = false }
 ```
 
 Below demonstrates getting the `RollupConfig` for OP Mainnet (Chain ID `10`).
