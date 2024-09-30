@@ -7,7 +7,7 @@ use hashbrown::HashMap;
 use op_alloy_genesis::{chain::HardForkConfiguration, ChainConfig, RollupConfig};
 
 /// A superchain configuration.
-#[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, Default, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct Superchain {
     /// Superchain identifier, without capitalization or display changes.
     pub name: String,
@@ -120,7 +120,7 @@ mod tests {
     use alloy_primitives::{address, b256, uint};
     use op_alloy_genesis::{
         chain::{HardForkConfiguration, SuperchainLevel},
-        AddressList, ChainGenesis, SystemConfig,
+        AddressList, ChainGenesis, SystemConfig, OP_MAINNET_BASE_FEE_PARAMS,
     };
 
     #[test]
@@ -131,12 +131,29 @@ mod tests {
             name: String::from("Base"),
             chain_id: 8453,
             l1_chain_id: 1,
-            superchain_time: Some(0),
             public_rpc: String::from("https://mainnet.base.org"),
             sequencer_rpc: String::from("https://mainnet-sequencer.base.org"),
             explorer: String::from("https://explorer.base.org"),
             superchain_level: SuperchainLevel::Frontier,
+            standard_chain_candidate: true,
+            superchain_time: Some(0),
             batch_inbox_addr: address!("ff00000000000000000000000000000000008453"),
+            superchain: String::from("mainnet"),
+            chain: String::new(),
+            hardfork_configuration: HardForkConfiguration {
+                canyon_time: Some(1704992401),
+                delta_time: Some(1708560000),
+                ecotone_time: Some(1710374401),
+                fjord_time: Some(1720627201),
+                granite_time: Some(1726070401),
+                holocene_time: None,
+            },
+            block_time: 2,
+            seq_window_size: 3600,
+            max_sequencer_drift: 600,
+            data_availability_type: "eth-da".to_string(),
+            optimism: Some(OP_MAINNET_BASE_FEE_PARAMS),
+            alt_da: None,
             genesis: ChainGenesis {
                 l1: BlockNumHash {
                     number: 17481768,
@@ -155,17 +172,6 @@ mod tests {
                     ..Default::default()
                 }),
             },
-            superchain: String::from("mainnet"),
-            chain: String::new(),
-            hardfork_configuration: HardForkConfiguration {
-                canyon_time: Some(1704992401),
-                delta_time: Some(1708560000),
-                ecotone_time: Some(1710374401),
-                fjord_time: Some(1720627201),
-                granite_time: Some(1726070401),
-                holocene_time: None,
-            },
-            alt_da: None,
             addresses: Some(AddressList {
                 address_manager: address!("8EfB6B5c4767B09Dc9AA6Af4eAA89F749522BaE2"),
                 l1_cross_domain_messenger_proxy: address!(
@@ -186,6 +192,7 @@ mod tests {
                 guardian: address!("09f7150d8c019bef34450d6920f6b3608cefdaf2"),
                 ..Default::default()
             }),
+            gas_paying_token: None,
         };
         assert_eq!(*superchains.op_chains.get(&8453).unwrap(), base_config);
     }
