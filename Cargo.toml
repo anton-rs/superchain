@@ -23,12 +23,11 @@ incremental = false
 
 [dependencies]
 # Alloy
-alloy-primitives = { version = "0.8", default-features = false }
+alloy-primitives = { version = "0.8", default-features = false, features = ["map"] }
 op-alloy-genesis = { version = "0.3", default-features = false, features = ["serde"] }
 
 # Misc
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
-hashbrown = { version = "0.14.3", features = ["serde"] }
 
 # Serialization
 serde = { version = "1.0.203", default-features = false, features = ["derive", "alloc"] }

@@ -2,8 +2,7 @@
 
 use super::Chain;
 use alloc::{string::String, vec::Vec};
-use alloy_primitives::Address;
-use hashbrown::HashMap;
+use alloy_primitives::{map::HashMap, Address};
 use op_alloy_genesis::{chain::HardForkConfiguration, ChainConfig, RollupConfig};
 
 /// A superchain configuration.
