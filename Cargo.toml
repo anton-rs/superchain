@@ -24,7 +24,7 @@ incremental = false
 [dependencies]
 # Alloy
 alloy-primitives = { version = "0.8", default-features = false }
-op-alloy-genesis = { version = "0.2", default-features = false, features = ["serde"] }
+op-alloy-genesis = { version = "0.3", default-features = false, features = ["serde"] }
 
 # Misc
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
@@ -35,7 +35,7 @@ serde = { version = "1.0.203", default-features = false, features = ["derive", "
 serde_json = { version = "1.0.66", default-features = false, features = ["raw_value"] }
 
 [dev-dependencies]
-alloy-eips = { version = "0.3", default-features = false }
+alloy-eips = { version = "0.4", default-features = false }
 
 [features]
 default = ["std"]
