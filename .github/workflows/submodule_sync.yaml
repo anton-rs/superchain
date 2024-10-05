@@ -28,7 +28,7 @@ jobs:
           token: ${{ secrets.PAT_TOKEN }}
           commit-message: Update Submodules
           signoff: false
-          branch: update-submodules
+          branch: bot/update-submodules
           base: main
           delete-branch: true
           title: '[BOT] Update Submodules'
