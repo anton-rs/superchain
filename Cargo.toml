@@ -23,8 +23,8 @@ incremental = false
 
 [dependencies]
 # Alloy
-alloy-primitives = { version = "0.8.5", default-features = false, features = ["map"] }
-op-alloy-genesis = { version = "0.3.3", default-features = false, features = ["serde"] }
+alloy-primitives = { version = "0.8.7", default-features = false, features = ["map"] }
+op-alloy-genesis = { version = "0.4.0", default-features = false, features = ["serde"] }
 
 # Misc
 lazy_static = { version = "1.5.0", features = ["spin_no_std"] }
