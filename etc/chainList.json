@@ -256,6 +256,23 @@
     }
   },
   {
+    "name": "Funki Sepolia Sandbox",
+    "identifier": "sepolia/funki",
+    "chainId": 3397901,
+    "rpc": [
+      "https://funki-testnet.alt.technology"
+    ],
+    "explorers": [
+      "https://sepolia-sandbox.funkichain.com/"
+    ],
+    "superchainLevel": 0,
+    "dataAvailabilityType": "alt-da",
+    "parent": {
+      "type": "L2",
+      "chain": "sepolia"
+    }
+  },
+  {
     "name": "Lisk Sepolia Testnet",
     "identifier": "sepolia/lisk",
     "chainId": 4202,
@@ -339,6 +356,24 @@
       "type": "L2",
       "chain": "sepolia"
     }
+  },
+  {
+    "name": "Binary Sepolia",
+    "identifier": "sepolia/tbn",
+    "chainId": 625,
+    "rpc": [
+      "https://rpc.testnet.thebinaryholdings.com"
+    ],
+    "explorers": [
+      "https://explorer.sepolia.thebinaryholdings.com"
+    ],
+    "superchainLevel": 0,
+    "dataAvailabilityType": "eth-da",
+    "parent": {
+      "type": "L2",
+      "chain": "sepolia"
+    },
+    "gasPayingToken": "0x46d878bf7BF62Ec542953CB89Ac0bF58d991181e"
   },
   {
     "name": "World Chain Sepolia Testnet",
