@@ -4,9 +4,9 @@ version = 3
 
 [[package]]
 name = "alloy-consensus"
-version = "0.4.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "705687d5bfd019fee57cf9e206b27b30a9a9617535d5590a02b171e813208f8e"
+checksum = "8628f840dfddef51520dc2d5694e14e1d2098069de4ad9812964adb8309c1dc4"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
@@ -30,9 +30,9 @@ dependencies = [
 
 [[package]]
 name = "alloy-eip7702"
-version = "0.1.1"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ea59dc42102bc9a1905dc57901edc6dd48b9f38115df86c7d252acba70d71d04"
+checksum = "eeffd2590ce780ddfaa9d0ae340eb2b4e08627650c4676eef537cef0b4bf535d"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -41,9 +41,9 @@ dependencies = [
 
 [[package]]
 name = "alloy-eips"
-version = "0.4.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6ffb906284a1e1f63c4607da2068c8197458a352d0b3e9796e67353d72a9be85"
+checksum = "a6a888c285255f82a60acecd06a719b84057d233ae281220532a8633e9220574"
 dependencies = [
  "alloy-eip2930",
  "alloy-eip7702",
@@ -51,15 +51,16 @@ dependencies = [
  "alloy-rlp",
  "alloy-serde",
  "c-kzg",
+ "derive_more",
  "serde",
  "sha2",
 ]
 
 [[package]]
 name = "alloy-primitives"
-version = "0.8.7"
+version = "0.8.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8ecb848c43f6b06ae3de2e4a67496cbbabd78ae87db0f1248934f15d76192c6a"
+checksum = "38f35429a652765189c1c5092870d8360ee7b7769b09b06d89ebaefd34676446"
 dependencies = [
  "alloy-rlp",
  "bytes",
@@ -100,9 +101,9 @@ dependencies = [
 
 [[package]]
 name = "alloy-serde"
-version = "0.4.2"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9dff0ab1cdd43ca001e324dc27ee0e8606bd2161d6623c63e0e0b8c4dfc13600"
+checksum = "e5b06099d7f448b55a418289d2d642f5e38c0207fc188c9cd7afe44382218a20"
 dependencies = [
  "alloy-primitives",
  "serde",
@@ -472,9 +473,9 @@ dependencies = [
 
 [[package]]
 name = "op-alloy-genesis"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9f3d31dfbbd8dd898c7512f8ce7d30103980485416f668566100b0ed0994b958"
+checksum = "8e46c2ab105f679f0cbfbc3fb762f3456d4b8556c841e667fc8f3c2226eb6c1e"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -640,9 +641,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.128"
+version = "1.0.129"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6ff5456707a1de34e7e37f2a6fd3d3f808c318259cbd01ab6377795054b483d8"
+checksum = "6dbcf9b78a125ee667ae19388837dd12294b858d101fdd393cb9d5501ef09eb2"
 dependencies = [
  "itoa",
  "memchr",
