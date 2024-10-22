@@ -170,6 +170,23 @@
     }
   },
   {
+    "name": "Swan Chain Mainnet",
+    "identifier": "mainnet/swan",
+    "chainId": 254,
+    "rpc": [
+      "https://mainnet-rpc.swanchain.org"
+    ],
+    "explorers": [
+      "https://swanscan.io"
+    ],
+    "superchainLevel": 0,
+    "dataAvailabilityType": "eth-da",
+    "parent": {
+      "type": "L2",
+      "chain": "mainnet"
+    }
+  },
+  {
     "name": "Binary Mainnet",
     "identifier": "mainnet/tbn",
     "chainId": 624,
@@ -247,6 +264,23 @@
     ],
     "explorers": [
       "https://sepolia-explorer.base.org"
+    ],
+    "superchainLevel": 0,
+    "dataAvailabilityType": "eth-da",
+    "parent": {
+      "type": "L2",
+      "chain": "sepolia"
+    }
+  },
+  {
+    "name": "Cyber Testnet",
+    "identifier": "sepolia/cyber",
+    "chainId": 111557560,
+    "rpc": [
+      "https://rpc.testnet.cyber.co"
+    ],
+    "explorers": [
+      "https://testnet.cyberscan.co/"
     ],
     "superchainLevel": 0,
     "dataAvailabilityType": "eth-da",
