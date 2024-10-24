@@ -34,7 +34,7 @@ serde = { version = "1.0.213", default-features = false, features = ["derive", "
 serde_json = { version = "1.0.132", default-features = false, features = ["raw_value"] }
 
 [dev-dependencies]
-alloy-eips = { version = "0.5.0", default-features = false }
+alloy-eips = { version = "0.5.4", default-features = false }
 
 [features]
 default = ["std"]
