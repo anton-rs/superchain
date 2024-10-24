@@ -12,7 +12,7 @@
 
 extern crate alloc;
 
-pub use alloy_primitives::map::HashMap;
+pub use alloy_primitives::map::{DefaultHashBuilder, HashMap};
 pub use op_alloy_genesis::{ChainConfig, RollupConfig};
 
 pub mod chain_list;
@@ -29,10 +29,10 @@ lazy_static::lazy_static! {
     pub static ref CHAINS: alloc::vec::Vec<Chain> = _INIT.chains.clone();
 
     /// OP Chain configurations exported from the registry
-    pub static ref OPCHAINS: HashMap<u64, ChainConfig> = _INIT.op_chains.clone();
+    pub static ref OPCHAINS: HashMap<u64, ChainConfig, DefaultHashBuilder> = _INIT.op_chains.clone();
 
     /// Rollup configurations exported from the registry
-    pub static ref ROLLUP_CONFIGS: HashMap<u64, RollupConfig> = _INIT.rollup_configs.clone();
+    pub static ref ROLLUP_CONFIGS: HashMap<u64, RollupConfig, DefaultHashBuilder> = _INIT.rollup_configs.clone();
 }
 
 #[cfg(test)]
