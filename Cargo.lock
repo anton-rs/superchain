@@ -68,6 +68,7 @@ dependencies = [
  "cfg-if",
  "const-hex",
  "derive_more",
+ "foldhash",
  "hashbrown",
  "hex-literal",
  "indexmap",
