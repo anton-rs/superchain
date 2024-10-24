@@ -2,7 +2,10 @@
 
 use super::Chain;
 use alloc::{string::String, vec::Vec};
-use alloy_primitives::{map::HashMap, Address};
+use alloy_primitives::{
+    map::{DefaultHashBuilder, HashMap},
+    Address,
+};
 use op_alloy_genesis::{chain::HardForkConfiguration, ChainConfig, RollupConfig};
 
 /// A superchain configuration.
@@ -62,9 +65,9 @@ pub struct Registry {
     /// The list of chains.
     pub chains: Vec<Chain>,
     /// Map of chain IDs to their chain configuration.
-    pub op_chains: HashMap<u64, ChainConfig>,
+    pub op_chains: HashMap<u64, ChainConfig, DefaultHashBuilder>,
     /// Map of chain IDs to their rollup configurations.
-    pub rollup_configs: HashMap<u64, RollupConfig>,
+    pub rollup_configs: HashMap<u64, RollupConfig, DefaultHashBuilder>,
 }
 
 impl Registry {
@@ -84,8 +87,8 @@ impl Registry {
     pub fn from_chain_list() -> Self {
         let chains = Self::read_chain_list();
         let superchains = Self::read_superchain_configs();
-        let mut op_chains = HashMap::new();
-        let mut rollup_configs = HashMap::new();
+        let mut op_chains = HashMap::default();
+        let mut rollup_configs = HashMap::default();
 
         for superchain in superchains.superchains {
             for mut chain_config in superchain.chains {
