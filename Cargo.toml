@@ -3,7 +3,7 @@ name = "superchain"
 description = "The Superchain Registry"
 version = "0.8.2"
 edition = "2021"
-rust-version = "1.80"
+rust-version = "1.81"
 authors = ["refcell", "clabby"]
 license = "MIT"
 repository = "https://github.com/anton-rs/superchain"
@@ -34,7 +34,7 @@ serde = { version = "1.0.213", default-features = false, features = ["derive", "
 serde_json = { version = "1.0.132", default-features = false, features = ["raw_value"] }
 
 [dev-dependencies]
-alloy-eips = { version = "0.5.0", default-features = false }
+alloy-eips = { version = "0.5.4", default-features = false }
 
 [features]
 default = ["std"]
