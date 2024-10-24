@@ -22,7 +22,7 @@ codegen-units = 1
 incremental = false
 
 [dependencies]
-alloy-primitives = { version = "0.8.9", default-features = false }
+alloy-primitives = { version = "0.8.9", default-features = false, features = ["map"] }
 op-alloy-genesis = { version = "0.5.1", default-features = false, features = ["serde"] }
 lazy_static = { version = "1.5.0", features = ["spin_no_std"] }
 serde = { version = "1.0.213", default-features = false, features = ["derive", "alloc"] }
@@ -32,8 +32,7 @@ serde_json = { version = "1.0.132", default-features = false, features = ["raw_v
 alloy-eips = { version = "0.5.4", default-features = false }
 
 [features]
-default = ["std", "map", "map-foldhash"]
-map = ["alloy-primitives/map"]
+default = ["std", "map-foldhash"]
 map-hashbrown = ["alloy-primitives/map-hashbrown"]
 map-foldhash = ["alloy-primitives/map-foldhash"]
 std = ["op-alloy-genesis/std", "serde_json/std"]
