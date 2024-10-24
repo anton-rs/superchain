@@ -45,7 +45,7 @@ various chains into instantiated objects, the [`superchain`][sc] crate requires
 as a dependency to a `Cargo.toml`.
 
 ```toml
-superchain = "0.8"
+superchain = "0.9"
 ```
 
 [`superchain`][sc] declares lazy evaluated statics that expose `ChainConfig`s, `RollupConfig`s,
@@ -75,14 +75,14 @@ Add the following to your `Cargo.toml`.
 
 ```toml
 [dependencies]
-superchain = "0.8"
+superchain = "0.9"
 ```
 
 To make `superchain` `no_std`, toggle `default-features` off like so.
 
 ```toml
 [dependencies]
-superchain = { version = "0.8", default-features = false }
+superchain = { version = "0.9", default-features = false }
 ```
 
 Below demonstrates getting the `RollupConfig` for OP Mainnet (Chain ID `10`).

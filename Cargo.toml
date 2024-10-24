@@ -1,7 +1,7 @@
 [package]
 name = "superchain"
 description = "The Superchain Registry"
-version = "0.8.2"
+version = "0.9.1"
 edition = "2021"
 rust-version = "1.81"
 authors = ["refcell", "clabby"]
@@ -22,14 +22,9 @@ codegen-units = 1
 incremental = false
 
 [dependencies]
-# Alloy
 alloy-primitives = { version = "0.8.9", default-features = false, features = ["map"] }
 op-alloy-genesis = { version = "0.5.1", default-features = false, features = ["serde"] }
-
-# Misc
 lazy_static = { version = "1.5.0", features = ["spin_no_std"] }
-
-# Serialization
 serde = { version = "1.0.213", default-features = false, features = ["derive", "alloc"] }
 serde_json = { version = "1.0.132", default-features = false, features = ["raw_value"] }
 
@@ -37,12 +32,11 @@ serde_json = { version = "1.0.132", default-features = false, features = ["raw_v
 alloy-eips = { version = "0.5.4", default-features = false }
 
 [features]
-default = ["std"]
+default = ["std", "map-foldhash"]
+map-hashbrown = ["alloy-primitives/map-hashbrown"]
+map-foldhash = ["alloy-primitives/map-foldhash"]
 std = ["op-alloy-genesis/std", "serde_json/std"]
 
-## ------
-## ------ Lints
-## ------
 
 [lints.rust]
 missing_debug_implementations = "warn"
@@ -55,11 +49,6 @@ unused-must-use = "deny"
 all = "warn"
 
 [lints.clippy]
-# These are some of clippy's nursery (i.e., experimental) lints that we like.
-# By default, nursery lints are allowed. Some of the lints below have made good
-# suggestions which we fixed. The others didn't have any findings, so we can
-# assume they don't have that many false positives. Let's enable them to
-# prevent future problems.
 branches_sharing_code = "warn"
 clear_with_drain = "warn"
 derive_partial_eq_without_eq = "warn"
@@ -110,9 +99,7 @@ use_self = "warn"
 useless_let_if_seq = "warn"
 zero_sized_map_values = "warn"
 
-# These are nursery lints which have findings. Allow them for now. Some are not
-# quite mature enough for use in our codebase and some we don't really want.
-# Explicitly listing should make it easier to fix in the future.
+# These are nursery lints which have findings. Allow them for now.
 as_ptr_cast_mut = "allow"
 cognitive_complexity = "allow"
 collection_is_never_read = "allow"
