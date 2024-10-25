@@ -192,7 +192,19 @@ mod tests {
                 proxy_admin_owner: address!("7bB41C3008B3f03FE483B28b8DB90e19Cf07595c"),
                 challenger: Some(address!("6F8C5bA3F59ea3E76300E3BEcDC231D656017824")),
                 guardian: address!("09f7150d8c019bef34450d6920f6b3608cefdaf2"),
-                ..Default::default()
+                anchor_state_registry_proxy: Some(address!(
+                    "db9091e48b1c42992a1213e6916184f9ebdbfedf"
+                )),
+                delayed_weth_proxy: Some(address!("a2f2ac6f5af72e494a227d79db20473cf7a1ffe8")),
+                dispute_game_factory_proxy: Some(address!(
+                    "43edb88c4b80fdd2adff2412a7bebf9df42cb40e"
+                )),
+                fault_dispute_game: Some(address!("cd3c0194db74c23807d4b90a5181e1b28cf7007c")),
+                mips: Some(address!("16e83ce5ce29bf90ad9da06d2fe6a15d5f344ce4")),
+                permissioned_dispute_game: Some(address!(
+                    "19009debf8954b610f207d5925eede827805986e"
+                )),
+                preimage_oracle: Some(address!("9c065e11870b891d214bc2da7ef1f9ddfa1be277")),
             }),
             gas_paying_token: None,
         };
