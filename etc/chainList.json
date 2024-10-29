@@ -130,7 +130,7 @@
       "https://explorer.lyra.finance"
     ],
     "superchainLevel": 0,
-    "dataAvailabilityType": "eth-da",
+    "dataAvailabilityType": "alt-da",
     "parent": {
       "type": "L2",
       "chain": "mainnet"
@@ -181,7 +181,7 @@
       "https://explorer.orderly.network"
     ],
     "superchainLevel": 0,
-    "dataAvailabilityType": "eth-da",
+    "dataAvailabilityType": "alt-da",
     "parent": {
       "type": "L2",
       "chain": "mainnet"
@@ -333,6 +333,23 @@
     ],
     "explorers": [
       "https://testnet.cyberscan.co/"
+    ],
+    "superchainLevel": 0,
+    "dataAvailabilityType": "eth-da",
+    "parent": {
+      "type": "L2",
+      "chain": "sepolia"
+    }
+  },
+  {
+    "name": "Ethernity Testnet",
+    "identifier": "sepolia/ethernity",
+    "chainId": 233,
+    "rpc": [
+      "https://testnet.ethernitychain.io"
+    ],
+    "explorers": [
+      "https://testnet.ernscan.io"
     ],
     "superchainLevel": 0,
     "dataAvailabilityType": "eth-da",
