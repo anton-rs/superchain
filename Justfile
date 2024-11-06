@@ -18,7 +18,7 @@ source:
 
 # Generate file bindings for the superchain-registry
 bind:
-  ./etc/bind.sh
+  @just --justfile ./crates/registry/Justfile bind
 
 # Run all tests
 tests: test test-features test-docs
