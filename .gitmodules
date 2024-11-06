@@ -1,3 +1,0 @@
-[submodule "superchain-registry"]
-	path = superchain-registry
-	url = https://github.com/ethereum-optimism/superchain-registry
