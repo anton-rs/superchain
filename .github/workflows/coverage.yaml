@@ -1,10 +1,13 @@
 name: Rust Coverage
+
 on:
   push:
     branches: [main]
   pull_request:
+
 env:
   CARGO_TERM_COLOR: always
+
 jobs:
   coverage:
     runs-on: ubuntu-latest
@@ -32,7 +35,6 @@ jobs:
             --lcov \
             --output-path lcov.info \
             --features test-utils \
-            --profile ci \
             -E '!test(test_online)' && \
             mv ./target/nextest/ci/junit.xml ./junit.xml
       - name: Record Rust version
