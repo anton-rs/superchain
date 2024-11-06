@@ -107,11 +107,7 @@ impl Registry {
             }
         }
 
-        Self {
-            chains,
-            op_chains,
-            rollup_configs,
-        }
+        Self { chains, op_chains, rollup_configs }
     }
 }
 
@@ -215,9 +211,6 @@ mod tests {
     fn test_read_rollup_configs() {
         use op_alloy_genesis::rollup::OP_MAINNET_CONFIG;
         let superchains = Registry::from_chain_list();
-        assert_eq!(
-            *superchains.rollup_configs.get(&10).unwrap(),
-            OP_MAINNET_CONFIG
-        );
+        assert_eq!(*superchains.rollup_configs.get(&10).unwrap(), OP_MAINNET_CONFIG);
     }
 }

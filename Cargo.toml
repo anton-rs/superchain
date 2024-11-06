@@ -1,113 +1,52 @@
-[package]
-name = "superchain"
-description = "The Superchain Registry"
-version = "0.9.2"
-edition = "2021"
-rust-version = "1.81"
-authors = ["refcell", "clabby"]
-license = "MIT"
-repository = "https://github.com/anton-rs/superchain"
-keywords = ["ethereum", "crypto", "optimism"]
-categories = ["cryptography", "cryptography::cryptocurrencies"]
-
-# Explicitly set the resolver to version 2, which is the default for packages with edition >= 2021
-# https://doc.rust-lang.org/edition-guide/rust-2021/default-cargo-resolver.html
+[workspace]
+members = ["crates/*"]
 resolver = "2"
 
-[profile.release]
-strip = "debuginfo"
-lto = "thin"
-panic = "unwind"
-codegen-units = 1
-incremental = false
+[workspace.package]
+version = "0.9.2"
+edition = "2021"
+license = "MIT"
+rust-version = "1.81"
+authors = ["clabby", "refcell"]
+homepage = "https://github.com/anton-rs/superchain"
+repository = "https://github.com/anton-rs/superchain"
+keywords = ["ethereum", "optimism", "crypto"]
+categories = ["cryptography", "cryptography::cryptocurrencies"]
+exclude = ["benches/", "tests/"]
 
-[dependencies]
-alloy-primitives = { version = "0.8.9", default-features = false, features = ["map"] }
-op-alloy-genesis = { version = "0.5.1", default-features = false, features = ["serde"] }
-lazy_static = { version = "1.5.0", features = ["spin_no_std"] }
-serde = { version = "1.0.213", default-features = false, features = ["derive", "alloc"] }
-serde_json = { version = "1.0.132", default-features = false, features = ["raw_value"] }
-
-[dev-dependencies]
-alloy-eips = { version = "0.5.4", default-features = false }
-
-[features]
-default = ["std", "map-foldhash"]
-map-hashbrown = ["alloy-primitives/map-hashbrown"]
-map-foldhash = ["alloy-primitives/map-foldhash"]
-std = ["op-alloy-genesis/std", "serde_json/std"]
-
-
-[lints.rust]
-missing_debug_implementations = "warn"
-missing_docs = "warn"
-rust-2018-idioms = { level = "deny", priority = -1 }
-unreachable-pub = "warn"
-unused-must-use = "deny"
-
-[lints.rustdoc]
+[workspace.lints.rustdoc]
 all = "warn"
 
-[lints.clippy]
-branches_sharing_code = "warn"
-clear_with_drain = "warn"
-derive_partial_eq_without_eq = "warn"
-doc_markdown = "warn"
-empty_line_after_doc_comments = "warn"
-empty_line_after_outer_attr = "warn"
-enum_glob_use = "warn"
-equatable_if_let = "warn"
-explicit_into_iter_loop = "warn"
-explicit_iter_loop = "warn"
-flat_map_option = "warn"
-imprecise_flops = "warn"
-iter_on_empty_collections = "warn"
-iter_on_single_items = "warn"
-iter_with_drain = "warn"
-iter_without_into_iter = "warn"
-large_stack_frames = "warn"
-manual_assert = "warn"
-manual_clamp = "warn"
-manual_string_new = "warn"
-match_same_arms = "warn"
-missing_const_for_fn = "warn"
-mutex_integer = "warn"
-naive_bytecount = "warn"
-needless_bitwise_bool = "warn"
-needless_continue = "warn"
-needless_pass_by_ref_mut = "warn"
-nonstandard_macro_braces = "warn"
-or_fun_call = "warn"
-path_buf_push_overwrite = "warn"
-read_zero_byte_vec = "warn"
-redundant_clone = "warn"
-single_char_pattern = "warn"
-string_lit_as_bytes = "warn"
-suboptimal_flops = "warn"
-suspicious_operation_groupings = "warn"
-trailing_empty_array = "warn"
-trait_duplication_in_bounds = "warn"
-transmute_undefined_repr = "warn"
-trivial_regex = "warn"
-tuple_array_conversions = "warn"
-type_repetition_in_bounds = "warn"
-uninhabited_references = "warn"
-unnecessary_struct_initialization = "warn"
-unused_peekable = "warn"
-unused_rounding = "warn"
-use_self = "warn"
-useless_let_if_seq = "warn"
-zero_sized_map_values = "warn"
+[workspace.lints.rust]
+missing-debug-implementations = "warn"
+missing-docs = "warn"
+unreachable-pub = "warn"
+unused-must-use = "deny"
+rust-2018-idioms = "deny"
+unnameable-types = "warn"
 
-# These are nursery lints which have findings. Allow them for now.
-as_ptr_cast_mut = "allow"
-cognitive_complexity = "allow"
-collection_is_never_read = "allow"
-debug_assert_with_mut_call = "allow"
-fallible_impl_from = "allow"
-future_not_send = "allow"
-needless_collect = "allow"
-non_send_fields_in_send_ty = "allow"
-redundant_pub_crate = "allow"
-significant_drop_in_scrutinee = "allow"
-significant_drop_tightening = "allow"
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+missing-const-for-fn = "warn"
+use-self = "warn"
+option-if-let-else = "warn"
+redundant-clone = "warn"
+
+[workspace.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[workspace.dependencies]
+# Alloy
+alloy-eips = { version = "0.5.4", default-features = false }
+alloy-primitives = { version = "0.8.9", default-features = false }
+
+# Op Alloy
+op-alloy-genesis = { version = "0.5.1", default-features = false }
+
+# Serialization
+serde = { version = "1.0.213", default-features = false }
+serde_json = { version = "1.0.132", default-features = false }
+
+# Misc
+lazy_static = { version = "1.5.0", default-features = false }
