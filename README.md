@@ -7,8 +7,9 @@
 </h4>
 
 <p align="center">
-  <a href="https://github.com/anton-rs/superchain/actions?query=workflow%3ACI+branch%3Amain"><img src="https://github.com/anton-rs/superchain/workflows/unit/badge.svg" alt="License"></a>
-  <img src="https://img.shields.io/badge/License-MIT-d1d1f6.svg?label=license&labelColor=2a2f35" alt="License">
+  <a href="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml"><img src="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml/badge.svg?label=ci" alt="CI"></a>
+  <a href="https://github.com/anton-rs/superchain/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-d1d1f6.svg?label=license&labelColor=2a2f35" alt="License"></a>
+  <a href="https://anton-rs.github.io/superchain"><img src="https://img.shields.io/badge/Contributor%20Book-854a15?logo=mdBook&labelColor=2a2f35" alt="Book"></a>
   <a href="https://img.shields.io/codecov/c/github/anton-rs/superchain"><img src="https://img.shields.io/codecov/c/github/anton-rs/superchain" alt="Codecov"></a>
 </p>
 
