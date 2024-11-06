@@ -10,12 +10,15 @@ env:
 
 jobs:
   check-no-std:
-    name: check no_std ${{ matrix.features }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      matrix:
+        package: ["superchain-registry"]
+    name: check no_std ${{ matrix.features }} ${{ matrix.package }}
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: riscv32imac-unknown-none-elf
-      - run: cargo check --target riscv32imac-unknown-none-elf --no-default-features
+      - run: cargo check --target riscv32imac-unknown-none-elf --no-default-features -p ${{ matrix.package }}
