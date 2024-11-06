@@ -40,35 +40,39 @@ rustdoc-args = ["--cfg", "docsrs"]
 kona-derive = { git = "https://github.com/anton-rs/kona", branch = "main" }
 
 [workspace.dependencies]
+# Workspace
+superchain-derive = { version = "0.9.2", path = "crates/derive", default-features = false }
+superchain-registry = { version = "0.9.2", path = "crates/registry", default-features = false }
+
 # Kona
 kona-derive = { version = "0.0.5", default-features = false }
 
 # Alloy
 alloy-rlp = { version = "0.3.9", default-features = false }
-alloy-eips = { version = "0.5.4", default-features = false }
-alloy-serde = { version = "0.5.4", default-features = false }
-alloy-provider = { version = "0.5.4", default-features = false }
-alloy-primitives = { version = "0.8.9", default-features = false }
-alloy-consensus = { version = "0.5.4", default-features = false }
-alloy-transport = { version = "0.5.4", default-features = false }
-alloy-rpc-client = { version = "0.5.4", default-features = false }
-alloy-node-bindings = { version = "0.5.4", default-features = false }
-alloy-transport-http = { version = "0.5.4", default-features = false }
-alloy-rpc-types-beacon = { version = "0.5.4", default-features = false }
+alloy-eips = { version = "0.6.1", default-features = false }
+alloy-serde = { version = "0.6.1", default-features = false }
+alloy-provider = { version = "0.6.1", default-features = false }
+alloy-primitives = { version = "0.8.11", default-features = false }
+alloy-consensus = { version = "0.6.1", default-features = false }
+alloy-transport = { version = "0.6.1", default-features = false }
+alloy-rpc-client = { version = "0.6.1", default-features = false }
+alloy-node-bindings = { version = "0.6.1", default-features = false }
+alloy-transport-http = { version = "0.6.1", default-features = false }
+alloy-rpc-types-beacon = { version = "0.6.1", default-features = false }
 
 # OP Alloy
-op-alloy-genesis = { version = "0.5.2", default-features = false }
-op-alloy-protocol = { version = "0.5.2", default-features = false }
-op-alloy-consensus = { version = "0.5.2", default-features = false }
+op-alloy-genesis = { version = "0.6.2", default-features = false }
+op-alloy-protocol = { version = "0.6.2", default-features = false }
+op-alloy-consensus = { version = "0.6.2", default-features = false }
 
 # Serialization
-serde = { version = "1.0.213", default-features = false }
+serde = { version = "1.0.214", default-features = false }
 serde_json = { version = "1.0.132", default-features = false }
 
 # Misc
-lru = "0.12.4"
-tokio = "1.40.0"
-reqwest = "0.12.8"
+lru = "0.12.5"
+tokio = "1.41.0"
+reqwest = "0.12.9"
 async-trait = "0.1.83"
 tracing = { version = "0.1.40", default-features = false }
 derive_more = { version = "1.0.0", default-features = false }
