@@ -49,4 +49,4 @@ serde = { version = "1.0.213", default-features = false }
 serde_json = { version = "1.0.132", default-features = false }
 
 # Misc
-lazy_static = { version = "1.5.0" default-features = false }
+lazy_static = { version = "1.5.0", default-features = false }

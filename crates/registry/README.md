@@ -9,7 +9,7 @@
 <p align="center">
   <a href="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml"><img src="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml/badge.svg?label=ci" alt="CI"></a>
   <img src="https://img.shields.io/badge/License-MIT-d1d1f6.svg?label=license&labelColor=2a2f35" alt="License">
-  <a href="https://crates.io/crates/superchain"><img src="https://img.shields.io/crates/v/superchain.svg" alt="Superchain Crate"></a>
+  <a href="https://crates.io/crates/superchain-registry"><img src="https://img.shields.io/crates/v/superchain-registry.svg" alt="Superchain Crate"></a>
   <a href="https://github.com/ethereum-optimism/monorepo"><img src="https://img.shields.io/badge/OP%20Stack-monorepo-red?labelColor=2a2f35" alt="OP Stack"></a>
   <a href="https://img.shields.io/codecov/c/github/anton-rs/superchain"><img src="https://img.shields.io/codecov/c/github/anton-rs/superchain" alt="Codecov"></a>
 </p>
@@ -45,7 +45,7 @@ various chains into instantiated objects, the [`superchain`][sc] crate requires
 as a dependency to a `Cargo.toml`.
 
 ```toml
-superchain = "0.9"
+superchain-registry = "0.9"
 ```
 
 [`superchain`][sc] declares lazy evaluated statics that expose `ChainConfig`s, `RollupConfig`s,
@@ -75,20 +75,20 @@ Add the following to your `Cargo.toml`.
 
 ```toml
 [dependencies]
-superchain = "0.9"
+superchain-registry = "0.9"
 ```
 
 To make `superchain` `no_std`, toggle `default-features` off like so.
 
 ```toml
 [dependencies]
-superchain = { version = "0.9", default-features = false }
+superchain-registry = { version = "0.9", default-features = false }
 ```
 
 Below demonstrates getting the `RollupConfig` for OP Mainnet (Chain ID `10`).
 
 ```rust
-use superchain::ROLLUP_CONFIGS;
+use superchain_registry::ROLLUP_CONFIGS;
 
 let op_chain_id = 10;
 let op_rollup_config = ROLLUP_CONFIGS.get(&op_chain_id);
@@ -98,7 +98,7 @@ println!("OP Mainnet Rollup Config: {:?}", op_rollup_config);
 A mapping from chain id to `ChainConfig` is also available.
 
 ```rust
-use superchain::OPCHAINS;
+use superchain_registry::OPCHAINS;
 
 let op_chain_id = 10;
 let op_chain_config = OPCHAINS.get(&op_chain_id);
