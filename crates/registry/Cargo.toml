@@ -1,14 +1,16 @@
 [package]
 name = "superchain-registry"
 description = "The Superchain Registry"
+
 version.workspace = true
 edition.workspace = true
-rust-version.workspace = true
 authors.workspace = true
 license.workspace = true
-repository = "https://github.com/anton-rs/superchain"
-keywords = ["ethereum", "crypto", "optimism"]
-categories = ["cryptography", "cryptography::cryptocurrencies"]
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+repository.workspace = true
+rust-version.workspace = true
 
 [lints]
 workspace = true
