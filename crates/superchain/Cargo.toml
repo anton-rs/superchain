@@ -22,7 +22,7 @@ superchain-registry = { workspace = true, optional = true }
 [features]
 default = ["std", "full"]
 
-std = ["superchain-derive?/std"]
+std = ["superchain-registry?/std"]
 
 full = [
   "derive",
