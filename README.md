@@ -3,7 +3,7 @@
 </h1>
 
 <h4 align="center">
-    A suite of `std` components for OP Stack L2 chain derivation, batch submission, and periphery services.
+    A suite of `std` components for the superchain.
 </h4>
 
 <p align="center">
