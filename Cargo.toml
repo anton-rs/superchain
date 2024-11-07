@@ -3,7 +3,7 @@ members = ["crates/*"]
 resolver = "2"
 
 [workspace.package]
-version = "0.10.0"
+version = "0.11.0"
 edition = "2021"
 license = "MIT"
 rust-version = "1.81"
@@ -38,8 +38,8 @@ rustdoc-args = ["--cfg", "docsrs"]
 
 [workspace.dependencies]
 # Workspace
-superchain-derive = { version = "0.10.0", path = "crates/derive", default-features = false }
-superchain-registry = { version = "0.10.0", path = "crates/registry", default-features = false }
+superchain-derive = { version = "0.11.0", path = "crates/derive", default-features = false }
+superchain-registry = { version = "0.11.0", path = "crates/registry", default-features = false }
 
 # Kona
 kona-derive = { version = "0.0.6", default-features = false }
