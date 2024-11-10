@@ -53,24 +53,41 @@ alloy-primitives = { version = "0.8.11", default-features = false }
 alloy-consensus = { version = "0.6.2", default-features = false }
 alloy-transport = { version = "0.6.2", default-features = false }
 alloy-rpc-client = { version = "0.6.2", default-features = false }
+alloy-rpc-types-eth = { version = "0.6.2", default-features = false }
 alloy-node-bindings = { version = "0.6.2", default-features = false }
 alloy-transport-http = { version = "0.6.2", default-features = false }
 alloy-rpc-types-beacon = { version = "0.6.2", default-features = false }
+alloy-rpc-types-engine = { version = "0.6.2", default-features = false }
 
 # OP Alloy
 op-alloy-genesis = { version = "0.6.3", default-features = false }
 op-alloy-protocol = { version = "0.6.3", default-features = false }
 op-alloy-consensus = { version = "0.6.3", default-features = false }
+op-alloy-rpc-types-engine = { version = "0.6.3", default-features = false }
 
 # Serialization
 serde = { version = "1.0.214", default-features = false }
 serde_json = { version = "1.0.132", default-features = false }
 
+# Networking
+snap = "1.1.1"
+discv5 = "0.9.0"
+libp2p = "0.54.1"
+openssl = "0.10.68"
+libp2p-identity = "0.2.9"
+
+# Testing
+arbtest = "0.3"
+arbitrary = "1"
+
 # Misc
 lru = "0.12.5"
+eyre = "0.6.12"
 tokio = "1.41.0"
+futures = "0.3.31"
 reqwest = "0.12.9"
 async-trait = "0.1.83"
+unsigned-varint = "0.8.0"
 tracing = { version = "0.1.40", default-features = false }
 derive_more = { version = "1.0.0", default-features = false }
 lazy_static = { version = "1.5.0", default-features = false }
