@@ -1,9 +1,9 @@
 //! Node subcommand for Hera.
 
 use clap::Args;
-use eyre::{bail, Result};
+use eyre::Result;
 // use rollup::{Driver, HeraArgsExt};
-use tracing::info;
+// use tracing::info;
 
 use crate::globals::GlobalArgs;
 

@@ -13,12 +13,13 @@ rust-version.workspace = true
 
 [dependencies]
 # Local
-super.workspace = true
 super-net.workspace = true
-super-driver.workspace = true
+superchain = { workspace = true, features = ["registry"] }
 
 # Workspace
 eyre.workspace = true
 tracing.workspace = true
 clap = { workspace = true, features = ["derive", "env"] }
 tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
+tracing-subscriber = { workspace = true, features = ["env-filter", "fmt"] }
+metrics-exporter-prometheus = { workspace = true, features = ["http-listener"] }
