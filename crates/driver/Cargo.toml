@@ -43,6 +43,7 @@ reqwest.workspace = true
 tracing.workspace = true
 async-trait.workspace = true
 parking_lot.workspace = true
+derive_more = { workspace = true, features = ["full"] }
 
 [features]
 default = []

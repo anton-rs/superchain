@@ -1,6 +1,6 @@
 //! Chain Provider
 
-use alloc::{boxed::Box, collections::vec_deque::VecDeque, sync::Arc, vec::Vec};
+use alloc::{boxed::Box, collections::vec_deque::VecDeque, string::ToString, sync::Arc, vec::Vec};
 use alloy_primitives::{map::HashMap, B256};
 
 use alloy_consensus::{
@@ -11,8 +11,10 @@ use alloy_eips::BlockNumHash;
 use alloy_rlp::{Decodable, Encodable};
 use alloy_signer::Signature;
 use async_trait::async_trait;
-use eyre::eyre;
-use kona_derive::traits::ChainProvider;
+use kona_derive::{
+    errors::{PipelineError, PipelineErrorKind},
+    traits::ChainProvider,
+};
 use op_alloy_protocol::BlockInfo;
 use parking_lot::RwLock;
 use reth::{primitives::Transaction, providers::Chain};
@@ -172,58 +174,107 @@ impl InMemoryChainProviderInner {
     }
 }
 
+/// An error for the [InMemoryChainProvider].
+#[derive(Debug, derive_more::Display)]
+pub enum InMemoryChainProviderError {
+    /// The header is not set.
+    #[display("Header not set")]
+    HeaderNotSet,
+    /// The block info is not set.
+    #[display("Block info not set")]
+    BlockInfoNotSet,
+    /// The receipts are not set.
+    #[display("Receipts not set")]
+    ReceiptsNotSet,
+    /// The transactions are not set.
+    #[display("Transactions not set")]
+    TxsNotSet,
+    /// The block is not found.
+    #[display("Block not found")]
+    BlockNotFound,
+}
+
+impl core::error::Error for InMemoryChainProviderError {}
+
+impl From<InMemoryChainProviderError> for PipelineErrorKind {
+    fn from(e: InMemoryChainProviderError) -> Self {
+        match e {
+            InMemoryChainProviderError::BlockNotFound => {
+                PipelineErrorKind::Temporary(PipelineError::Provider("block not found".to_string()))
+            }
+            InMemoryChainProviderError::HeaderNotSet => {
+                PipelineErrorKind::Temporary(PipelineError::Provider("header not set".to_string()))
+            }
+            InMemoryChainProviderError::BlockInfoNotSet => PipelineErrorKind::Temporary(
+                PipelineError::Provider("block info not set".to_string()),
+            ),
+            InMemoryChainProviderError::ReceiptsNotSet => PipelineErrorKind::Temporary(
+                PipelineError::Provider("receipts not set".to_string()),
+            ),
+            InMemoryChainProviderError::TxsNotSet => PipelineErrorKind::Temporary(
+                PipelineError::Provider("transactions not set".to_string()),
+            ),
+        }
+    }
+}
+
 #[async_trait]
 impl ChainProvider for InMemoryChainProvider {
-    type Error = eyre::Error;
+    type Error = InMemoryChainProviderError;
 
     /// Fetch the L1 [Header] for the given [B256] hash.
-    async fn header_by_hash(&mut self, hash: B256) -> eyre::Result<Header> {
+    async fn header_by_hash(&mut self, hash: B256) -> Result<Header, Self::Error> {
         self.0
             .read()
             .hash_to_header
             .get(&hash)
             .cloned()
-            .ok_or_else(|| eyre!("Header not found for hash: {}", hash))
+            .ok_or_else(|| InMemoryChainProviderError::HeaderNotSet)
     }
 
     /// Returns the block at the given number, or an error if the block does not exist in the data
     /// source.
-    async fn block_info_by_number(&mut self, number: u64) -> eyre::Result<BlockInfo> {
+    async fn block_info_by_number(&mut self, number: u64) -> Result<BlockInfo, Self::Error> {
         self.0
             .read()
             .hash_to_block_info
             .values()
             .find(|bi| bi.number == number)
             .cloned()
-            .ok_or_else(|| eyre!("Block not found"))
+            .ok_or_else(|| InMemoryChainProviderError::BlockInfoNotSet)
     }
 
     /// Returns all receipts in the block with the given hash, or an error if the block does not
     /// exist in the data source.
-    async fn receipts_by_hash(&mut self, hash: B256) -> eyre::Result<Vec<Receipt>> {
+    async fn receipts_by_hash(&mut self, hash: B256) -> Result<Vec<Receipt>, Self::Error> {
         self.0
             .read()
             .hash_to_receipts
             .get(&hash)
             .cloned()
-            .ok_or_else(|| eyre!("Receipts not found"))
+            .ok_or_else(|| InMemoryChainProviderError::ReceiptsNotSet)
     }
 
     /// Returns block info and transactions for the given block hash.
     async fn block_info_and_transactions_by_hash(
         &mut self,
         hash: B256,
-    ) -> eyre::Result<(BlockInfo, Vec<TxEnvelope>)> {
+    ) -> Result<(BlockInfo, Vec<TxEnvelope>), Self::Error> {
         let block_info = self
             .0
             .read()
             .hash_to_block_info
             .get(&hash)
             .cloned()
-            .ok_or_else(|| eyre!("Block not found"))?;
+            .ok_or_else(|| InMemoryChainProviderError::BlockNotFound)?;
 
-        let txs =
-            self.0.read().hash_to_txs.get(&hash).cloned().ok_or_else(|| eyre!("Tx not found"))?;
+        let txs = self
+            .0
+            .read()
+            .hash_to_txs
+            .get(&hash)
+            .cloned()
+            .ok_or_else(|| InMemoryChainProviderError::TxsNotSet)?;
 
         Ok((block_info, txs))
     }
