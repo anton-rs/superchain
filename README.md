@@ -7,10 +7,10 @@
 </h4>
 
 <p align="center">
-  <a href="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml"><img src="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml/badge.svg?label=ci" alt="CI"></a>
-  <a href="https://github.com/anton-rs/superchain/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-d1d1f6.svg?label=license&labelColor=2a2f35" alt="License"></a>
-  <a href="https://anton-rs.github.io/superchain"><img src="https://img.shields.io/badge/Contributor%20Book-854a15?logo=mdBook&labelColor=2a2f35" alt="Book"></a>
-  <a href="https://img.shields.io/codecov/c/github/anton-rs/superchain"><img src="https://img.shields.io/codecov/c/github/anton-rs/superchain" alt="Codecov"></a>
+  <a href="https://github.com/anton-rs/super/actions/workflows/rust_ci.yaml"><img src="https://github.com/anton-rs/super/actions/workflows/rust_ci.yaml/badge.svg?label=ci" alt="CI"></a>
+  <a href="https://github.com/anton-rs/super/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-d1d1f6.svg?label=license&labelColor=2a2f35" alt="License"></a>
+  <a href="https://anton-rs.github.io/super"><img src="https://img.shields.io/badge/Contributor%20Book-854a15?logo=mdBook&labelColor=2a2f35" alt="Book"></a>
+  <a href="https://img.shields.io/codecov/c/github/anton-rs/super"><img src="https://img.shields.io/codecov/c/github/anton-rs/super" alt="Codecov"></a>
 </p>
 
 <p align="center">
@@ -23,14 +23,14 @@
 
 ## Overview
 
-The `superchain` is a suite of portable, modular `std` OP Stack components.
+`super` is a suite of portable, modular `std` OP Stack components.
 
 [bin/](./bin/) provides a host of binary applications that compose [crates](./crates/).
 
 
 ## Development Status
 
-`superchain` is currently in active development, and is not yet ready for use in production.
+`super` is currently in active development, and is not yet ready for use in production.
 
 
 ## Security
