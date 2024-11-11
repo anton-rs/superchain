@@ -1,11 +1,14 @@
 //! L2 Chain Provider
 
-use alloc::{boxed::Box, collections::vec_deque::VecDeque, sync::Arc, vec::Vec};
+use alloc::{boxed::Box, collections::vec_deque::VecDeque, string::ToString, sync::Arc, vec::Vec};
 use alloy_primitives::{map::HashMap, B256};
 
 use alloy_consensus::{Header, Receipt, TxEnvelope};
 use async_trait::async_trait;
-use kona_derive::traits::L2ChainProvider;
+use kona_derive::{
+    errors::{PipelineError, PipelineErrorKind},
+    traits::L2ChainProvider,
+};
 use op_alloy_consensus::OpBlock;
 use op_alloy_genesis::{RollupConfig, SystemConfig};
 use op_alloy_protocol::{BatchValidationProvider, BlockInfo, L2BlockInfo};
@@ -22,7 +25,7 @@ impl InMemoryL2ChainProvider {
     }
 
     /// Flushes the provider, removing all items.
-    pub fn flush(&self) {
+    pub fn flush(&mut self) {
         let mut inner = self.0.write();
         inner.key_order.clear();
         inner.hash_to_header.clear();
@@ -70,9 +73,29 @@ impl InMemoryL2ChainProviderInner {
     }
 }
 
+/// An error that can occur when interacting with an [InMemoryL2ChainProvider].
+#[derive(Debug, derive_more::Display)]
+pub enum InMemoryL2ChainProviderError {
+    /// The block does not exist.
+    #[display("Block does not exist")]
+    BlockDoesNotExist,
+}
+
+impl From<InMemoryL2ChainProviderError> for PipelineErrorKind {
+    fn from(err: InMemoryL2ChainProviderError) -> Self {
+        match err {
+            InMemoryL2ChainProviderError::BlockDoesNotExist => PipelineErrorKind::Temporary(
+                PipelineError::Provider("Block does not exist".to_string()),
+            ),
+        }
+    }
+}
+
+impl core::error::Error for InMemoryL2ChainProviderError {}
+
 #[async_trait]
 impl BatchValidationProvider for InMemoryL2ChainProvider {
-    type Error = eyre::Error;
+    type Error = InMemoryL2ChainProviderError;
 
     /// Returns the [L2BlockInfo] given a block number.
     ///
@@ -91,14 +114,14 @@ impl BatchValidationProvider for InMemoryL2ChainProvider {
 
 #[async_trait]
 impl L2ChainProvider for InMemoryL2ChainProvider {
-    type Error = eyre::Error;
+    type Error = InMemoryL2ChainProviderError;
 
     /// Returns the [SystemConfig] by L2 number.
     async fn system_config_by_number(
         &mut self,
         _: u64,
         _: Arc<RollupConfig>,
-    ) -> Result<SystemConfig, Self::Error> {
+    ) -> Result<SystemConfig, <Self as BatchValidationProvider>::Error> {
         todo!()
     }
 }

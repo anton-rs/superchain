@@ -89,8 +89,8 @@ impl HiloPipeline {
 impl DriverPipeline<HiloDerivationPipeline> for HiloPipeline {
     /// Flushes provider caches on re-orgs.
     fn flush(&self) {
-        self.chain_provider.flush();
-        self.l2_chain_provider.flush();
+        // self.chain_provider.flush();
+        // self.l2_chain_provider.flush();
     }
 }
 
