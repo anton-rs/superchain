@@ -1,0 +1,20 @@
+[package]
+name = "super-driver"
+description = "Derivation driver for the OP Stack"
+
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+# Kona
+# kona-derive.workspace = true
+
+[features]
+default = []
