@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="./crates/registry/assets/banner.png" alt="hilo" width="100%" align="center">
+    <img src="./assets/banner.png" alt="hilo" width="100%" align="center">
 </h1>
 
 <h4 align="center">
@@ -23,9 +23,12 @@
 
 ## Overview
 
-`hilo` is a suite of portable, modular `std` OP Stack components.
-
-[bin/](./bin/) provides a host of binary applications that compose [crates](./crates/).
+`hilo` is the sister of [`kona`][kona].
+It is a suite of portable, modular `std` OP Stack components,
+where `kona` contains `no_std` components.
+`hilo` provides library components in [crates](./crates/), and
+binary applications in [bin/](./bin/). Bins like `hera` compose
+multiple crates from `hilo` and `kona`.
 
 
 ## Development Status
@@ -52,3 +55,4 @@ Licensed under <a href="LICENSE-MIT">MIT license</a>.
 
 [mit-url]: LICENSE-MIT
 [apache-url]: LICENSE-APACHE
+[kona]: https://github.com/anton-rs/kona
