@@ -1,4 +1,4 @@
-# `super`
+#@ `hilo-net`
 
 A consensus network library for the OP Stack.
 
@@ -16,7 +16,7 @@ Contains a gossipsub driver to run discv5 peer discovery and block gossip.
 ```rust,no_run
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use alloy_primitives::address;
-use super_net::driver::NetworkDriver;
+use hilo_net::driver::NetworkDriver;
 
 // Build the network driver.
 let signer = address!("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");

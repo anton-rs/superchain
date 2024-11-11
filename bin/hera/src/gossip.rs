@@ -3,9 +3,9 @@
 use crate::globals::GlobalArgs;
 use clap::Args;
 use eyre::Result;
+use hilo::registry::ROLLUP_CONFIGS;
+use hilo_net::driver::NetworkDriver;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-use super_net::driver::NetworkDriver;
-use superchain::registry::ROLLUP_CONFIGS;
 
 /// The Hera gossip subcommand.
 #[derive(Debug, Clone, Args)]

@@ -1,5 +1,5 @@
 [package]
-name = "super-registry"
+name = "hilo-registry"
 description = "The Superchain Registry"
 
 version.workspace = true

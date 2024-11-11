@@ -1,9 +1,9 @@
 ## `super-derive`
 
-<a href="https://github.com/anton-rs/super/actions/workflows/rust_ci.yaml"><img src="https://github.com/anton-rs/super/actions/workflows/rust_ci.yaml/badge.svg?label=ci" alt="CI"></a>
-<a href="https://crates.io/crates/super-derive"><img src="https://img.shields.io/crates/v/super-derive.svg?label=super-derive&labelColor=2a2f35" alt="Kona Derive Alloy"></a>
-<a href="https://github.com/anton-rs/super/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-d1d1f6.svg?label=license&labelColor=2a2f35" alt="License"></a>
-<a href="https://img.shields.io/codecov/c/github/anton-rs/super"><img src="https://img.shields.io/codecov/c/github/anton-rs/super" alt="Codecov"></a>
+<a href="https://github.com/anton-rs/hilo/actions/workflows/rust_ci.yaml"><img src="https://github.com/anton-rs/hilo/actions/workflows/rust_ci.yaml/badge.svg?label=ci" alt="CI"></a>
+<a href="https://crates.io/crates/hilo-derive"><img src="https://img.shields.io/crates/v/hilo-derive.svg?label=hilo-derive&labelColor=2a2f35" alt="Kona Derive Alloy"></a>
+<a href="https://github.com/anton-rs/hilo/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-d1d1f6.svg?label=license&labelColor=2a2f35" alt="License"></a>
+<a href="https://img.shields.io/codecov/c/github/anton-rs/hilo"><img src="https://img.shields.io/codecov/c/github/anton-rs/hilo" alt="Codecov"></a>
 
 _Notice: Requires an `std` environment._
 
@@ -16,7 +16,7 @@ backed by [alloy][a] providers is to use the exported `new_online_pipeline` meth
 
 ```rust
 use std::sync::Arc;
-use super_derive::prelude::*;
+use hilo_derive::prelude::*;
 use op_alloy_protocol::BlockInfo;
 use op_alloy_genesis::RollupConfig;
 

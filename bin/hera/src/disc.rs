@@ -3,8 +3,8 @@
 use crate::globals::GlobalArgs;
 use clap::Args;
 use eyre::Result;
+use hilo_net::discovery::builder::DiscoveryBuilder;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-use super_net::discovery::builder::DiscoveryBuilder;
 
 /// The Hera discovery subcommand.
 #[derive(Debug, Clone, Args)]

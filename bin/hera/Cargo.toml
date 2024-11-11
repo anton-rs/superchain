@@ -13,8 +13,8 @@ rust-version.workspace = true
 
 [dependencies]
 # Local
-super-net.workspace = true
-superchain = { workspace = true, features = ["registry"] }
+hilo-net.workspace = true
+hilo = { workspace = true, features = ["registry"] }
 
 # Workspace
 eyre.workspace = true
