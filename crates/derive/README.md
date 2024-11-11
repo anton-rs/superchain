@@ -1,9 +1,9 @@
-## `superchain-derive`
+## `super-derive`
 
-<a href="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml"><img src="https://github.com/anton-rs/superchain/actions/workflows/rust_ci.yaml/badge.svg?label=ci" alt="CI"></a>
-<a href="https://crates.io/crates/superchain-derive"><img src="https://img.shields.io/crates/v/superchain-derive.svg?label=superchain-derive&labelColor=2a2f35" alt="Kona Derive Alloy"></a>
-<a href="https://github.com/anton-rs/superchain/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-d1d1f6.svg?label=license&labelColor=2a2f35" alt="License"></a>
-<a href="https://img.shields.io/codecov/c/github/anton-rs/superchain"><img src="https://img.shields.io/codecov/c/github/anton-rs/superchain" alt="Codecov"></a>
+<a href="https://github.com/anton-rs/super/actions/workflows/rust_ci.yaml"><img src="https://github.com/anton-rs/super/actions/workflows/rust_ci.yaml/badge.svg?label=ci" alt="CI"></a>
+<a href="https://crates.io/crates/super-derive"><img src="https://img.shields.io/crates/v/super-derive.svg?label=super-derive&labelColor=2a2f35" alt="Kona Derive Alloy"></a>
+<a href="https://github.com/anton-rs/super/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-d1d1f6.svg?label=license&labelColor=2a2f35" alt="License"></a>
+<a href="https://img.shields.io/codecov/c/github/anton-rs/super"><img src="https://img.shields.io/codecov/c/github/anton-rs/super" alt="Codecov"></a>
 
 _Notice: Requires an `std` environment._
 
@@ -11,14 +11,14 @@ An online, alloy-backed derivation pipeline, built on [`kona-derive`][d].
 
 ## Usage
 
-The easiest way to use `superchain-derive-alloy` to construct a derivation pipeline
+The easiest way to use `super-derive` to construct a derivation pipeline
 backed by [alloy][a] providers is to use the exported `new_online_pipeline` method.
 
 ```rust
 use std::sync::Arc;
+use super_derive::prelude::*;
 use op_alloy_protocol::BlockInfo;
 use op_alloy_genesis::RollupConfig;
-use superchain_derive::prelude::*;
 
 let rollup_config = Arc::new(RollupConfig::default());
 let chain_provider =
@@ -55,7 +55,7 @@ assert_eq!(pipeline.origin(), Some(origin));
 ## Features
 
 The most up-to-date feature list will be available on the
-[docs.rs `Feature Flags` tab][ff] of the `superchain-derive-alloy` crate.
+[docs.rs `Feature Flags` tab][ff] of the `super-derive` crate.
 
 Some features include the following.
 - `test-utils`: Test utilities for downstream libraries.
@@ -66,4 +66,4 @@ Some features include the following.
 
 [a]: https://github.com/alloy-rs/alloy
 [d]: https://crates.io/crates/kona-derive
-[ff]: https://docs.rs/crate/kona-derive-alloy/latest/features
+[ff]: https://docs.rs/crate/super-derive/latest/features

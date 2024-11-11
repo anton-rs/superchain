@@ -52,7 +52,7 @@ impl DiscoveryDriver {
     ///
     /// ```no_run
     /// use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-    /// use superchain_net::discovery::builder::DiscoveryBuilder;
+    /// use super_net::discovery::builder::DiscoveryBuilder;
     ///
     /// #[tokio::main]
     /// async fn main() {

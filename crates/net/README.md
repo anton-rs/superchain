@@ -1,4 +1,6 @@
-## Consensus Network Library
+# `super`
+
+A consensus network library for the OP Stack.
 
 Contains a gossipsub driver to run discv5 peer discovery and block gossip.
 
@@ -14,7 +16,7 @@ Contains a gossipsub driver to run discv5 peer discovery and block gossip.
 ```rust,no_run
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use alloy_primitives::address;
-use superchain_net::driver::NetworkDriver;
+use super_net::driver::NetworkDriver;
 
 // Build the network driver.
 let signer = address!("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
@@ -37,6 +39,8 @@ println!("NetworkDriver started.");
 ### Acknowledgements
 
 Largely based off [magi]'s [p2p module][p2p].
+
+<!-- Links -->
 
 [magi]: https://github.com/a16z/magi
 [p2p]: https://github.com/a16z/magi/tree/master/src/network
