@@ -16,7 +16,7 @@ ci: fmt lint tests
 source:
   git submodule update --remote
 
-# Generate file bindings for the superchain-registry
+# Generate file bindings for super-registry
 bind:
   @just --justfile ./crates/registry/Justfile bind
 

@@ -4,6 +4,6 @@ set positional-arguments
 default:
   @just --list
 
-# Generate file bindings for the superchain-registry
+# Generate file bindings
 bind:
   ./etc/bind.sh

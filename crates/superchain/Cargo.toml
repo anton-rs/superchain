@@ -16,20 +16,20 @@ rust-version.workspace = true
 workspace = true
 
 [dependencies]
-superchain-derive = { workspace = true, optional = true }
-superchain-registry = { workspace = true, optional = true }
+super-derive = { workspace = true, optional = true }
+super-registry = { workspace = true, optional = true }
 
 [features]
 default = ["std", "full"]
 
-std = ["superchain-registry?/std"]
+std = ["super-registry?/std"]
 
 full = [
   "derive",
   "registry",
 ]
 
-derive = ["dep:superchain-derive"]
-registry = ["dep:superchain-registry"]
+derive = ["dep:super-derive"]
+registry = ["dep:super-registry"]
 
-test-utils = ["superchain-derive?/test-utils"]
+test-utils = ["super-derive?/test-utils"]

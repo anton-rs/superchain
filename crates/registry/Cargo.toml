@@ -1,5 +1,5 @@
 [package]
-name = "superchain-registry"
+name = "super-registry"
 description = "The Superchain Registry"
 
 version.workspace = true

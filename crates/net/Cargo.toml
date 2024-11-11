@@ -1,13 +1,15 @@
 [package]
-name = "superchain-net"
+name = "super-net"
 description = "Networking library for the OP Stack"
-version = "0.0.0"
+
+version.workspace = true
 edition.workspace = true
 authors.workspace = true
 license.workspace = true
+homepage.workspace = true
 keywords.workspace = true
-repository.workspace = true
 categories.workspace = true
+repository.workspace = true
 rust-version.workspace = true
 
 [dependencies]

@@ -8,8 +8,8 @@
 
 #[cfg(feature = "derive")]
 #[doc(inline)]
-pub use superchain_derive as derive;
+pub use super_derive as derive;
 
 #[cfg(feature = "registry")]
 #[doc(inline)]
-pub use superchain_registry as registry;
+pub use super_registry as registry;
