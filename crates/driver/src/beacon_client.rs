@@ -1,18 +1,24 @@
 //! Contains an online implementation of the `BeaconClient` trait.
 
+use alloc::{
+    boxed::Box,
+    format,
+    string::{String, ToString},
+    vec::Vec,
+};
 use alloy_rpc_types_beacon::sidecar::{BeaconBlobBundle, BlobData};
 use async_trait::async_trait;
 use kona_derive::sources::IndexedBlobHash;
 use reqwest::Client;
 
 /// The config spec engine api method.
-pub(crate) const SPEC_METHOD: &str = "eth/v1/config/spec";
+const SPEC_METHOD: &str = "eth/v1/config/spec";
 
 /// The beacon genesis engine api method.
-pub(crate) const GENESIS_METHOD: &str = "eth/v1/beacon/genesis";
+const GENESIS_METHOD: &str = "eth/v1/beacon/genesis";
 
 /// The blob sidecars engine api method prefix.
-pub(crate) const SIDECARS_METHOD_PREFIX: &str = "eth/v1/beacon/blob_sidecars";
+const SIDECARS_METHOD_PREFIX: &str = "eth/v1/beacon/blob_sidecars";
 
 /// A reduced genesis data.
 #[derive(Debug, Default, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -64,7 +70,7 @@ impl APIGenesisResponse {
 #[async_trait]
 pub trait BeaconClient {
     /// The error type for [BeaconClient] implementations.
-    type Error: std::fmt::Display + ToString;
+    type Error: core::fmt::Display + ToString;
 
     /// Returns the config spec.
     async fn config_spec(&self) -> Result<APIConfigResponse, Self::Error>;
@@ -128,7 +134,7 @@ impl BeaconClient for OnlineBeaconClient {
         let mut sidecars = Vec::with_capacity(hashes.len());
         hashes.iter().for_each(|hash| {
             if let Some(sidecar) =
-                raw_response.data.iter().find(|sidecar| sidecar.index == (hash.index as u64))
+                raw_response.data.iter().find(|sidecar| sidecar.index == hash.index as u64)
             {
                 sidecars.push(sidecar.clone());
             }
