@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/*"]
+members = ["crates/*", "bin/*"]
 resolver = "2"
 
 [workspace.package]
@@ -38,7 +38,11 @@ rustdoc-args = ["--cfg", "docsrs"]
 
 [workspace.dependencies]
 # Workspace
+super = { version = "0.11.0", path = "crates/super", default-features = false }
+super-net = { version = "0.11.0", path = "crates/net", default-features = false }
+super-driver = { version = "0.11.0", path = "crates/driver", default-features = false }
 super-derive = { version = "0.11.0", path = "crates/derive", default-features = false }
+superchain = { version = "0.11.0", path = "crates/superchain", default-features = false }
 super-registry = { version = "0.11.0", path = "crates/registry", default-features = false }
 
 # Kona
@@ -69,6 +73,11 @@ op-alloy-rpc-types-engine = { version = "0.6.3", default-features = false }
 serde = { version = "1.0.214", default-features = false }
 serde_json = { version = "1.0.132", default-features = false }
 
+# Tracing
+tracing = { version = "0.1.40", default-features = false }
+tracing-subscriber = { version = "0.3.18", default-features = false }
+metrics-exporter-prometheus = { version = "0.16.0", default-features = false }
+
 # Networking
 snap = "1.1.1"
 discv5 = "0.9.0"
@@ -83,11 +92,11 @@ arbitrary = "1"
 # Misc
 lru = "0.12.5"
 eyre = "0.6.12"
+clap = "4.5.20"
 tokio = "1.41.0"
 futures = "0.3.31"
 reqwest = "0.12.9"
 async-trait = "0.1.83"
 unsigned-varint = "0.8.0"
-tracing = { version = "0.1.40", default-features = false }
 derive_more = { version = "1.0.0", default-features = false }
 lazy_static = { version = "1.5.0", default-features = false }
