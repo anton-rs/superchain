@@ -8,8 +8,8 @@ edition = "2021"
 license = "MIT"
 rust-version = "1.81"
 authors = ["clabby", "refcell"]
-homepage = "https://github.com/anton-rs/superchain"
-repository = "https://github.com/anton-rs/superchain"
+homepage = "https://github.com/anton-rs/hilo"
+repository = "https://github.com/anton-rs/hilo"
 keywords = ["ethereum", "optimism", "crypto"]
 categories = ["cryptography", "cryptography::cryptocurrencies"]
 exclude = ["benches/", "tests/"]
@@ -38,12 +38,11 @@ rustdoc-args = ["--cfg", "docsrs"]
 
 [workspace.dependencies]
 # Workspace
-super = { version = "0.11.0", path = "crates/super", default-features = false }
-super-net = { version = "0.11.0", path = "crates/net", default-features = false }
-super-driver = { version = "0.11.0", path = "crates/driver", default-features = false }
-super-derive = { version = "0.11.0", path = "crates/derive", default-features = false }
-superchain = { version = "0.11.0", path = "crates/superchain", default-features = false }
-super-registry = { version = "0.11.0", path = "crates/registry", default-features = false }
+hilo = { version = "0.11.0", path = "crates/hilo", default-features = false }
+hilo-net = { version = "0.11.0", path = "crates/net", default-features = false }
+hilo-driver = { version = "0.11.0", path = "crates/driver", default-features = false }
+hilo-derive = { version = "0.11.0", path = "crates/derive", default-features = false }
+hilo-registry = { version = "0.11.0", path = "crates/registry", default-features = false }
 
 # Kona
 kona-derive = { version = "0.0.6", default-features = false }

@@ -1,5 +1,5 @@
 [package]
-name = "super-net"
+name = "hilo-net"
 description = "Networking library for the OP Stack"
 
 version.workspace = true

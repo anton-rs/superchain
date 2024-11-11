@@ -16,20 +16,20 @@ rust-version.workspace = true
 workspace = true
 
 [dependencies]
-super-derive = { workspace = true, optional = true }
-super-registry = { workspace = true, optional = true }
+hilo-derive = { workspace = true, optional = true }
+hilo-registry = { workspace = true, optional = true }
 
 [features]
 default = ["std", "full"]
 
-std = ["super-registry?/std"]
+std = ["hilo-registry?/std"]
 
 full = [
   "derive",
   "registry",
 ]
 
-derive = ["dep:super-derive"]
-registry = ["dep:super-registry"]
+derive = ["dep:hilo-derive"]
+registry = ["dep:hilo-registry"]
 
-test-utils = ["super-derive?/test-utils"]
+test-utils = ["hilo-derive?/test-utils"]

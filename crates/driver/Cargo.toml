@@ -1,5 +1,5 @@
 [package]
-name = "super-driver"
+name = "hilo-driver"
 description = "Derivation driver for the OP Stack"
 
 version.workspace = true

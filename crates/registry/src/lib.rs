@@ -1,8 +1,8 @@
 #![doc = include_str!("../README.md")]
 #![doc(
-    html_logo_url = "https://raw.githubusercontent.com/anton-rs/superchain/main/assets/superchain.png",
+    html_logo_url = "https://raw.githubusercontent.com/anton-rs/hilo/main/assets/superchain.png",
     html_favicon_url = "https://avatars.githubusercontent.com/u/139668603?s=256",
-    issue_tracker_base_url = "https://github.com/anton-rs/superchain/issues/"
+    issue_tracker_base_url = "https://github.com/anton-rs/hilo/issues/"
 )]
 #![warn(missing_debug_implementations, missing_docs, rustdoc::all)]
 #![deny(unused_must_use, rust_2018_idioms)]

@@ -51,8 +51,8 @@ impl DiscoveryDriver {
     /// ## Example
     ///
     /// ```no_run
+    /// use hilo_net::discovery::builder::DiscoveryBuilder;
     /// use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-    /// use super_net::discovery::builder::DiscoveryBuilder;
     ///
     /// #[tokio::main]
     /// async fn main() {

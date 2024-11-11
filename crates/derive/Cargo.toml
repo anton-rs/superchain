@@ -1,5 +1,5 @@
 [package]
-name = "super-derive"
+name = "hilo-derive"
 description = "An alloy-backed derivation pipeline for the OP Stack, built on `kona-derive`"
 
 version.workspace = true

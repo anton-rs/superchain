@@ -126,8 +126,8 @@ impl NetworkDriverBuilder {
     /// ## Example
     ///
     /// ```rust,ignore
-    /// use super_net::gossip::config;
-    /// use super_net::NetworkDriverBuilder;
+    /// use hilo_net::gossip::config;
+    /// use hilo_net::NetworkDriverBuilder;
     /// use std::net::{IpAddr, Ipv4Addr, SocketAddr};
     ///
     /// let chain_id = 10;
@@ -160,8 +160,8 @@ impl NetworkDriverBuilder {
     /// ```rust
     /// use alloy_primitives::{address, Address};
     /// use discv5::{ConfigBuilder, ListenConfig};
+    /// use hilo_net::builder::NetworkDriverBuilder;
     /// use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-    /// use super_net::builder::NetworkDriverBuilder;
     ///
     /// let id = 10;
     /// let signer = Address::random();
@@ -202,7 +202,7 @@ impl NetworkDriverBuilder {
     ///
     /// ```rust,ignore
     /// use std::net::{IpAddr, Ipv4Addr, SocketAddr};
-    /// use super_net::NetworkDriverBuilder;
+    /// use hilo_net::NetworkDriverBuilder;
     ///
     /// let chain_id = 10;
     /// let signer = Address::random();

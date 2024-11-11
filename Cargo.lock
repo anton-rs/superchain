@@ -2166,9 +2166,9 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "eyre",
+ "hilo",
+ "hilo-net",
  "metrics-exporter-prometheus",
- "super-net",
- "superchain",
  "tokio",
  "tracing",
  "tracing-subscriber",
@@ -2251,6 +2251,82 @@ dependencies = [
  "thiserror",
  "tokio",
  "tracing",
+]
+
+[[package]]
+name = "hilo"
+version = "0.11.0"
+dependencies = [
+ "hilo-derive",
+ "hilo-registry",
+]
+
+[[package]]
+name = "hilo-derive"
+version = "0.11.0"
+dependencies = [
+ "alloy-consensus",
+ "alloy-eips",
+ "alloy-node-bindings",
+ "alloy-primitives",
+ "alloy-provider",
+ "alloy-rlp",
+ "alloy-rpc-client",
+ "alloy-rpc-types-beacon",
+ "alloy-serde",
+ "alloy-transport",
+ "alloy-transport-http",
+ "async-trait",
+ "derive_more",
+ "kona-derive",
+ "lru",
+ "op-alloy-consensus",
+ "op-alloy-genesis",
+ "op-alloy-protocol",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
+name = "hilo-driver"
+version = "0.11.0"
+
+[[package]]
+name = "hilo-net"
+version = "0.11.0"
+dependencies = [
+ "alloy-primitives",
+ "alloy-rlp",
+ "alloy-rpc-types-engine",
+ "arbitrary",
+ "arbtest",
+ "discv5",
+ "eyre",
+ "futures",
+ "lazy_static",
+ "libp2p",
+ "libp2p-identity",
+ "op-alloy-rpc-types-engine",
+ "openssl",
+ "snap",
+ "tokio",
+ "tracing",
+ "unsigned-varint 0.8.0",
+]
+
+[[package]]
+name = "hilo-registry"
+version = "0.11.0"
+dependencies = [
+ "alloy-eips",
+ "alloy-primitives",
+ "lazy_static",
+ "op-alloy-genesis",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -5048,87 +5124,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
-name = "super"
-version = "0.11.0"
-dependencies = [
- "super-derive",
- "super-registry",
-]
-
-[[package]]
-name = "super-derive"
-version = "0.11.0"
-dependencies = [
- "alloy-consensus",
- "alloy-eips",
- "alloy-node-bindings",
- "alloy-primitives",
- "alloy-provider",
- "alloy-rlp",
- "alloy-rpc-client",
- "alloy-rpc-types-beacon",
- "alloy-serde",
- "alloy-transport",
- "alloy-transport-http",
- "async-trait",
- "derive_more",
- "kona-derive",
- "lru",
- "op-alloy-consensus",
- "op-alloy-genesis",
- "op-alloy-protocol",
- "reqwest",
- "serde",
- "serde_json",
- "tokio",
- "tracing",
-]
-
-[[package]]
-name = "super-driver"
-version = "0.11.0"
-
-[[package]]
-name = "super-net"
-version = "0.11.0"
-dependencies = [
- "alloy-primitives",
- "alloy-rlp",
- "alloy-rpc-types-engine",
- "arbitrary",
- "arbtest",
- "discv5",
- "eyre",
- "futures",
- "lazy_static",
- "libp2p",
- "libp2p-identity",
- "op-alloy-rpc-types-engine",
- "openssl",
- "snap",
- "tokio",
- "tracing",
- "unsigned-varint 0.8.0",
-]
-
-[[package]]
-name = "super-registry"
-version = "0.11.0"
-dependencies = [
- "alloy-eips",
- "alloy-primitives",
- "lazy_static",
- "op-alloy-genesis",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "superchain"
 version = "0.11.0"
 dependencies = [
- "super-derive",
- "super-registry",
+ "hilo-derive",
+ "hilo-registry",
 ]
 
 [[package]]
