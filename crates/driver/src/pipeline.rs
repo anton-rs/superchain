@@ -53,13 +53,16 @@ pub struct HiloPipeline {
     /// The internal derivation pipeline.
     pub pipeline: HiloDerivationPipeline,
     /// The chain provider.
+    #[allow(unused)]
     pub chain_provider: InMemoryChainProvider,
     /// The L2 chain provider.
+    #[allow(unused)]
     pub l2_chain_provider: InMemoryL2ChainProvider,
 }
 
 impl HiloPipeline {
     /// Constructs a new Hilo derivation pipeline.
+    #[allow(unused)]
     pub fn new(
         cfg: Arc<RollupConfig>,
         sync_start: PipelineCursor,

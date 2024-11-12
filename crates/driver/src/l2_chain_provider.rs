@@ -40,6 +40,7 @@ impl InMemoryL2ChainProvider {
 struct InMemoryL2ChainProviderInner {
     /// The maximum number of items to store in the provider.
     /// This is used to prevent unbounded memory usage.
+    #[allow(unused)]
     capacity: usize,
 
     /// The order in which keys were inserted into the provider.

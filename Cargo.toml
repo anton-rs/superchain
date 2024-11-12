@@ -75,11 +75,11 @@ op-alloy-consensus = { version = "0.5.2", default-features = false }
 op-alloy-rpc-types-engine = { version = "0.5.2", default-features = false }
 
 # Reth
-reth = { git = "https://github.com/paradigmxyz/reth", rev = "2fba3c0" }
-reth-exex = { git = "https://github.com/paradigmxyz/reth", rev = "2fba3c0" }
-reth-node-api = { git = "https://github.com/paradigmxyz/reth", rev = "2fba3c0" }
-reth-node-ethereum = { git = "https://github.com/paradigmxyz/reth", rev = "2fba3c0" }
-reth-execution-types = { git = "https://github.com/paradigmxyz/reth", rev = "2fba3c0" }
+reth = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
+reth-exex = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
+reth-node-api = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
+reth-node-ethereum = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
+reth-execution-types = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
 
 # Serialization
 serde = { version = "1.0.214", default-features = false }
