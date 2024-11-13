@@ -3,10 +3,10 @@
 use alloc::{string::String, vec::Vec};
 
 /// List of Chains.
-#[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, Default, Hash, Eq, PartialEq, serde::Serialize)]
 pub struct ChainList {
     /// List of Chains.
-    pub chains: Vec<Chain>,
+    pub chains: &'static [Chain],
 }
 
 /// A Chain Definition.
