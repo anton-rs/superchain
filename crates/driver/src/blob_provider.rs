@@ -2,14 +2,13 @@
 
 use alloc::{boxed::Box, collections::VecDeque, string::ToString, sync::Arc, vec::Vec};
 
-use alloy_eips::eip4844::Blob;
+use alloy_eips::eip4844::{Blob, BlobTransactionSidecar};
 use alloy_primitives::{map::HashMap, B256};
 use async_trait::async_trait;
 use eyre::{eyre, Result};
 use kona_derive::{errors::BlobProviderError, sources::IndexedBlobHash, traits::BlobProvider};
 use op_alloy_protocol::BlockInfo;
 use parking_lot::Mutex;
-use reth::primitives::BlobTransactionSidecar;
 use tracing::warn;
 use url::Url;
 

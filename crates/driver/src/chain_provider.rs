@@ -8,8 +8,6 @@ use alloy_consensus::{
     TxLegacy,
 };
 use alloy_eips::BlockNumHash;
-use alloy_rlp::{Decodable, Encodable};
-use alloy_signer::Signature;
 use async_trait::async_trait;
 use kona_derive::{
     errors::{PipelineError, PipelineErrorKind},
@@ -281,9 +279,7 @@ impl ChainProvider for InMemoryChainProvider {
 }
 
 pub fn reth_to_alloy_tx(tx: &reth::primitives::TransactionSigned) -> Option<TxEnvelope> {
-    let mut buf = Vec::new();
-    tx.signature.encode(&mut buf);
-    let sig = Signature::decode(&mut buf.as_slice()).ok()?;
+    let sig = tx.signature;
     let new = match &tx.transaction {
         Transaction::Legacy(l) => {
             let legacy_tx = TxLegacy {

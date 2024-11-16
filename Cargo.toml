@@ -37,15 +37,14 @@ all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
 [patch.crates-io]
-kona-derive = { git = "https://github.com/anton-rs/kona", branch = "main" }
-kona-driver = { git = "https://github.com/anton-rs/kona", branch = "main" }
+kona-derive = { git = "https://github.com/anton-rs/kona", branch = "rf/feat/update-deps" }
+kona-driver = { git = "https://github.com/anton-rs/kona", branch = "rf/feat/update-deps" }
 
 [workspace.dependencies]
 # Workspace
 hilo = { version = "0.11.0", path = "crates/hilo", default-features = false }
 hilo-net = { version = "0.11.0", path = "crates/net", default-features = false }
 hilo-driver = { version = "0.11.0", path = "crates/driver", default-features = false }
-hilo-derive = { version = "0.11.0", path = "crates/derive", default-features = false }
 hilo-registry = { version = "0.11.0", path = "crates/registry", default-features = false }
 
 # Kona
@@ -54,32 +53,32 @@ kona-driver = { version = "0.0.0", default-features = false }
 
 # Alloy
 alloy-rlp = { version = "0.3.9", default-features = false }
-alloy-eips = { version = "0.5.4", default-features = false }
-alloy-serde = { version = "0.5.4", default-features = false }
-alloy-signer = { version = "0.5.4", default-features = false }
-alloy-provider = { version = "0.5.4", default-features = false }
-alloy-primitives = { version = "0.8.9", default-features = false }
-alloy-consensus = { version = "0.5.4", default-features = false }
-alloy-transport = { version = "0.5.4", default-features = false }
-alloy-rpc-client = { version = "0.5.4", default-features = false }
-alloy-rpc-types-eth = { version = "0.5.4", default-features = false }
-alloy-node-bindings = { version = "0.5.4", default-features = false }
-alloy-transport-http = { version = "0.5.4", default-features = false }
-alloy-rpc-types-beacon = { version = "0.5.4", default-features = false }
-alloy-rpc-types-engine = { version = "0.5.4", default-features = false }
+alloy-eips = { version = "0.6.4", default-features = false }
+alloy-serde = { version = "0.6.4", default-features = false }
+alloy-signer = { version = "0.6.4", default-features = false }
+alloy-provider = { version = "0.6.4", default-features = false }
+alloy-primitives = { version = "0.8.11", default-features = false }
+alloy-consensus = { version = "0.6.4", default-features = false }
+alloy-transport = { version = "0.6.4", default-features = false }
+alloy-rpc-client = { version = "0.6.4", default-features = false }
+alloy-rpc-types-eth = { version = "0.6.4", default-features = false }
+alloy-node-bindings = { version = "0.6.4", default-features = false }
+alloy-transport-http = { version = "0.6.4", default-features = false }
+alloy-rpc-types-beacon = { version = "0.6.4", default-features = false }
+alloy-rpc-types-engine = { version = "0.6.4", default-features = false }
 
 # OP Alloy
-op-alloy-genesis = { version = "0.5.2", default-features = false }
-op-alloy-protocol = { version = "0.5.2", default-features = false }
-op-alloy-consensus = { version = "0.5.2", default-features = false }
-op-alloy-rpc-types-engine = { version = "0.5.2", default-features = false }
+op-alloy-genesis = { version = "0.6.6", default-features = false }
+op-alloy-protocol = { version = "0.6.6", default-features = false }
+op-alloy-consensus = { version = "0.6.6", default-features = false }
+op-alloy-rpc-types-engine = { version = "0.6.6", default-features = false }
 
 # Reth
-reth = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
-reth-exex = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
-reth-node-api = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
-reth-node-ethereum = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
-reth-execution-types = { git = "https://github.com/paradigmxyz/reth", rev = "5c2e941" }
+reth = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
+reth-exex = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
+reth-node-api = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
+reth-node-ethereum = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
+reth-execution-types = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
 
 # Serialization
 serde = { version = "1.0.214", default-features = false }
