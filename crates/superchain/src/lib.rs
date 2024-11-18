@@ -6,9 +6,9 @@
 #![cfg_attr(not(test), warn(unused_crate_dependencies))]
 #![cfg_attr(docsrs, feature(doc_cfg, doc_auto_cfg))]
 
-#[cfg(feature = "derive")]
+#[cfg(feature = "driver")]
 #[doc(inline)]
-pub use hilo_derive as derive;
+pub use hilo_driver as driver;
 
 #[cfg(feature = "registry")]
 #[doc(inline)]

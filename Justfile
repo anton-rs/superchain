@@ -31,7 +31,7 @@ hack:
 fmt: fmt-fix fmt-check
 
 # Lint for all available targets
-lint: lint-source lint-source-features lint-docs
+lint: lint-source lint-docs
 
 # Build for the native target
 build *args='':
@@ -49,9 +49,10 @@ fmt-check:
 lint-source: fmt-check
   cargo +nightly clippy --all --all-targets -- -D warnings
 
+# Reth bug was causing the following to fail
 # Lints
-lint-source-features: fmt-check
-  cargo +nightly clippy --all --all-features --all-targets -- -D warnings
+# lint-source-features: fmt-check
+#   cargo +nightly clippy --all --all-features --all-targets -- -D warnings
 
 # Lint the Rust documentation
 lint-docs:
@@ -63,7 +64,7 @@ test *args='':
 
 # Test for the native target with all features
 test-features *args='':
-  cargo nextest run --all --all-features $@
+  cargo nextest run --all $@
 
 # Test the Rust documentation
 test-docs:

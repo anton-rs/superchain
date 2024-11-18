@@ -16,7 +16,7 @@ rust-version.workspace = true
 workspace = true
 
 [dependencies]
-hilo-derive = { workspace = true, optional = true }
+hilo-driver = { workspace = true, optional = true }
 hilo-registry = { workspace = true, optional = true }
 
 [features]
@@ -25,11 +25,9 @@ default = ["std", "full"]
 std = ["hilo-registry?/std"]
 
 full = [
-  "derive",
+  "driver",
   "registry",
 ]
 
-derive = ["dep:hilo-derive"]
+driver = ["dep:hilo-driver"]
 registry = ["dep:hilo-registry"]
-
-test-utils = ["hilo-derive?/test-utils"]
