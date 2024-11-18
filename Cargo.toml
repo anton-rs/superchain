@@ -37,8 +37,8 @@ all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
 [patch.crates-io]
-kona-derive = { git = "https://github.com/anton-rs/kona", branch = "rf/feat/update-deps" }
-kona-driver = { git = "https://github.com/anton-rs/kona", branch = "rf/feat/update-deps" }
+kona-derive = { git = "https://github.com/anton-rs/kona", branch = "main" }
+kona-driver = { git = "https://github.com/anton-rs/kona", branch = "main" }
 
 [workspace.dependencies]
 # Workspace

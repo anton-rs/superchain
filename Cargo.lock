@@ -3029,7 +3029,7 @@ dependencies = [
 [[package]]
 name = "kona-derive"
 version = "0.0.6"
-source = "git+https://github.com/anton-rs/kona?branch=rf/feat/update-deps#c0984bf8faa8ecf570f9660f2d1cf3dc170434ca"
+source = "git+https://github.com/anton-rs/kona?branch=main#138a8f29255ee45a6a12f1200303d02a73154e07"
 dependencies = [
  "alloc-no-stdlib",
  "alloy-consensus",
@@ -3051,7 +3051,7 @@ dependencies = [
 [[package]]
 name = "kona-driver"
 version = "0.0.0"
-source = "git+https://github.com/anton-rs/kona?branch=rf/feat/update-deps#c0984bf8faa8ecf570f9660f2d1cf3dc170434ca"
+source = "git+https://github.com/anton-rs/kona?branch=main#138a8f29255ee45a6a12f1200303d02a73154e07"
 dependencies = [
  "alloy-consensus",
  "alloy-primitives",
