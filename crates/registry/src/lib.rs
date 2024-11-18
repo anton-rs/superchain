@@ -40,10 +40,10 @@ mod tests {
     #[test]
     fn test_hardcoded_rollup_configs() {
         let test_cases = vec![
-            (10, op_alloy_genesis::rollup::OP_MAINNET_CONFIG),
-            (8453, op_alloy_genesis::rollup::BASE_MAINNET_CONFIG),
-            (11155420, op_alloy_genesis::rollup::OP_SEPOLIA_CONFIG),
-            (84532, op_alloy_genesis::rollup::BASE_SEPOLIA_CONFIG),
+            (10, op_alloy_genesis::OP_MAINNET_CONFIG),
+            (8453, op_alloy_genesis::BASE_MAINNET_CONFIG),
+            (11155420, op_alloy_genesis::OP_SEPOLIA_CONFIG),
+            (84532, op_alloy_genesis::BASE_SEPOLIA_CONFIG),
         ];
 
         for (chain_id, expected) in test_cases {

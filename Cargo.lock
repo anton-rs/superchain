@@ -3029,7 +3029,7 @@ dependencies = [
 [[package]]
 name = "kona-derive"
 version = "0.0.6"
-source = "git+https://github.com/anton-rs/kona?branch=main#138a8f29255ee45a6a12f1200303d02a73154e07"
+source = "git+https://github.com/anton-rs/kona?branch=rf/chore/alloy-updates#02dad9376a13006204a066f7a31648a9cee97746"
 dependencies = [
  "alloc-no-stdlib",
  "alloy-consensus",
@@ -3051,7 +3051,7 @@ dependencies = [
 [[package]]
 name = "kona-driver"
 version = "0.0.0"
-source = "git+https://github.com/anton-rs/kona?branch=main#138a8f29255ee45a6a12f1200303d02a73154e07"
+source = "git+https://github.com/anton-rs/kona?branch=rf/chore/alloy-updates#02dad9376a13006204a066f7a31648a9cee97746"
 dependencies = [
  "alloy-consensus",
  "alloy-primitives",
@@ -4123,8 +4123,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-genesis"
 version = "0.6.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8ebd0391a3123b47e44ccca8a6f63a39ead2d7ea52e4fc132ff1297f6184314e"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/feat/holocene-timestamps#47a8eea7c268e7c76cfa8a343ce402e822739d7e"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -4132,6 +4131,7 @@ dependencies = [
  "alloy-sol-types",
  "serde",
  "serde_repr",
+ "thiserror 2.0.3",
 ]
 
 [[package]]
