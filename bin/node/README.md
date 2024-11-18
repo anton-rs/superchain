@@ -1,26 +1,25 @@
-## `hera`
+## `node`
 
-_Hera is a Rust implementation of the [OP Stack][opstack] Rollup node._
+A rollup or consensus node powered by [hilo] and [kona].
 
-### Overview
-
-Hera can be run as either a standalone node or as an [Execution Extension][exex]
+It can be run as either a standalone node or as an [Execution Extension][exex]
 on top of an L1 [Reth][reth] node in the same process.
 
-Under the hood, Hera is powered by the [Kona-derive][kona] library which handles
+Under the hood, the node is powered by the [Kona-derive][kona] library which handles
 the [derivation pipeline][derivation] of the L2 payloads from L1 transactions.
 
 ### Usage
 
 ```
-cargo run --bin hera
+cargo run --bin node
 ```
 
 
 <!-- Links -->
 
+[hilo]: https://github.com/anton-rs/hilo
+[kona]: https://github.com/anton-rs/kona
 [reth]: https://github.com/paradigmxyz/reth
-[kona]: https://github.com/ethereum-optimism/kona
 [exex]: https://www.paradigm.xyz/2024/05/reth-exex
 [opstack]: https://docs.optimism.io/
 [derivation]: https://docs.optimism.io/stack/protocol/derivation-pipeline
