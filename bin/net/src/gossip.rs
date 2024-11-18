@@ -1,4 +1,4 @@
-//! Gossip subcommand for Hera.
+//! Gossip subcommand.
 
 use crate::globals::GlobalArgs;
 use clap::Args;

@@ -9,7 +9,6 @@ use eyre::Result;
 mod disc;
 mod globals;
 mod gossip;
-mod node;
 mod telemetry;
 
 /// The Hera CLI Arguments.
@@ -21,15 +20,13 @@ pub(crate) struct HeraArgs {
     pub global: globals::GlobalArgs,
     /// The subcommand to run.
     #[clap(subcommand)]
-    pub subcommand: HeraSubcommand,
+    pub subcommand: NetSubcommand,
 }
 
 /// Subcommands for the CLI.
 #[derive(Debug, Clone, Subcommand)]
 #[allow(clippy::large_enum_variant)]
-pub(crate) enum HeraSubcommand {
-    /// Run the standalone Hera node.
-    Node(node::NodeCommand),
+pub(crate) enum NetSubcommand {
     /// Discovery service command.
     Disc(disc::DiscCommand),
     /// Gossip service command.
@@ -46,8 +43,7 @@ async fn main() -> Result<()> {
 
     // Dispatch on subcommand.
     match args.subcommand {
-        HeraSubcommand::Node(node) => node.run(&args.global).await,
-        HeraSubcommand::Disc(disc) => disc.run(&args.global).await,
-        HeraSubcommand::Gossip(gossip) => gossip.run(&args.global).await,
+        NetSubcommand::Disc(disc) => disc.run(&args.global).await,
+        NetSubcommand::Gossip(gossip) => gossip.run(&args.global).await,
     }
 }
