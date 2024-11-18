@@ -57,7 +57,7 @@ alloy-eips = { version = "0.6.4", default-features = false }
 alloy-serde = { version = "0.6.4", default-features = false }
 alloy-signer = { version = "0.6.4", default-features = false }
 alloy-provider = { version = "0.6.4", default-features = false }
-alloy-primitives = { version = "0.8.11", default-features = false }
+alloy-primitives = { version = "0.8.12", default-features = false }
 alloy-consensus = { version = "0.6.4", default-features = false }
 alloy-transport = { version = "0.6.4", default-features = false }
 alloy-rpc-client = { version = "0.6.4", default-features = false }
@@ -74,11 +74,8 @@ op-alloy-consensus = { version = "0.6.6", default-features = false }
 op-alloy-rpc-types-engine = { version = "0.6.6", default-features = false }
 
 # Reth
-reth = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
-reth-exex = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
-reth-node-api = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
-reth-node-ethereum = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
-reth-execution-types = { git = "https://github.com/paradigmxyz/reth", rev = "b31b1ea" }
+reth-provider = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
+reth-primitives = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
 
 # Serialization
 serde = { version = "1.0.214", default-features = false }

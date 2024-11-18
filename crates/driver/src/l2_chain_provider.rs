@@ -19,7 +19,7 @@ use parking_lot::RwLock;
 pub struct InMemoryL2ChainProvider(Arc<RwLock<InMemoryL2ChainProviderInner>>);
 
 impl InMemoryL2ChainProvider {
-    /// Create a new [InMemoryChainProvider] with the given capacity.
+    /// Create a new [InMemoryL2ChainProvider] with the given capacity.
     pub fn with_capacity(cap: usize) -> Self {
         Self(Arc::new(RwLock::new(InMemoryL2ChainProviderInner::with_capacity(cap))))
     }

@@ -15,7 +15,8 @@ use kona_derive::{
 };
 use op_alloy_protocol::BlockInfo;
 use parking_lot::RwLock;
-use reth::{primitives::Transaction, providers::Chain};
+use reth_primitives::Transaction;
+use reth_provider::Chain;
 
 /// An in-memory [ChainProvider] that stores chain data,
 /// meant to be shared between multiple readers.
@@ -278,7 +279,7 @@ impl ChainProvider for InMemoryChainProvider {
     }
 }
 
-pub fn reth_to_alloy_tx(tx: &reth::primitives::TransactionSigned) -> Option<TxEnvelope> {
+pub fn reth_to_alloy_tx(tx: &reth_primitives::TransactionSigned) -> Option<TxEnvelope> {
     let sig = tx.signature;
     let new = match &tx.transaction {
         Transaction::Legacy(l) => {
