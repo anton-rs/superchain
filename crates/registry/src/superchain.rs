@@ -6,7 +6,7 @@ use alloy_primitives::{
     map::{DefaultHashBuilder, HashMap},
     Address,
 };
-use op_alloy_genesis::{chain::HardForkConfiguration, ChainConfig, RollupConfig};
+use op_alloy_genesis::{ChainConfig, HardForkConfiguration, RollupConfig};
 
 /// A superchain configuration.
 #[derive(Debug, Clone, Default, Eq, PartialEq, serde::Serialize, serde::Deserialize)]
@@ -117,8 +117,8 @@ mod tests {
     use alloy_eips::BlockNumHash;
     use alloy_primitives::{address, b256, uint};
     use op_alloy_genesis::{
-        chain::{HardForkConfiguration, SuperchainLevel},
-        AddressList, ChainGenesis, SystemConfig, OP_MAINNET_BASE_FEE_PARAMS,
+        AddressList, ChainGenesis, HardForkConfiguration, SuperchainLevel, SystemConfig,
+        OP_MAINNET_BASE_FEE_PARAMS,
     };
 
     #[test]
@@ -209,7 +209,7 @@ mod tests {
 
     #[test]
     fn test_read_rollup_configs() {
-        use op_alloy_genesis::rollup::OP_MAINNET_CONFIG;
+        use op_alloy_genesis::OP_MAINNET_CONFIG;
         let superchains = Registry::from_chain_list();
         assert_eq!(*superchains.rollup_configs.get(&10).unwrap(), OP_MAINNET_CONFIG);
     }
