@@ -17,17 +17,12 @@ workspace = true
 
 [dependencies]
 hilo-driver = { workspace = true, optional = true }
-hilo-registry = { workspace = true, optional = true }
 
 [features]
-default = ["std", "full"]
-
-std = ["hilo-registry?/std"]
+default = ["full"]
 
 full = [
   "driver",
-  "registry",
 ]
 
 driver = ["dep:hilo-driver"]
-registry = ["dep:hilo-registry"]
