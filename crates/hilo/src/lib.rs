@@ -9,7 +9,3 @@
 #[cfg(feature = "driver")]
 #[doc(inline)]
 pub use hilo_driver as driver;
-
-#[cfg(feature = "registry")]
-#[doc(inline)]
-pub use hilo_registry as registry;

@@ -1019,9 +1019,9 @@ checksum = "c3ac9f8b63eca6fd385229b3675f6cc0dc5c8a5c8a54a59d4f52ffd670d87b0c"
 
 [[package]]
 name = "bytemuck"
-version = "1.19.0"
+version = "1.20.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8334215b81e418a0a7bdb8ef0849474f40bb10c8b71f1c4ed315cff49f32494d"
+checksum = "8b37c88a63ffd85d15b406896cc343916d7cf57838a847b3a6f2ca5d39a5695a"
 
 [[package]]
 name = "byteorder"
@@ -2177,9 +2177,9 @@ dependencies = [
 
 [[package]]
 name = "h2"
-version = "0.4.6"
+version = "0.4.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "524e8ac6999421f49a846c2d4411f337e53497d8ec55d67753beffa43c5d9205"
+checksum = "ccae279728d634d083c00f6099cb58f01cc99c145b84b8be2f6c74618d79922e"
 dependencies = [
  "atomic-waker",
  "bytes",
@@ -2320,7 +2320,6 @@ name = "hilo"
 version = "0.11.0"
 dependencies = [
  "hilo-driver",
- "hilo-registry",
 ]
 
 [[package]]
@@ -2337,7 +2336,7 @@ dependencies = [
  "eyre",
  "kona-derive",
  "kona-driver",
- "op-alloy-consensus",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
@@ -2371,18 +2370,6 @@ dependencies = [
  "tokio",
  "tracing",
  "unsigned-varint 0.8.0",
-]
-
-[[package]]
-name = "hilo-registry"
-version = "0.11.0"
-dependencies = [
- "alloy-eips",
- "alloy-primitives",
- "lazy_static",
- "op-alloy-genesis",
- "serde",
- "serde_json",
 ]
 
 [[package]]
@@ -2529,14 +2516,14 @@ dependencies = [
 
 [[package]]
 name = "hyper"
-version = "1.5.0"
+version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bbbff0a806a4728c99295b254c8838933b5b082d75e3cb70c8dab21fdfbcfa9a"
+checksum = "97818827ef4f364230e16705d4706e2897df2bb60617d6ca15d598025a3c481f"
 dependencies = [
  "bytes",
  "futures-channel",
  "futures-util",
- "h2 0.4.6",
+ "h2 0.4.7",
  "http 1.1.0",
  "http-body 1.0.1",
  "httparse",
@@ -2556,7 +2543,7 @@ checksum = "08afdbb5c31130e3034af566421053ab03787c640246a446327f550d11bcb333"
 dependencies = [
  "futures-util",
  "http 1.1.0",
- "hyper 1.5.0",
+ "hyper 1.5.1",
  "hyper-util",
  "rustls",
  "rustls-pki-types",
@@ -2573,7 +2560,7 @@ checksum = "70206fc6890eaca9fde8a0bf71caa2ddfc9fe045ac9e5c70df101a7dbde866e0"
 dependencies = [
  "bytes",
  "http-body-util",
- "hyper 1.5.0",
+ "hyper 1.5.1",
  "hyper-util",
  "native-tls",
  "tokio",
@@ -2592,7 +2579,7 @@ dependencies = [
  "futures-util",
  "http 1.1.0",
  "http-body 1.0.1",
- "hyper 1.5.0",
+ "hyper 1.5.1",
  "pin-project-lite",
  "socket2",
  "tokio",
@@ -3019,7 +3006,7 @@ dependencies = [
 [[package]]
 name = "kona-derive"
 version = "0.0.6"
-source = "git+https://github.com/anton-rs/kona?branch=rf/chore/alloy-updates#09d2df019f5f966961366efca78b0c263b354936"
+source = "git+https://github.com/anton-rs/kona?branch=rf/test/op-alloy-registry#1543cdf0af218bfe4e31480f5606af52a2eebdf7"
 dependencies = [
  "alloc-no-stdlib",
  "alloy-consensus",
@@ -3030,7 +3017,7 @@ dependencies = [
  "async-trait",
  "brotli",
  "miniz_oxide",
- "op-alloy-consensus",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
@@ -3041,14 +3028,14 @@ dependencies = [
 [[package]]
 name = "kona-driver"
 version = "0.0.0"
-source = "git+https://github.com/anton-rs/kona?branch=rf/chore/alloy-updates#09d2df019f5f966961366efca78b0c263b354936"
+source = "git+https://github.com/anton-rs/kona?branch=rf/test/op-alloy-registry#1543cdf0af218bfe4e31480f5606af52a2eebdf7"
 dependencies = [
  "alloy-consensus",
  "alloy-primitives",
  "alloy-rlp",
  "async-trait",
  "kona-derive",
- "op-alloy-consensus",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
@@ -3644,7 +3631,7 @@ checksum = "85b6f8152da6d7892ff1b7a1c0fa3f435e92b5918ad67035c3bb432111d9a29b"
 dependencies = [
  "base64 0.22.1",
  "http-body-util",
- "hyper 1.5.0",
+ "hyper 1.5.1",
  "hyper-util",
  "indexmap 2.6.0",
  "ipnet",
@@ -3819,9 +3806,9 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "eyre",
- "hilo",
  "hilo-net",
  "metrics-exporter-prometheus",
+ "op-alloy-registry",
  "tokio",
  "tracing",
  "tracing-subscriber",
@@ -4136,10 +4123,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "op-alloy-consensus"
+version = "0.6.7"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
+dependencies = [
+ "alloy-consensus",
+ "alloy-eips",
+ "alloy-primitives",
+ "alloy-rlp",
+ "derive_more",
+ "thiserror 2.0.3",
+]
+
+[[package]]
 name = "op-alloy-genesis"
 version = "0.6.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "818180672dd14ca6642fb57942e1cbd602669f42b6e0222b7ea9bbcae065d67e"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -4153,8 +4152,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-protocol"
 version = "0.6.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1803a1ac96203b8f713b1fa9b7509c46c645ca7bc22b582761a7495e999d4301"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
 dependencies = [
  "alloc-no-stdlib",
  "alloy-consensus",
@@ -4164,11 +4162,23 @@ dependencies = [
  "async-trait",
  "brotli",
  "miniz_oxide",
- "op-alloy-consensus",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
  "op-alloy-genesis",
  "thiserror 2.0.3",
  "tracing",
  "unsigned-varint 0.8.0",
+]
+
+[[package]]
+name = "op-alloy-registry"
+version = "0.6.7"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
+dependencies = [
+ "alloy-primitives",
+ "lazy_static",
+ "op-alloy-genesis",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -4184,7 +4194,7 @@ dependencies = [
  "alloy-rpc-types-eth",
  "alloy-serde",
  "derive_more",
- "op-alloy-consensus",
+ "op-alloy-consensus 0.6.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
  "serde_json",
 ]
@@ -4192,15 +4202,14 @@ dependencies = [
 [[package]]
 name = "op-alloy-rpc-types-engine"
 version = "0.6.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c227fcc7d81d4023363ba12406e57ebcc1c7cbb1075c38ea471ae32138d4706d"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
  "alloy-rpc-types-engine",
  "derive_more",
  "ethereum_ssz",
- "op-alloy-consensus",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
  "op-alloy-protocol",
  "snap",
  "thiserror 2.0.3",
@@ -4840,11 +4849,11 @@ dependencies = [
  "encoding_rs",
  "futures-core",
  "futures-util",
- "h2 0.4.6",
+ "h2 0.4.7",
  "http 1.1.0",
  "http-body 1.0.1",
  "http-body-util",
- "hyper 1.5.0",
+ "hyper 1.5.1",
  "hyper-rustls",
  "hyper-tls",
  "hyper-util",
@@ -5861,9 +5870,9 @@ dependencies = [
 
 [[package]]
 name = "rustix"
-version = "0.38.40"
+version = "0.38.41"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "99e4ea3e1cdc4b559b8e5650f9c8e5998e3e5c1343b4eaf034565f32318d63c0"
+checksum = "d7f649912bc1495e167a6edee79151c84b1bad49748cb4f1f1167f459f6224f6"
 dependencies = [
  "bitflags 2.6.0",
  "errno",
@@ -5971,9 +5980,9 @@ dependencies = [
 
 [[package]]
 name = "schannel"
-version = "0.1.26"
+version = "0.1.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "01227be5826fa0690321a2ba6c5cd57a19cf3f6a09e76973b58e61de6ab9d1c1"
+checksum = "1f29ebaa345f945cec9fbbc532eb307f0fdad8161f281b6369539c8d84876b3d"
 dependencies = [
  "windows-sys 0.59.0",
 ]
@@ -6057,9 +6066,9 @@ checksum = "61697e0a1c7e512e84a621326239844a24d8207b4669b41bc18b32ea5cbf988b"
 
 [[package]]
 name = "semver-parser"
-version = "0.10.2"
+version = "0.10.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "00b0bef5b7f9e0df16536d3961cfb6e84331c065b4066afb39768d0e319411f7"
+checksum = "9900206b54a3527fdc7b8a938bffd94a568bac4f4aa8113b209df75a09c0dec2"
 dependencies = [
  "pest",
 ]
@@ -6362,7 +6371,6 @@ name = "superchain"
 version = "0.11.0"
 dependencies = [
  "hilo-driver",
- "hilo-registry",
 ]
 
 [[package]]

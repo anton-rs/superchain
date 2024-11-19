@@ -14,7 +14,9 @@ rust-version.workspace = true
 [dependencies]
 # Local
 hilo-net.workspace = true
-hilo = { workspace = true, features = ["registry"] }
+
+# op-alloy
+op-alloy-registry.workspace = true
 
 # Workspace
 eyre.workspace = true
