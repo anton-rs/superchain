@@ -2360,7 +2360,7 @@ dependencies = [
  "eyre",
  "kona-derive",
  "kona-driver",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
@@ -3060,7 +3060,7 @@ dependencies = [
 [[package]]
 name = "kona-derive"
 version = "0.0.6"
-source = "git+https://github.com/anton-rs/kona?branch=rf/test/op-alloy-registry#1543cdf0af218bfe4e31480f5606af52a2eebdf7"
+source = "git+https://github.com/anton-rs/kona?branch=rf/test/op-alloy-registry#d854d9ae136c18535431868dab7eaa333721b801"
 dependencies = [
  "alloc-no-stdlib",
  "alloy-consensus",
@@ -3071,7 +3071,7 @@ dependencies = [
  "async-trait",
  "brotli",
  "miniz_oxide",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
@@ -3082,14 +3082,14 @@ dependencies = [
 [[package]]
 name = "kona-driver"
 version = "0.0.0"
-source = "git+https://github.com/anton-rs/kona?branch=rf/test/op-alloy-registry#1543cdf0af218bfe4e31480f5606af52a2eebdf7"
+source = "git+https://github.com/anton-rs/kona?branch=rf/test/op-alloy-registry#d854d9ae136c18535431868dab7eaa333721b801"
 dependencies = [
  "alloy-consensus",
  "alloy-primitives",
  "alloy-rlp",
  "async-trait",
  "kona-derive",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
@@ -4179,7 +4179,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-consensus"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -4192,7 +4192,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-genesis"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -4206,7 +4206,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-protocol"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
 dependencies = [
  "alloc-no-stdlib",
  "alloy-consensus",
@@ -4216,7 +4216,7 @@ dependencies = [
  "async-trait",
  "brotli",
  "miniz_oxide",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
  "op-alloy-genesis",
  "thiserror 2.0.3",
  "tracing",
@@ -4226,7 +4226,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-registry"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
 dependencies = [
  "alloy-primitives",
  "lazy_static",
@@ -4256,14 +4256,14 @@ dependencies = [
 [[package]]
 name = "op-alloy-rpc-types-engine"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs#0e1bb950ee079a27f3dbcd4fb637a438583f8b5e"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
  "alloy-rpc-types-engine",
  "derive_more",
  "ethereum_ssz",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=rf/chore/rm-hardcoded-configs)",
+ "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
  "op-alloy-protocol",
  "snap",
  "thiserror 2.0.3",
