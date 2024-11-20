@@ -1,5 +1,6 @@
 //! Contains the configuration for the hilo-node.
 
+use crate::SyncMode;
 use alloy_rpc_types_engine::JwtSecret;
 use op_alloy_genesis::RollupConfig;
 use serde::{Deserialize, Serialize};
@@ -8,14 +9,16 @@ use url::Url;
 /// The global node configuration.
 #[derive(Debug, Clone, Deserialize)]
 pub struct Config {
+    /// The L2 Chain ID.
+    pub l2_chain_id: u64,
     /// The L1 chain RPC URL
-    pub l1_rpc_url: String,
+    pub l1_rpc_url: Url,
     /// The base chain beacon client RPC URL
-    pub l1_beacon_url: String,
+    pub l1_beacon_url: Url,
     /// The L2 chain RPC URL
-    pub l2_rpc_url: String,
+    pub l2_rpc_url: Url,
     /// The L2 engine API URL
-    pub l2_engine_url: String,
+    pub l2_engine_url: Url,
     /// The rollup config
     pub rollup_config: RollupConfig,
     /// Engine API JWT Secret.
@@ -23,12 +26,14 @@ pub struct Config {
     #[serde(deserialize_with = "deserialize_jwt_secret")]
     pub jwt_secret: JwtSecret,
     /// A trusted L2 RPC URL to use for fast/checkpoint syncing
-    pub checkpoint_sync_url: Option<String>,
-    /// The port of the `Magi` RPC server
-    pub rpc_url: Url,
+    pub checkpoint_sync_url: Option<Url>,
+    /// The hilo-node RPC server
+    pub rpc_url: Option<Url>,
     /// The devnet mode.
     /// If devnet is enabled.
     pub devnet: bool,
+    /// The mode to sync.
+    pub sync_mode: SyncMode,
 }
 
 impl Serialize for Config {

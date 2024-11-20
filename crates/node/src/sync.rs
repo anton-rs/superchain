@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-/// Sync Mode Specifies how `magi` should sync the L2 chain
+/// Sync Mode Specifies how to sync the L2 chain
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
 pub enum SyncMode {
     /// Fast sync mode
