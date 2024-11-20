@@ -74,11 +74,11 @@ alloy-rpc-types-engine = { version = "0.6.4", default-features = false }
 # op-alloy-consensus = { version = "0.6.7", default-features = false }
 # op-alloy-rpc-types-engine = { version = "0.6.7", default-features = false }
 
-op-alloy-genesis = { git = "https://github.com/alloy-rs/op-alloy", branch = "rf/chore/rm-hardcoded-configs", default-features = false }
-op-alloy-protocol = { git = "https://github.com/alloy-rs/op-alloy", branch = "rf/chore/rm-hardcoded-configs", default-features = false }
-op-alloy-registry = { git = "https://github.com/alloy-rs/op-alloy", branch = "rf/chore/rm-hardcoded-configs", default-features = false }
-op-alloy-consensus = { git = "https://github.com/alloy-rs/op-alloy", branch = "rf/chore/rm-hardcoded-configs", default-features = false }
-op-alloy-rpc-types-engine = { git = "https://github.com/alloy-rs/op-alloy", branch = "rf/chore/rm-hardcoded-configs", default-features = false }
+op-alloy-genesis = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
+op-alloy-protocol = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
+op-alloy-registry = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
+op-alloy-consensus = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
+op-alloy-rpc-types-engine = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
 
 
 # Reth
@@ -109,12 +109,15 @@ arbitrary = "1"
 url = "2.5.2"
 lru = "0.12.5"
 eyre = "0.6.12"
+again = "0.1.2"
 clap = "4.5.20"
 tokio = "1.41.0"
-parking_lot = "0.12.3"
 futures = "0.3.31"
 reqwest = "0.12.9"
+parking_lot = "0.12.3"
 async-trait = "0.1.83"
+futures-timer = "3.0.3"
 unsigned-varint = "0.8.0"
+thiserror = { version = "2.0", default-features = false }
 derive_more = { version = "1.0.0", default-features = false }
 lazy_static = { version = "1.5.0", default-features = false }
