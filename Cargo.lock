@@ -2521,7 +2521,7 @@ dependencies = [
  "eyre",
  "kona-derive",
  "kona-driver",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
+ "op-alloy-consensus 0.6.7",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
@@ -3181,9 +3181,9 @@ dependencies = [
 
 [[package]]
 name = "itoa"
-version = "1.0.11"
+version = "1.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "49f1f14873335454500d59611f1cf4a4b0f786f9ac11f4312a78e4cf2566695b"
+checksum = "7a73e9fe3c49d7afb2ace819fa181a287ce54a0983eda4e0eb05c22f82ffe534"
 
 [[package]]
 name = "jobserver"
@@ -3265,7 +3265,7 @@ dependencies = [
  "async-trait",
  "brotli",
  "miniz_oxide",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
+ "op-alloy-consensus 0.6.7",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
@@ -3283,7 +3283,7 @@ dependencies = [
  "alloy-rlp",
  "async-trait",
  "kona-derive",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
+ "op-alloy-consensus 0.6.7",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
@@ -3333,7 +3333,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4979f22fdb869068da03c9f7528f8297c6fd2606bc3a4affe42e6a823fdb8da4"
 dependencies = [
  "cfg-if",
- "windows-targets 0.48.5",
+ "windows-targets 0.52.6",
 ]
 
 [[package]]
@@ -4363,8 +4363,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-consensus"
 version = "0.6.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "72da577a88d35b893fae6467112651f26ef023434c196b2a0b3dc75bc853e0e4"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#022f6f524b66d8dfee87dfa40a53a00c03c9898e"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -4378,8 +4377,9 @@ dependencies = [
 
 [[package]]
 name = "op-alloy-consensus"
-version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
+version = "0.6.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fce158d886815d419222daa67fcdf949a34f7950653a4498ebeb4963331f70ed"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -4394,7 +4394,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-genesis"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#022f6f524b66d8dfee87dfa40a53a00c03c9898e"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -4408,7 +4408,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-protocol"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#022f6f524b66d8dfee87dfa40a53a00c03c9898e"
 dependencies = [
  "alloc-no-stdlib",
  "alloy-consensus",
@@ -4419,7 +4419,7 @@ dependencies = [
  "async-trait",
  "brotli",
  "miniz_oxide",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
+ "op-alloy-consensus 0.6.7",
  "op-alloy-genesis",
  "serde",
  "thiserror 2.0.3",
@@ -4430,7 +4430,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-provider"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#022f6f524b66d8dfee87dfa40a53a00c03c9898e"
 dependencies = [
  "alloy-network",
  "alloy-primitives",
@@ -4444,7 +4444,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-registry"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#022f6f524b66d8dfee87dfa40a53a00c03c9898e"
 dependencies = [
  "alloy-primitives",
  "lazy_static",
@@ -4455,9 +4455,9 @@ dependencies = [
 
 [[package]]
 name = "op-alloy-rpc-types"
-version = "0.6.7"
+version = "0.6.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a838c125256e02e2f9da88c51e263b02a06cda7e60382fe2551a3385b516f5bb"
+checksum = "060ebeaea8c772e396215f69bb86d231ec8b7f36aca0dd6ce367ceaa9a8c33e6"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -4466,7 +4466,7 @@ dependencies = [
  "alloy-rpc-types-eth",
  "alloy-serde",
  "derive_more",
- "op-alloy-consensus 0.6.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "op-alloy-consensus 0.6.8",
  "serde",
  "serde_json",
 ]
@@ -4474,7 +4474,7 @@ dependencies = [
 [[package]]
 name = "op-alloy-rpc-types-engine"
 version = "0.6.7"
-source = "git+https://github.com/alloy-rs/op-alloy?branch=main#afc125b647f7da0a7e701706ff4893ca188f663a"
+source = "git+https://github.com/alloy-rs/op-alloy?branch=main#022f6f524b66d8dfee87dfa40a53a00c03c9898e"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
@@ -4482,7 +4482,7 @@ dependencies = [
  "alloy-serde",
  "derive_more",
  "ethereum_ssz",
- "op-alloy-consensus 0.6.7 (git+https://github.com/alloy-rs/op-alloy?branch=main)",
+ "op-alloy-consensus 0.6.7",
  "op-alloy-protocol",
  "serde",
  "snap",
@@ -7216,9 +7216,9 @@ checksum = "5ab17db44d7388991a428b2ee655ce0c212e862eff1768a455c58f9aad6e7893"
 
 [[package]]
 name = "unicode-ident"
-version = "1.0.13"
+version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e91b56cd4cadaeb79bbf1a5645f6b4f8dc5bde8834ad5894a8db35fda9efa1fe"
+checksum = "adb9e6ca4f869e1180728b7950e35922a7fc6397f7b641499e8f3ef06e50dc83"
 
 [[package]]
 name = "unicode-normalization"
@@ -7492,7 +7492,7 @@ version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cf221c93e13a30d793f7645a0e7762c55d169dbb0a49671918a2319d289b10bb"
 dependencies = [
- "windows-sys 0.48.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
