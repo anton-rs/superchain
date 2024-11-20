@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 use url::Url;
 
 /// The global node configuration.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Config {
     /// The L2 Chain ID.
     pub l2_chain_id: u64,
@@ -23,7 +23,7 @@ pub struct Config {
     pub rollup_config: RollupConfig,
     /// Engine API JWT Secret.
     /// This is used to authenticate with the engine API
-    #[serde(deserialize_with = "deserialize_jwt_secret")]
+    #[serde(deserialize_with = "deserialize_jwt_secret", serialize_with = "as_hex")]
     pub jwt_secret: JwtSecret,
     /// A trusted L2 RPC URL to use for fast/checkpoint syncing
     pub checkpoint_sync_url: Option<Url>,
@@ -36,28 +36,12 @@ pub struct Config {
     pub sync_mode: SyncMode,
 }
 
-impl Serialize for Config {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        use serde::ser::SerializeStruct;
-        // 3 is the number of fields in the struct.
-        let mut state = serializer.serialize_struct("Config", 9)?;
-        state.serialize_field("l1_rpc_url", &self.l1_rpc_url)?;
-        state.serialize_field("l1_beacon_url", &self.l1_beacon_url)?;
-        state.serialize_field("l2_rpc_url", &self.l2_rpc_url)?;
-        state.serialize_field("l2_engine_url", &self.l2_engine_url)?;
-        state.serialize_field("rollup_config", &self.rollup_config)?;
-        state.serialize_field(
-            "jwt_secret",
-            &alloy_primitives::hex::encode(self.jwt_secret.as_bytes()),
-        )?;
-        state.serialize_field("checkpoint_sync_url", &self.checkpoint_sync_url)?;
-        state.serialize_field("rpc_url", &self.rpc_url)?;
-        state.serialize_field("devnet", &self.devnet)?;
-        state.end()
-    }
+fn as_hex<S>(v: &JwtSecret, serializer: S) -> Result<S::Ok, S::Error>
+where
+    S: serde::ser::Serializer,
+{
+    let encoded = alloy_primitives::hex::encode(v.as_bytes());
+    serializer.serialize_str(&encoded)
 }
 
 fn deserialize_jwt_secret<'de, D>(deserializer: D) -> Result<JwtSecret, D::Error>
@@ -66,4 +50,37 @@ where
 {
     let s: &str = serde::de::Deserialize::deserialize(deserializer)?;
     JwtSecret::from_hex(s).map_err(serde::de::Error::custom)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use op_alloy_registry::ROLLUP_CONFIGS;
+
+    #[test]
+    fn test_roundtrip_config() {
+        let rollup_config = ROLLUP_CONFIGS.get(&10).unwrap().clone();
+        let l1_rpc_url = Url::parse("http://127.0.0.1:8545").unwrap();
+        let l1_beacon_url = Url::parse("http://127.0.0.1:8555").unwrap();
+        let l2_rpc_url = Url::parse("http://127.0.0.1:9545").unwrap();
+        let l2_engine_url = Url::parse("http://127.0.0.1:9555").unwrap();
+        let jwt_secret = JwtSecret::random();
+        let config = Config {
+            l2_chain_id: 10,
+            l1_rpc_url,
+            l2_rpc_url,
+            l1_beacon_url,
+            l2_engine_url,
+            rollup_config,
+            jwt_secret,
+            checkpoint_sync_url: None,
+            rpc_url: None,
+            devnet: false,
+            sync_mode: SyncMode::Fast,
+        };
+
+        let serialized = serde_json::to_string(&config).unwrap();
+        let deserialized: Config = serde_json::from_str(&serialized).unwrap();
+        assert_eq!(config, deserialized);
+    }
 }

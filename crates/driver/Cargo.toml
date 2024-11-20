@@ -36,6 +36,7 @@ reth-primitives.workspace = true
 
 # Misc
 url.workspace = true
+thiserror.workspace = true
 eyre.workspace = true
 serde.workspace = true
 reqwest = { workspace = true, features = ["json"] }

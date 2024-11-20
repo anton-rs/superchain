@@ -62,7 +62,6 @@ pub struct HiloPipeline {
 
 impl HiloPipeline {
     /// Constructs a new Hilo derivation pipeline.
-    #[allow(unused)]
     pub fn new(
         cfg: Arc<RollupConfig>,
         sync_start: PipelineCursor,

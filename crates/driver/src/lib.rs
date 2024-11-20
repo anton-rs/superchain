@@ -6,6 +6,12 @@
 
 extern crate alloc;
 
+mod executor;
+pub use executor::{HiloExecutor, HiloExecutorConstructor};
+
+mod driver;
+pub use driver::HiloDriver;
+
 mod blobs;
 pub use blobs::{
     BlobSidecarProvider, OnlineBlobProvider, OnlineBlobProviderBuilder,
@@ -21,6 +27,7 @@ pub use beacon_client::{
 mod pipeline;
 pub use pipeline::{
     HiloAttributesBuilder, HiloAttributesQueue, HiloDataProvider, HiloDerivationPipeline,
+    HiloPipeline,
 };
 
 mod chain_provider;

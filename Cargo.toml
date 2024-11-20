@@ -103,12 +103,15 @@ libp2p-identity = "0.2.9"
 arbtest = "0.3"
 arbitrary = "1"
 
+# CLI
+clap = "4.5.20"
+figment = { version = "0.10.8", features = ["toml", "env"] }
+
 # Misc
 url = "2.5.2"
 lru = "0.12.5"
 eyre = "0.6.12"
 again = "0.1.2"
-clap = "4.5.20"
 tokio = "1.41.0"
 futures = "0.3.31"
 reqwest = "0.12.9"
@@ -121,3 +124,4 @@ unsigned-varint = "0.8.0"
 thiserror = { version = "2.0", default-features = false }
 derive_more = { version = "1.0.0", default-features = false }
 lazy_static = { version = "1.5.0", default-features = false }
+ctrlc = { version = "3.2.3", features = ["termination"] }
