@@ -13,6 +13,7 @@ rust-version.workspace = true
 
 [dependencies]
 # Local
+hilo-node.workspace = true
 hilo-engine.workspace = true
 # hilo-net.workspace = true
 # hilo = { workspace = true, features = ["registry"] }

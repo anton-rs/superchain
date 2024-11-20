@@ -2580,6 +2580,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "hilo-node"
+version = "0.11.0"
+dependencies = [
+ "alloy-primitives",
+ "alloy-rpc-types-engine",
+ "op-alloy-genesis",
+ "serde",
+ "url",
+]
+
+[[package]]
 name = "hkdf"
 version = "0.12.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4134,6 +4145,7 @@ dependencies = [
  "clap",
  "eyre",
  "hilo-engine",
+ "hilo-node",
  "metrics-exporter-prometheus",
  "op-alloy-genesis",
  "op-alloy-registry",
@@ -7272,6 +7284,7 @@ dependencies = [
  "form_urlencoded",
  "idna 1.0.3",
  "percent-encoding",
+ "serde",
 ]
 
 [[package]]
