@@ -4173,6 +4173,7 @@ dependencies = [
 name = "node"
 version = "0.1.0"
 dependencies = [
+ "alloy-primitives",
  "alloy-rpc-types-engine",
  "clap",
  "eyre",

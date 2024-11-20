@@ -32,12 +32,7 @@ pub const DEFAULT_L1_BEACON_CLIENT_URL: &str = "http://localhost:5052/";
 #[command(author, version, about, long_about = None)]
 pub(crate) struct NodeArgs {
     /// A port to serve prometheus metrics on.
-    #[clap(
-        long,
-        short = 'm',
-        default_value = "9090",
-        help = "The port to serve prometheus metrics on"
-    )]
+    #[clap(long, default_value = "9090", help = "The port to serve prometheus metrics on")]
     pub metrics_port: u16,
 
     /// URL of the checkpoint sync server to fetch checkpoints from.
@@ -97,7 +92,7 @@ pub(crate) struct NodeArgs {
     /// JWT secret for the auth-rpc endpoint of the execution client.
     /// This MUST be a valid path to a file containing the hex-encoded JWT secret.
     #[clap(long = "l2-engine-jwt-secret", env = "L2_ENGINE_JWT_SECRET")]
-    pub l2_engine_jwt_secret: PathBuf,
+    pub l2_engine_jwt_secret: Option<PathBuf>,
 
     /// The maximum **number of blocks** to keep cached in the chain provider.
     ///
@@ -131,10 +126,12 @@ impl NodeArgs {
     /// using the provided [PathBuf]. If the file is not found,
     /// it will return the default JWT secret.
     pub fn jwt_secret(&self) -> Option<JwtSecret> {
-        match std::fs::read_to_string(&self.l2_engine_jwt_secret) {
-            Ok(content) => JwtSecret::from_hex(content).ok(),
-            Err(_) => Self::default_jwt_secret(),
+        if let Some(path) = &self.l2_engine_jwt_secret {
+            if let Ok(secret) = std::fs::read_to_string(path) {
+                return JwtSecret::from_hex(secret).ok();
+            }
         }
+        Self::default_jwt_secret()
     }
 
     /// Uses the current directory to attempt to read
@@ -145,8 +142,16 @@ impl NodeArgs {
         match std::fs::read_to_string(cur_dir.join("jwt.hex")) {
             Ok(content) => JwtSecret::from_hex(content).ok(),
             Err(_) => {
-                tracing::error!("Failed to read JWT secret from file: {:?}", cur_dir);
-                None
+                use std::io::Write;
+                let secret = JwtSecret::random();
+                if let Ok(mut file) = File::create("jwt.hex") {
+                    if let Err(e) =
+                        file.write_all(alloy_primitives::hex::encode(secret.as_bytes()).as_bytes())
+                    {
+                        tracing::error!("Failed to write JWT secret to file: {:?}", e);
+                    }
+                }
+                Some(secret)
             }
         }
     }
@@ -160,6 +165,7 @@ impl From<NodeArgs> for hilo_node::Config {
             l2_chain_id: args.l2_chain_id,
             l1_rpc_url: args.l1_rpc_url,
             l1_beacon_url: args.l1_beacon_client_url,
+            blob_archiver_url: args.l1_blob_archiver_url,
             l2_rpc_url: args.l2_rpc_url,
             l2_engine_url: args.l2_engine_api_url,
             rollup_config,
@@ -168,8 +174,7 @@ impl From<NodeArgs> for hilo_node::Config {
             sync_mode: args.sync_mode,
             rpc_url: args.rpc_url,
             devnet: false,
-            // metrics_port: args.metrics_port,
-            // l1_blob_archiver_url: args.l1_blob_archiver_url,
+            cache_size: args.l1_chain_cache_size,
         }
     }
 }

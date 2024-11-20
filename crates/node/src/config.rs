@@ -15,6 +15,8 @@ pub struct Config {
     pub l1_rpc_url: Url,
     /// The base chain beacon client RPC URL
     pub l1_beacon_url: Url,
+    /// An optional blob archiver URL used in the fallback provider.
+    pub blob_archiver_url: Option<Url>,
     /// The L2 chain RPC URL
     pub l2_rpc_url: Url,
     /// The L2 engine API URL
@@ -34,6 +36,8 @@ pub struct Config {
     pub devnet: bool,
     /// The mode to sync.
     pub sync_mode: SyncMode,
+    /// The cache size for in-memory providers.
+    pub cache_size: usize,
 }
 
 fn as_hex<S>(v: &JwtSecret, serializer: S) -> Result<S::Ok, S::Error>
@@ -70,6 +74,7 @@ mod tests {
             l1_rpc_url,
             l2_rpc_url,
             l1_beacon_url,
+            blob_archiver_url: None,
             l2_engine_url,
             rollup_config,
             jwt_secret,
@@ -77,6 +82,7 @@ mod tests {
             rpc_url: None,
             devnet: false,
             sync_mode: SyncMode::Fast,
+            cache_size: 256,
         };
 
         let serialized = serde_json::to_string(&config).unwrap();

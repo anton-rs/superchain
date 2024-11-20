@@ -1,4 +1,4 @@
-//! Discovery subcommand for Hera.
+//! Discovery subcommand for Hilo.
 
 use crate::globals::GlobalArgs;
 use clap::Args;
@@ -6,7 +6,7 @@ use eyre::Result;
 use hilo_net::discovery::builder::DiscoveryBuilder;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
-/// The Hera discovery subcommand.
+/// The discovery subcommand.
 #[derive(Debug, Clone, Args)]
 #[non_exhaustive]
 pub struct DiscCommand {
