@@ -14,16 +14,24 @@ rust-version.workspace = true
 
 [dependencies]
 # Alloy
+alloy-eips.workspace = true
+alloy-network.workspace = true
+alloy-rpc-client.workspace = true
+alloy-rpc-types-eth.workspace = true
+alloy-provider = { workspace = true, features = ["ipc", "reqwest"] }
+alloy-primitives = { workspace = true, features = ["map"] }
+alloy-transport-http = { workspace = true, features = ["jwt-auth"] }
 alloy-rpc-types-engine = { workspace = true, features = ["jwt", "serde"] }
 
+op-alloy-provider.workspace = true
+op-alloy-rpc-types-engine.workspace = true
+
 # Misc
-again.workspace = true
-serde.workspace = true
-futures.workspace = true
-reqwest = { workspace = true, features = ["json"] }
+url.workspace = true
+tracing.workspace = true
+tower.workspace = true
+http-body-util.workspace = true
 thiserror.workspace = true
-serde_json.workspace = true
-async-trait.workspace = true
 
 [dev-dependencies]
 tokio.workspace = true
