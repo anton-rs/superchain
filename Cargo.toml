@@ -38,8 +38,8 @@ rustdoc-args = ["--cfg", "docsrs"]
 
 [patch.crates-io]
 # Kona alloy dep updates - sepolia holocene release can replace this patch
-kona-derive = { git = "https://github.com/anton-rs/kona", branch = "rf/test/op-alloy-registry" }
-kona-driver = { git = "https://github.com/anton-rs/kona", branch = "rf/test/op-alloy-registry" }
+kona-derive = { git = "https://github.com/anton-rs/kona", branch = "rf/0.6.8" }
+kona-driver = { git = "https://github.com/anton-rs/kona", branch = "rf/0.6.8" }
 
 [workspace.dependencies]
 # Workspace
@@ -72,18 +72,12 @@ alloy-rpc-types-beacon = { version = "0.6.4", default-features = false }
 alloy-rpc-types-engine = { version = "0.6.4", default-features = false }
 
 # OP Alloy
-# op-alloy-genesis = { version = "0.6.7", default-features = false }
-# op-alloy-protocol = { version = "0.6.7", default-features = false }
-# op-alloy-registry = { version = "0.6.7", default-features = false }
-# op-alloy-consensus = { version = "0.6.7", default-features = false }
-# op-alloy-rpc-types-engine = { version = "0.6.7", default-features = false }
-
-op-alloy-genesis = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
-op-alloy-provider = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
-op-alloy-protocol = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
-op-alloy-registry = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
-op-alloy-consensus = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
-op-alloy-rpc-types-engine = { git = "https://github.com/alloy-rs/op-alloy", branch = "main", default-features = false }
+op-alloy-genesis = { version = "0.6.8", default-features = false }
+op-alloy-provider = { version = "0.6.8", default-features = false }
+op-alloy-protocol = { version = "0.6.8", default-features = false }
+op-alloy-registry = { version = "0.6.8", default-features = false }
+op-alloy-consensus = { version = "0.6.8", default-features = false }
+op-alloy-rpc-types-engine = { version = "0.6.8", default-features = false }
 
 # Reth
 reth-provider = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
