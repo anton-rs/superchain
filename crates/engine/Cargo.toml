@@ -20,7 +20,7 @@ alloy-rpc-types-engine = { workspace = true, features = ["jwt", "serde"] }
 again.workspace = true
 serde.workspace = true
 futures.workspace = true
-reqwest.workspace = true
+reqwest = { workspace = true, features = ["json"] }
 thiserror.workspace = true
 serde_json.workspace = true
 async-trait.workspace = true
