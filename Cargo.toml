@@ -36,11 +36,6 @@ redundant-clone = "warn"
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
-[patch.crates-io]
-# Kona alloy dep updates - sepolia holocene release can replace this patch
-kona-derive = { git = "https://github.com/anton-rs/kona", branch = "rf/0.6.8" }
-kona-driver = { git = "https://github.com/anton-rs/kona", branch = "rf/0.6.8" }
-
 [workspace.dependencies]
 # Workspace
 hilo = { version = "0.11.0", path = "crates/hilo", default-features = false }
@@ -50,8 +45,8 @@ hilo-driver = { version = "0.11.0", path = "crates/driver", default-features = f
 hilo-engine = { version = "0.11.0", path = "crates/engine", default-features = false }
 
 # Kona
-kona-derive = { version = "0.0.6", default-features = false }
-kona-driver = { version = "0.0.0", default-features = false }
+kona-derive = { version = "0.1.0", default-features = false }
+kona-driver = { version = "0.1.0", default-features = false }
 
 # Alloy
 alloy-rlp = { version = "0.3.9", default-features = false }

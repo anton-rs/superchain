@@ -3273,18 +3273,16 @@ dependencies = [
 
 [[package]]
 name = "kona-derive"
-version = "0.0.6"
-source = "git+https://github.com/anton-rs/kona?branch=rf/0.6.8#eb9a7227a54bf38a4de33f1e7c0b2f06e29ebbea"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ed6ff7a213463e9835b5db412603b139fbc379b0f5f2552adc19bf843c504f81"
 dependencies = [
- "alloc-no-stdlib",
  "alloy-consensus",
  "alloy-eips",
  "alloy-primitives",
  "alloy-rlp",
  "alloy-rpc-types-engine",
  "async-trait",
- "brotli",
- "miniz_oxide",
  "op-alloy-consensus",
  "op-alloy-genesis",
  "op-alloy-protocol",
@@ -3295,8 +3293,9 @@ dependencies = [
 
 [[package]]
 name = "kona-driver"
-version = "0.0.0"
-source = "git+https://github.com/anton-rs/kona?branch=rf/0.6.8#eb9a7227a54bf38a4de33f1e7c0b2f06e29ebbea"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "50086c8a02b42c3a3f87b56003bde481bc34d410dbb58ea1d09259dc85089966"
 dependencies = [
  "alloy-consensus",
  "alloy-primitives",
