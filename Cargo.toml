@@ -45,6 +45,7 @@ kona-driver = { git = "https://github.com/anton-rs/kona", branch = "rf/test/op-a
 # Workspace
 hilo = { version = "0.11.0", path = "crates/hilo", default-features = false }
 hilo-net = { version = "0.11.0", path = "crates/net", default-features = false }
+hilo-node = { version = "0.11.0", path = "crates/node", default-features = false }
 hilo-driver = { version = "0.11.0", path = "crates/driver", default-features = false }
 hilo-engine = { version = "0.11.0", path = "crates/engine", default-features = false }
 
