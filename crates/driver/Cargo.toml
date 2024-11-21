@@ -36,7 +36,7 @@ op-alloy-consensus.workspace = true
 op-alloy-rpc-types-engine.workspace = true
 
 # Reth
-reth-provider.workspace = true
+reth-provider = { workspace = true, features = ["reqwest"] }
 reth-primitives.workspace = true
 reth-execution-types.workspace = true
 reth-exex = { workspace = true, features = ["serde"] }
