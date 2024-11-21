@@ -1,8 +1,8 @@
-//! Global arguments for the Hera CLI.
+//! Global arguments for the CLI.
 
 use clap::Parser;
 
-/// Global arguments for the Hera CLI.
+/// Global arguments for the CLI.
 #[derive(Parser, Clone, Debug)]
 pub(crate) struct GlobalArgs {
     /// The L2 chain ID to use.

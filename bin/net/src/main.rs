@@ -11,11 +11,11 @@ mod globals;
 mod gossip;
 mod telemetry;
 
-/// The Hera CLI Arguments.
+/// The CLI Arguments.
 #[derive(Parser, Clone, Debug)]
 #[command(author, version, about, long_about = None)]
-pub(crate) struct HeraArgs {
-    /// Global arguments for the Hera CLI.
+pub(crate) struct NetArgs {
+    /// Global arguments for the CLI.
     #[clap(flatten)]
     pub global: globals::GlobalArgs,
     /// The subcommand to run.
@@ -36,7 +36,7 @@ pub(crate) enum NetSubcommand {
 #[tokio::main]
 async fn main() -> Result<()> {
     // Parse arguments.
-    let args = HeraArgs::parse();
+    let args = NetArgs::parse();
 
     // Initialize the telemetry stack.
     telemetry::init_stack(args.global.metrics_port)?;

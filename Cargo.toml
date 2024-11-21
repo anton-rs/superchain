@@ -37,9 +37,8 @@ all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
 [patch.crates-io]
-# Kona alloy dep updates - sepolia holocene release can replace this patch
-kona-derive = { git = "https://github.com/anton-rs/kona", branch = "rf/0.6.8" }
-kona-driver = { git = "https://github.com/anton-rs/kona", branch = "rf/0.6.8" }
+kona-derive = { git = "https://github.com/anton-rs/kona", branch = "rf/chore/driver-visibility" }
+kona-driver = { git = "https://github.com/anton-rs/kona", branch = "rf/chore/driver-visibility" }
 
 [workspace.dependencies]
 # Workspace
@@ -50,8 +49,8 @@ hilo-driver = { version = "0.11.0", path = "crates/driver", default-features = f
 hilo-engine = { version = "0.11.0", path = "crates/engine", default-features = false }
 
 # Kona
-kona-derive = { version = "0.0.6", default-features = false }
-kona-driver = { version = "0.0.0", default-features = false }
+kona-derive = { version = "0.1.0", default-features = false }
+kona-driver = { version = "0.1.0", default-features = false }
 
 # Alloy
 alloy-rlp = { version = "0.3.9", default-features = false }
@@ -80,8 +79,10 @@ op-alloy-consensus = { version = "0.6.8", default-features = false }
 op-alloy-rpc-types-engine = { version = "0.6.8", default-features = false }
 
 # Reth
+reth-exex = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
 reth-provider = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
 reth-primitives = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
+reth-execution-types = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
 
 # Serialization
 serde = { version = "1.0.214", default-features = false }
@@ -103,12 +104,15 @@ libp2p-identity = "0.2.9"
 arbtest = "0.3"
 arbitrary = "1"
 
+# CLI
+clap = "4.5.20"
+figment = { version = "0.10.8", features = ["toml", "env"] }
+
 # Misc
 url = "2.5.2"
 lru = "0.12.5"
 eyre = "0.6.12"
 again = "0.1.2"
-clap = "4.5.20"
 tokio = "1.41.0"
 futures = "0.3.31"
 reqwest = "0.12.9"
@@ -121,3 +125,4 @@ unsigned-varint = "0.8.0"
 thiserror = { version = "2.0", default-features = false }
 derive_more = { version = "1.0.0", default-features = false }
 lazy_static = { version = "1.5.0", default-features = false }
+ctrlc = { version = "3.2.3", features = ["termination"] }

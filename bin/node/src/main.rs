@@ -3,29 +3,32 @@
 #![cfg_attr(docsrs, feature(doc_cfg, doc_auto_cfg))]
 #![cfg_attr(not(test), warn(unused_crate_dependencies))]
 
+use clap::Parser;
+use hilo_node::Node;
+
 mod cli;
 mod telemetry;
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
     // Parse arguments.
-    use clap::Parser;
     let args = cli::NodeArgs::parse();
 
     // Initialize the telemetry stack.
-    telemetry::init_stack(args.metrics_port)?;
+    telemetry::init(args.metrics_port)?;
+    tracing::info!(
+        "Running a standalone Hilo Node. Attributes validation: {}",
+        args.validation_mode
+    );
 
-    // info!(
-    //     "Running the Hilo Node in Standalone mode. Attributes validation: {}",
-    //     self.hera_config.validation_mode
-    // );
-    //
-    // let cfg = self.hera_config.get_l2_config()?;
-    // let driver = Driver::standalone(self.hera_config, cfg).await?;
-    //
-    // if let Err(e) = driver.start().await {
-    //     bail!("[CRIT] Rollup driver failed: {:?}", e)
-    // }
+    // Construct the node from the config.
+    let cfg = args.into();
+    let node = Node::from_config(cfg);
+
+    // Run the node.
+    if let Err(e) = node.run().await {
+        eyre::bail!("[CRIT] Node failed: {:?}", e)
+    }
 
     Ok(())
 }

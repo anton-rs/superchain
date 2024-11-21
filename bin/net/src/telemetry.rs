@@ -11,7 +11,7 @@ use tracing_subscriber::{
 ///
 /// This function should be called at the beginning of the program.
 pub fn init_stack(metrics_port: u16) -> Result<()> {
-    let filter = EnvFilter::builder().with_default_directive("hera=info".parse()?).from_env_lossy();
+    let filter = EnvFilter::builder().with_default_directive("hilo=info".parse()?).from_env_lossy();
 
     // Whether to use ANSI formatting and colors in the console output.
     // If unset, always use colors if stdout is a tty.

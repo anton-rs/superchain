@@ -3,6 +3,12 @@
 #![cfg_attr(docsrs, feature(doc_cfg, doc_auto_cfg))]
 #![cfg_attr(not(test), warn(unused_crate_dependencies))]
 
+#[macro_use]
+extern crate tracing;
+
+mod node;
+pub use node::Node;
+
 mod sync;
 pub use sync::SyncMode;
 

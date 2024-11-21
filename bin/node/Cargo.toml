@@ -15,10 +15,9 @@ rust-version.workspace = true
 # Local
 hilo-node.workspace = true
 hilo-engine.workspace = true
-# hilo-net.workspace = true
-# hilo = { workspace = true, features = ["registry"] }
 
 # Alloy
+alloy-primitives.workspace = true
 alloy-rpc-types-engine = { workspace = true, features = ["jwt"] }
 
 # op-alloy

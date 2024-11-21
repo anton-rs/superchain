@@ -7,7 +7,7 @@ use hilo_net::driver::NetworkDriver;
 use op_alloy_registry::ROLLUP_CONFIGS;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
-/// The Hera gossip subcommand.
+/// The gossip subcommand.
 #[derive(Debug, Clone, Args)]
 #[non_exhaustive]
 pub struct GossipCommand {

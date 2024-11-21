@@ -1,6 +1,5 @@
 //! A pipeline
 
-use alloc::{boxed::Box, sync::Arc};
 use async_trait::async_trait;
 use kona_derive::{
     attributes::StatefulAttributesBuilder,
@@ -18,6 +17,7 @@ use kona_driver::{DriverPipeline, PipelineCursor};
 use op_alloy_genesis::{RollupConfig, SystemConfig};
 use op_alloy_protocol::{BlockInfo, L2BlockInfo};
 use op_alloy_rpc_types_engine::OpAttributesWithParent;
+use std::{boxed::Box, sync::Arc};
 
 use crate::{DurableBlobProvider, InMemoryChainProvider, InMemoryL2ChainProvider};
 
@@ -62,7 +62,6 @@ pub struct HiloPipeline {
 
 impl HiloPipeline {
     /// Constructs a new Hilo derivation pipeline.
-    #[allow(unused)]
     pub fn new(
         cfg: Arc<RollupConfig>,
         sync_start: PipelineCursor,
