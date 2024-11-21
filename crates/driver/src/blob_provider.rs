@@ -1,6 +1,6 @@
 //! Blob Providers
 
-use alloc::{boxed::Box, collections::VecDeque, string::ToString, sync::Arc, vec::Vec};
+use std::{boxed::Box, collections::VecDeque, string::ToString, sync::Arc, vec::Vec};
 
 use alloy_eips::eip4844::{Blob, BlobTransactionSidecar};
 use alloy_primitives::{map::HashMap, B256};

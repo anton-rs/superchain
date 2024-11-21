@@ -1,15 +1,15 @@
 //! Contains an online implementation of the `BlobProvider` trait.
 
-use alloc::{
-    boxed::Box,
-    string::{String, ToString},
-    vec::Vec,
-};
 use alloy_eips::eip4844::{Blob, BlobTransactionSidecarItem};
 use alloy_rpc_types_beacon::sidecar::BlobData;
 use async_trait::async_trait;
 use kona_derive::{errors::BlobProviderError, sources::IndexedBlobHash, traits::BlobProvider};
 use op_alloy_protocol::BlockInfo;
+use std::{
+    boxed::Box,
+    string::{String, ToString},
+    vec::Vec,
+};
 use tracing::warn;
 
 use crate::{BeaconClient, OnlineBeaconClient};

@@ -2,9 +2,11 @@
 #![doc(issue_tracker_base_url = "https://github.com/anton-rs/hilo/issues/")]
 #![cfg_attr(docsrs, feature(doc_cfg, doc_auto_cfg))]
 #![cfg_attr(not(test), warn(unused_crate_dependencies))]
-#![cfg_attr(not(test), no_std)]
+// #![cfg_attr(not(test), no_std)]
+// extern crate alloc;
 
-extern crate alloc;
+#[macro_use]
+extern crate tracing;
 
 mod executor;
 pub use executor::{HiloExecutor, HiloExecutorConstructor};
@@ -17,6 +19,9 @@ pub use blobs::{
     BlobSidecarProvider, OnlineBlobProvider, OnlineBlobProviderBuilder,
     OnlineBlobProviderWithFallback,
 };
+
+mod context;
+pub use context::{Context, StandaloneContext};
 
 mod beacon_client;
 pub use beacon_client::{

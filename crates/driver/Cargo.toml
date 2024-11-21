@@ -20,8 +20,13 @@ kona-driver.workspace = true
 # Alloy
 alloy-eips.workspace = true
 alloy-serde.workspace = true
+alloy-network.workspace = true
+alloy-transport.workspace = true
 alloy-consensus.workspace = true
+alloy-rpc-types-eth.workspace = true
 alloy-rpc-types-beacon.workspace = true
+alloy-provider = { workspace = true, features = ["ipc", "ws"] }
+alloy-rpc-types = { workspace = true, features = ["ssz"] }
 alloy-primitives = { workspace = true, features = ["map"] }
 
 # Op Alloy
@@ -33,16 +38,20 @@ op-alloy-rpc-types-engine.workspace = true
 # Reth
 reth-provider.workspace = true
 reth-primitives.workspace = true
+reth-execution-types.workspace = true
+reth-exex = { workspace = true, features = ["serde"] }
 
 # Misc
 url.workspace = true
-thiserror.workspace = true
 eyre.workspace = true
 serde.workspace = true
-reqwest = { workspace = true, features = ["json"] }
+tokio.workspace = true
 tracing.workspace = true
+futures.workspace = true
+thiserror.workspace = true
 async-trait.workspace = true
 parking_lot.workspace = true
+reqwest = { workspace = true, features = ["json"] }
 derive_more = { workspace = true, features = ["full"] }
 
 [features]

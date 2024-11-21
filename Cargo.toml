@@ -36,6 +36,10 @@ redundant-clone = "warn"
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
+[patch.crates-io]
+kona-derive = { git = "https://github.com/anton-rs/kona", branch = "rf/chore/driver-visibility" }
+kona-driver = { git = "https://github.com/anton-rs/kona", branch = "rf/chore/driver-visibility" }
+
 [workspace.dependencies]
 # Workspace
 hilo = { version = "0.11.0", path = "crates/hilo", default-features = false }
@@ -75,8 +79,10 @@ op-alloy-consensus = { version = "0.6.8", default-features = false }
 op-alloy-rpc-types-engine = { version = "0.6.8", default-features = false }
 
 # Reth
+reth-exex = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
 reth-provider = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
 reth-primitives = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
+reth-execution-types = { git = "https://github.com/paradigmxyz/reth", rev = "7ae8ce1" }
 
 # Serialization
 serde = { version = "1.0.214", default-features = false }

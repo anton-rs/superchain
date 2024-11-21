@@ -1,15 +1,15 @@
 //! Contains an online implementation of the `BeaconClient` trait.
 
-use alloc::{
+use alloy_rpc_types_beacon::sidecar::{BeaconBlobBundle, BlobData};
+use async_trait::async_trait;
+use kona_derive::sources::IndexedBlobHash;
+use reqwest::Client;
+use std::{
     boxed::Box,
     format,
     string::{String, ToString},
     vec::Vec,
 };
-use alloy_rpc_types_beacon::sidecar::{BeaconBlobBundle, BlobData};
-use async_trait::async_trait;
-use kona_derive::sources::IndexedBlobHash;
-use reqwest::Client;
 
 /// The config spec engine api method.
 const SPEC_METHOD: &str = "eth/v1/config/spec";

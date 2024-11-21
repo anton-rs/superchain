@@ -13,7 +13,11 @@ use tokio::sync::watch::{channel, Receiver};
 
 /// A high-level `Node` error.
 #[derive(Debug, thiserror::Error)]
-pub enum NodeError {}
+pub enum NodeError {
+    /// An error occurred during standalone initialization.
+    #[error("standalone initialization failed")]
+    StandaloneInit,
+}
 
 /// The core node runner.
 #[derive(Debug)]
@@ -133,11 +137,19 @@ impl Node {
             Arc::new(self.config.rollup_config.clone()),
             cursor.clone(),
             self.blob_provider(),
-            chain_provider,
+            chain_provider.clone(),
             l2_chain_provider,
         );
         let executor = HiloExecutorConstructor::new();
-        let mut driver = HiloDriver::new(cursor, executor, pipeline);
+        let mut driver = HiloDriver::standalone(
+            Arc::new(self.config.rollup_config.clone()),
+            self.config.l1_rpc_url.clone(),
+            cursor,
+            executor,
+            pipeline,
+        )
+        .await
+        .map_err(|_| NodeError::StandaloneInit)?;
 
         // Run the derivation pipeline until we are able to produce the output root of the claimed
         // L2 block.
