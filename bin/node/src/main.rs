@@ -4,7 +4,7 @@
 #![cfg_attr(not(test), warn(unused_crate_dependencies))]
 
 use clap::Parser;
-use hilo_node::Node;
+use hilo_node::{Config, Node};
 
 mod cli;
 mod telemetry;
@@ -22,8 +22,8 @@ async fn main() -> eyre::Result<()> {
     );
 
     // Construct the node from the config.
-    let cfg = args.into();
-    let node = Node::from_config(cfg);
+    let cfg = Config::from(args);
+    let node = Node::from(cfg);
 
     // Run the node.
     if let Err(e) = node.run().await {

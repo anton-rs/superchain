@@ -32,9 +32,8 @@ pub struct Node {
     shutdown_recv: Receiver<bool>,
 }
 
-impl Node {
-    /// Creates a new [Node] from a [Config] and registers the SIGINT signal handler.
-    pub fn from_config(config: Config) -> Self {
+impl From<Config> for Node {
+    fn from(config: Config) -> Self {
         let (shutdown_sender, shutdown_recv) = channel(false);
         ctrlc::set_handler(move || {
             tracing::info!("shutting down");
@@ -44,7 +43,9 @@ impl Node {
 
         Self { config, sync_mode: SyncMode::Full, checkpoint_hash: None, shutdown_recv }
     }
+}
 
+impl Node {
     /// Sets the [SyncMode]
     pub fn with_sync_mode(mut self, sync_mode: SyncMode) -> Self {
         self.sync_mode = sync_mode;
