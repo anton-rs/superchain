@@ -42,13 +42,13 @@ reth-execution-types.workspace = true
 reth-exex = { workspace = true, features = ["serde"] }
 
 # Misc
-url.workspace = true
 tokio.workspace = true
 serde.workspace = true
 tracing.workspace = true
 futures.workspace = true
 thiserror.workspace = true
 async-trait.workspace = true
+url = { workspace = true, features = ["serde"] }
 
 [dev-dependencies]
 reqwest.workspace = true
