@@ -6,6 +6,20 @@ use op_alloy_genesis::RollupConfig;
 use serde::{Deserialize, Serialize};
 use url::Url;
 
+/// An error thrown by a [Config] operation.
+#[derive(Debug, thiserror::Error)]
+pub enum ConfigError {
+    /// An error thrown by the beacon client.
+    #[error("beacon client error: {0}")]
+    Beacon(String),
+    /// An L2 chain provider error.
+    #[error("L2 chain provider error: {0}")]
+    L2ChainProvider(String),
+    /// An L1 chain provider error.
+    #[error("L1 chain provider error: {0}")]
+    ChainProvider(String),
+}
+
 /// The global node configuration.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Config {
@@ -38,6 +52,22 @@ pub struct Config {
     pub sync_mode: SyncMode,
     /// The cache size for in-memory providers.
     pub cache_size: usize,
+}
+
+impl From<Config> for hilo_driver::Config {
+    fn from(config: Config) -> Self {
+        hilo_driver::Config {
+            l2_chain_id: config.l2_chain_id,
+            l1_rpc_url: config.l1_rpc_url,
+            l1_beacon_url: config.l1_beacon_url,
+            blob_archiver_url: config.blob_archiver_url,
+            l2_rpc_url: config.l2_rpc_url,
+            l2_engine_url: config.l2_engine_url,
+            rollup_config: config.rollup_config,
+            rpc_url: config.rpc_url,
+            cache_size: config.cache_size,
+        }
+    }
 }
 
 fn as_hex<S>(v: &JwtSecret, serializer: S) -> Result<S::Ok, S::Error>

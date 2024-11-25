@@ -47,6 +47,8 @@ hilo-net = { version = "0.11.0", path = "crates/net", default-features = false }
 hilo-node = { version = "0.11.0", path = "crates/node", default-features = false }
 hilo-driver = { version = "0.11.0", path = "crates/driver", default-features = false }
 hilo-engine = { version = "0.11.0", path = "crates/engine", default-features = false }
+hilo-providers-local = { version = "0.11.0", path = "crates/providers-local", default-features = false }
+hilo-providers-alloy = { version = "0.11.0", path = "crates/providers-alloy", default-features = false }
 
 # Kona
 kona-derive = { version = "0.1.0", default-features = false }

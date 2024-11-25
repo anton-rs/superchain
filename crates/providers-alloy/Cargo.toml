@@ -1,6 +1,6 @@
 [package]
-name = "hilo-driver"
-description = "Derivation driver for the OP Stack"
+name = "hilo-providers-alloy"
+description = "Alloy-backed providers for hilo"
 
 version.workspace = true
 edition.workspace = true
@@ -13,46 +13,34 @@ repository.workspace = true
 rust-version.workspace = true
 
 [dependencies]
-# Local
-hilo-providers-local.workspace = true
-hilo-providers-alloy.workspace = true
-
 # Kona
 kona-derive.workspace = true
-kona-driver.workspace = true
 
 # Alloy
+alloy-rlp.workspace = true
+alloy-serde.workspace = true
 alloy-eips.workspace = true
-alloy-network.workspace = true
 alloy-transport.workspace = true
 alloy-consensus.workspace = true
-alloy-rpc-types-eth.workspace = true
 alloy-provider = { workspace = true, features = ["ipc", "ws", "reqwest"] }
-alloy-rpc-types = { workspace = true, features = ["ssz"] }
 alloy-primitives = { workspace = true, features = ["map"] }
+alloy-rpc-types-beacon.workspace = true
 
 # Op Alloy
 op-alloy-genesis.workspace = true
 op-alloy-protocol.workspace = true
-op-alloy-rpc-types-engine.workspace = true
-
-# Reth
-reth-primitives.workspace = true
-reth-execution-types.workspace = true
-reth-exex = { workspace = true, features = ["serde"] }
+op-alloy-consensus.workspace = true
 
 # Misc
 url.workspace = true
-tokio.workspace = true
-serde.workspace = true
 tracing.workspace = true
-futures.workspace = true
+lru.workspace = true
+serde.workspace = true
+eyre.workspace = true
 thiserror.workspace = true
 async-trait.workspace = true
+parking_lot.workspace = true
+reqwest = { workspace = true, features = ["json"] }
 
 [dev-dependencies]
-reqwest.workspace = true
-eyre.workspace = true
-
-[features]
-default = []
+tokio.workspace = true

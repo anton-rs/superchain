@@ -1,7 +1,7 @@
 //! L2 Chain Provider
 
+use alloc::{boxed::Box, collections::vec_deque::VecDeque, string::ToString, sync::Arc, vec::Vec};
 use alloy_primitives::{map::HashMap, B256};
-use std::{boxed::Box, collections::vec_deque::VecDeque, string::ToString, sync::Arc, vec::Vec};
 
 use alloy_consensus::{Header, Receipt, TxEnvelope};
 use async_trait::async_trait;

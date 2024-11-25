@@ -1,23 +1,8 @@
 //! Contains the core `Node` runner.
 
-use crate::{Config, SyncMode};
-use hilo_driver::{
-    HiloDriver, HiloExecutorConstructor, HiloPipeline, InMemoryChainProvider,
-    InMemoryL2ChainProvider, OnlineBeaconClient, OnlineBlobProvider,
-    OnlineBlobProviderWithFallback,
-};
-use kona_driver::PipelineCursor;
-use op_alloy_protocol::{BlockInfo, L2BlockInfo};
-use std::sync::Arc;
+use crate::{Config, NodeError, SyncMode};
+use hilo_driver::{HiloDriver, HiloExecutorConstructor};
 use tokio::sync::watch::{channel, Receiver};
-
-/// A high-level `Node` error.
-#[derive(Debug, thiserror::Error)]
-pub enum NodeError {
-    /// An error occurred during standalone initialization.
-    #[error("standalone initialization failed")]
-    StandaloneInit,
-}
 
 /// The core node runner.
 #[derive(Debug)]
@@ -101,63 +86,12 @@ impl Node {
         unimplemented!();
     }
 
-    /// Construct a blob provider from the config.
-    pub fn blob_provider(
-        &self,
-    ) -> OnlineBlobProviderWithFallback<OnlineBeaconClient, OnlineBeaconClient> {
-        let beacon_client =
-            OnlineBeaconClient::new_http(String::from(self.config.l1_beacon_url.clone()));
-        let genesis = Some(self.config.rollup_config.genesis.l1.number);
-        // TODO: fix the slot interval here
-        let blob = OnlineBlobProvider::new(beacon_client, genesis, Some(10));
-        OnlineBlobProviderWithFallback::new(blob, None)
-    }
-
     /// Creates and starts the [HiloDriver] which handles the derivation sync process.
     async fn start_driver(&self) -> Result<(), NodeError> {
-        // TODO: use the proper safe head info.
-        // This should be pulled in using the checkpoint hash.
-        let safe_head_info = L2BlockInfo::default();
-        // let l1_origin = BlockInfo::default();
-        let channel_timeout =
-            self.config.rollup_config.channel_timeout(safe_head_info.block_info.timestamp);
-        // let mut l1_origin_number = l1_origin.number.saturating_sub(channel_timeout);
-        // if l1_origin_number < self.config.rollup_config.genesis.l1.number {
-        //     l1_origin_number = self.config.rollup_config.genesis.l1.number;
-        // }
-
-        // TODO: pull in the correct origin using the chain provider
-        // let origin = chain_provider.block_info_by_number(l1_origin_number).await?;
-        let origin = BlockInfo::default();
-        let cursor = PipelineCursor::new(channel_timeout, origin);
-
-        // TODO: pull in chain capacity from config and cli
-        let chain_provider = InMemoryChainProvider::with_capacity(100);
-        let l2_chain_provider = InMemoryL2ChainProvider::with_capacity(100);
-        let pipeline = HiloPipeline::new(
-            Arc::new(self.config.rollup_config.clone()),
-            cursor.clone(),
-            self.blob_provider(),
-            chain_provider.clone(),
-            l2_chain_provider,
-        );
-        let executor = HiloExecutorConstructor::new();
-        let mut driver = HiloDriver::standalone(
-            Arc::new(self.config.rollup_config.clone()),
-            self.config.l1_rpc_url.clone(),
-            cursor,
-            executor,
-            pipeline,
-        )
-        .await
-        .map_err(|_| NodeError::StandaloneInit)?;
-
-        // Run the derivation pipeline until we are able to produce the output root of the claimed
-        // L2 block.
-        // let (number, output_root) =
-        //     driver.advance_to_target(&boot.rollup_config, boot.claimed_l2_block_number).await?;
-
-        driver.start().await;
+        let cfg = self.config.clone().into();
+        let exec = HiloExecutorConstructor::new();
+        let mut driver = HiloDriver::standalone(cfg, exec).await?;
+        driver.start().await?;
         Ok(())
     }
 

@@ -1,0 +1,36 @@
+[package]
+name = "hilo-providers-local"
+description = "Local providers for hilo"
+
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+# Kona
+kona-derive.workspace = true
+
+# Alloy
+alloy-eips.workspace = true
+alloy-consensus.workspace = true
+alloy-primitives = { workspace = true, features = ["map"] }
+
+# Op Alloy
+op-alloy-genesis.workspace = true
+op-alloy-protocol.workspace = true
+op-alloy-consensus.workspace = true
+
+# Reth
+reth-provider.workspace = true
+reth-primitives.workspace = true
+
+# Misc
+async-trait.workspace = true
+parking_lot.workspace = true
+derive_more = { workspace = true, features = ["full"] }

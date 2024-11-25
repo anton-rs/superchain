@@ -2788,26 +2788,22 @@ dependencies = [
  "alloy-primitives",
  "alloy-provider",
  "alloy-rpc-types",
- "alloy-rpc-types-beacon",
  "alloy-rpc-types-eth",
- "alloy-serde",
  "alloy-transport",
  "async-trait",
- "derive_more",
  "eyre",
  "futures",
+ "hilo-providers-alloy",
+ "hilo-providers-local",
  "kona-derive",
  "kona-driver",
- "op-alloy-consensus",
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
- "parking_lot",
  "reqwest",
  "reth-execution-types",
  "reth-exex",
  "reth-primitives",
- "reth-provider",
  "serde",
  "thiserror 2.0.3",
  "tokio",
@@ -2866,11 +2862,10 @@ version = "0.11.0"
 dependencies = [
  "alloy-primitives",
  "alloy-rpc-types-engine",
+ "alloy-transport",
  "ctrlc",
  "hilo-driver",
- "kona-driver",
  "op-alloy-genesis",
- "op-alloy-protocol",
  "op-alloy-registry",
  "serde",
  "serde_json",
@@ -2878,6 +2873,52 @@ dependencies = [
  "tokio",
  "tracing",
  "url",
+]
+
+[[package]]
+name = "hilo-providers-alloy"
+version = "0.11.0"
+dependencies = [
+ "alloy-consensus",
+ "alloy-eips",
+ "alloy-primitives",
+ "alloy-provider",
+ "alloy-rlp",
+ "alloy-rpc-types-beacon",
+ "alloy-serde",
+ "alloy-transport",
+ "async-trait",
+ "eyre",
+ "kona-derive",
+ "lru",
+ "op-alloy-consensus",
+ "op-alloy-genesis",
+ "op-alloy-protocol",
+ "parking_lot",
+ "reqwest",
+ "serde",
+ "thiserror 2.0.3",
+ "tokio",
+ "tracing",
+ "url",
+]
+
+[[package]]
+name = "hilo-providers-local"
+version = "0.11.0"
+dependencies = [
+ "alloy-consensus",
+ "alloy-eips",
+ "alloy-primitives",
+ "async-trait",
+ "derive_more",
+ "kona-derive",
+ "op-alloy-consensus",
+ "op-alloy-genesis",
+ "op-alloy-protocol",
+ "parking_lot",
+ "reth-primitives",
+ "reth-provider",
 ]
 
 [[package]]
