@@ -19,7 +19,8 @@ use op_alloy_protocol::{BlockInfo, L2BlockInfo};
 use op_alloy_rpc_types_engine::OpAttributesWithParent;
 use std::{boxed::Box, sync::Arc};
 
-use crate::{DurableBlobProvider, InMemoryChainProvider, InMemoryL2ChainProvider};
+use hilo_providers_alloy::DurableBlobProvider;
+use hilo_providers_local::{InMemoryChainProvider, InMemoryL2ChainProvider};
 
 /// Hilo Derivation Pipeline.
 pub type HiloDerivationPipeline =

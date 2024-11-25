@@ -1,7 +1,7 @@
 //! Chain Provider
 
+use alloc::{boxed::Box, collections::vec_deque::VecDeque, string::ToString, sync::Arc, vec::Vec};
 use alloy_primitives::{map::HashMap, B256};
-use std::{boxed::Box, collections::vec_deque::VecDeque, string::ToString, sync::Arc, vec::Vec};
 
 use alloy_consensus::{
     Header, Receipt, Signed, TxEip1559, TxEip2930, TxEip4844, TxEip4844Variant, TxEnvelope,
