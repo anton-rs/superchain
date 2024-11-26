@@ -4,6 +4,7 @@ use alloy_transport::TransportResult;
 use kona_derive::{errors::PipelineErrorKind, traits::SignalReceiver, types::ResetSignal};
 use kona_driver::{Driver, PipelineCursor, TipCursor};
 use std::sync::Arc;
+// use tokio::sync::watch::{channel, Receiver};
 
 use hilo_engine::{EngineApi, HiloExecutorConstructor};
 use hilo_providers_local::{InMemoryChainProvider, InMemoryL2ChainProvider};
@@ -29,6 +30,9 @@ pub enum DriverError {
     /// Kona's driver unexpectedly errored.
     #[error("kona driver error")]
     DriverErrored,
+    /// Shutdown signal received.
+    #[error("shutdown signal received")]
+    Shutdown,
 }
 
 /// HiloDriver is a wrapper around the `Driver` that
@@ -41,6 +45,8 @@ pub struct HiloDriver<C: Context> {
     pub cfg: Config,
     /// A constructor for execution.
     pub exec: Option<HiloExecutorConstructor>,
+    // Receiver to listen for SIGINT signals
+    // shutdown_recv: Receiver<bool>,
 }
 
 impl HiloDriver<StandaloneContext> {
@@ -57,6 +63,13 @@ where
 {
     /// Constructs a new [HiloDriver].
     pub fn new(cfg: Config, ctx: C, exec: HiloExecutorConstructor) -> Self {
+        // TODO: Receive shutdown signal
+        // let (_shutdown_sender, shutdown_recv) = channel(false);
+        // ctrlc::set_handler(move || {
+        //     tracing::info!("sending shut down signal");
+        //     shutdown_sender.send(true).expect("could not send shutdown signal");
+        // })
+        // .expect("could not register shutdown handler");
         Self { cfg, ctx, exec: Some(exec) }
     }
 
@@ -141,6 +154,16 @@ where
             }
         }
     }
+
+    // Exits if a SIGINT signal is received
+    // fn check_shutdown(&self) -> Result<(), DriverError> {
+    //     if *self.shutdown_recv.borrow() {
+    //         tracing::warn!("shutting down");
+    //         std::process::exit(1);
+    //     }
+    //
+    //     Ok(())
+    // }
 
     /// Wait for the L2 genesis' corresponding L1 block to be available in the L1 chain.
     async fn wait_for_l2_genesis_l1_block(&mut self) {
