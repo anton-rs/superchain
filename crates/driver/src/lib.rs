@@ -13,10 +13,10 @@ mod executor;
 pub use executor::{HiloExecutor, HiloExecutorConstructor};
 
 mod driver;
-pub use driver::HiloDriver;
+pub use driver::{DriverError, HiloDriver};
 
 mod context;
-pub use context::{Context, StandaloneContext};
+pub use context::{ChainNotification, Context, StandaloneContext};
 
 mod pipeline;
 pub use pipeline::{
