@@ -1,6 +1,7 @@
 //! Node error types.
 
 use crate::ConfigError;
+use hilo_driver::DriverError;
 
 /// A high-level `Node`error.
 #[derive(Debug, thiserror::Error)]
@@ -14,6 +15,9 @@ pub enum NodeError {
     /// An error thrown by a [crate::Config] operation.
     #[error("config error: {0}")]
     Beacon(#[from] ConfigError),
+    /// An error thrown by the driver.
+    #[error("driver error: {0}")]
+    Driver(#[from] DriverError),
 }
 
 impl From<alloy_transport::TransportError> for NodeError {
