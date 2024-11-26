@@ -1,7 +1,7 @@
 //! Contains the core `Node` runner.
 
 use crate::{Config, NodeError, SyncMode};
-use hilo_driver::{HiloDriver, HiloExecutorConstructor};
+use hilo_driver::HiloDriver;
 use tokio::sync::watch::{channel, Receiver};
 
 /// The core node runner.
@@ -89,7 +89,7 @@ impl Node {
     /// Creates and starts the [HiloDriver] which handles the derivation sync process.
     async fn start_driver(&self) -> Result<(), NodeError> {
         let cfg = self.config.clone().into();
-        let exec = HiloExecutorConstructor::new();
+        let exec = self.config.executor();
         let mut driver = HiloDriver::standalone(cfg, exec).await?;
         driver.start().await?;
         Ok(())

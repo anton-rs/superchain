@@ -13,8 +13,12 @@ repository.workspace = true
 rust-version.workspace = true
 
 [dependencies]
+# Kona
+kona-driver.workspace = true
+
 # Alloy
 alloy-eips.workspace = true
+alloy-consensus.workspace = true
 alloy-network.workspace = true
 alloy-rpc-client.workspace = true
 alloy-rpc-types-eth.workspace = true
@@ -23,6 +27,7 @@ alloy-primitives = { workspace = true, features = ["map"] }
 alloy-transport-http = { workspace = true, features = ["jwt-auth"] }
 alloy-rpc-types-engine = { workspace = true, features = ["jwt", "serde"] }
 
+# Op Alloy
 op-alloy-provider.workspace = true
 op-alloy-rpc-types-engine.workspace = true
 

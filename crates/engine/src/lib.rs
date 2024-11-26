@@ -6,6 +6,9 @@
 mod validation;
 pub use validation::ValidationMode;
 
+mod constructor;
+pub use constructor::HiloExecutorConstructor;
+
 mod api;
 pub use api::EngineApi;
 

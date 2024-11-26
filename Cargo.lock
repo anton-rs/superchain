@@ -2793,6 +2793,7 @@ dependencies = [
  "async-trait",
  "eyre",
  "futures",
+ "hilo-engine",
  "hilo-providers-alloy",
  "hilo-providers-local",
  "kona-derive",
@@ -2815,6 +2816,7 @@ dependencies = [
 name = "hilo-engine"
 version = "0.11.0"
 dependencies = [
+ "alloy-consensus",
  "alloy-eips",
  "alloy-network",
  "alloy-primitives",
@@ -2824,6 +2826,7 @@ dependencies = [
  "alloy-rpc-types-eth",
  "alloy-transport-http",
  "http-body-util",
+ "kona-driver",
  "op-alloy-provider",
  "op-alloy-rpc-types-engine",
  "thiserror 2.0.3",
@@ -2865,6 +2868,7 @@ dependencies = [
  "alloy-transport",
  "ctrlc",
  "hilo-driver",
+ "hilo-engine",
  "op-alloy-genesis",
  "op-alloy-registry",
  "serde",

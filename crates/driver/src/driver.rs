@@ -5,16 +5,17 @@ use kona_derive::{errors::PipelineErrorKind, traits::SignalReceiver, types::Rese
 use kona_driver::{Driver, DriverPipeline, PipelineCursor, TipCursor};
 use std::sync::Arc;
 
+use hilo_engine::{EngineApi, HiloExecutorConstructor};
 use hilo_providers_local::{InMemoryChainProvider, InMemoryL2ChainProvider};
 
 use crate::{
-    ChainNotification, Config, ConfigError, Context, HiloDerivationPipeline, HiloExecutor,
-    HiloExecutorConstructor, HiloPipeline, StandaloneContext,
+    ChainNotification, Config, ConfigError, Context, HiloDerivationPipeline, HiloPipeline,
+    StandaloneContext,
 };
 
 /// A driver from [kona_driver] that uses hilo-types.
 pub type KonaDriver =
-    Driver<HiloExecutor, HiloExecutorConstructor, HiloPipeline, HiloDerivationPipeline>;
+    Driver<EngineApi, HiloExecutorConstructor, HiloPipeline, HiloDerivationPipeline>;
 
 /// An error that can happen when running the driver.
 #[derive(Debug, thiserror::Error)]
