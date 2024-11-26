@@ -5,8 +5,9 @@ use tower::ServiceBuilder;
 use tracing::warn;
 use url::Url;
 
+use alloy_consensus::Header;
 use alloy_network::AnyNetwork;
-use alloy_primitives::Bytes;
+use alloy_primitives::{Bytes, B256};
 use alloy_provider::RootProvider;
 use alloy_rpc_client::RpcClient;
 use alloy_rpc_types_engine::{ForkchoiceState, JwtSecret};
@@ -17,8 +18,9 @@ use alloy_transport_http::{
     },
     AuthLayer, AuthService, Http, HyperClient,
 };
+use kona_driver::Executor;
 use op_alloy_provider::ext::engine::OpEngineApi;
-use op_alloy_rpc_types_engine::OpAttributesWithParent;
+use op_alloy_rpc_types_engine::{OpAttributesWithParent, OpPayloadAttributes};
 
 /// A Hyper HTTP client with a JWT authentication layer.
 type HyperAuthClient<B = Full<Bytes>> = HyperClient<B, AuthService<Client<HttpConnector, B>>>;
@@ -35,6 +37,31 @@ pub enum ValidationError {
     /// An RPC error
     #[error("RPC error")]
     RpcError,
+}
+
+/// An executor error.
+#[derive(Debug, thiserror::Error)]
+pub enum ExecutorError {
+    /// An error occurred while executing the payload.
+    #[error("An error occurred while executing the payload")]
+    PayloadError,
+    /// An error occurred while computing the output root.
+    #[error("An error occurred while computing the output root")]
+    OutputRootError,
+}
+
+impl Executor for EngineApi {
+    type Error = ExecutorError;
+
+    /// Execute the given payload attributes.
+    fn execute_payload(&mut self, _: OpPayloadAttributes) -> Result<&Header, Self::Error> {
+        todo!()
+    }
+
+    /// Computes the output root.
+    fn compute_output_root(&mut self) -> Result<B256, Self::Error> {
+        todo!()
+    }
 }
 
 impl EngineApi {

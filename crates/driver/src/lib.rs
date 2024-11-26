@@ -9,9 +9,6 @@ extern crate tracing;
 mod config;
 pub use config::{Config, ConfigError};
 
-mod executor;
-pub use executor::{HiloExecutor, HiloExecutorConstructor};
-
 mod driver;
 pub use driver::{DriverError, HiloDriver};
 
