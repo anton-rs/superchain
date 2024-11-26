@@ -2,7 +2,7 @@
 
 use alloy_transport::TransportResult;
 use kona_derive::{errors::PipelineErrorKind, traits::SignalReceiver, types::ResetSignal};
-use kona_driver::{Driver, DriverPipeline, PipelineCursor, TipCursor};
+use kona_driver::{Driver, PipelineCursor, TipCursor};
 use std::sync::Arc;
 
 use hilo_engine::{EngineApi, HiloExecutorConstructor};
@@ -26,6 +26,9 @@ pub enum DriverError {
     /// A pipeline reset failed.
     #[error("pipeline reset error: {0}")]
     PipelineReset(#[from] PipelineErrorKind),
+    /// Kona's driver unexpectedly errored.
+    #[error("kona driver error")]
+    DriverErrored,
 }
 
 /// HiloDriver is a wrapper around the `Driver` that
@@ -122,10 +125,16 @@ where
         // Step 3: Start the processing loop
         loop {
             tokio::select! {
-                Ok(_) = driver.pipeline.produce_payload(*driver.cursor.l2_safe_head()) => {
-                    info!("Produced payload");
-                    // todo
-                }
+                result = driver.advance_to_target(&self.cfg.rollup_config, None) => match result {
+                    Ok((bn, hash)) => {
+                        error!("Driver unexpectedly stopped at target block: {} {}", bn, hash);
+                    }
+                    Err(e) => {
+                        error!("Driver error: {}", e);
+                        // TODO: optionally allow recovery
+                        return Err(DriverError::DriverErrored);
+                    }
+                },
                 Some(notification) = self.ctx.recv_notification() => {
                     self.handle_notification(notification, &mut driver).await?;
                 }
