@@ -26,7 +26,7 @@ pub trait Engine {
     async fn forkchoice_update(
         &self,
         state: ForkchoiceState,
-        attr: OpPayloadAttributes,
+        attr: Option<OpPayloadAttributes>,
     ) -> Result<ForkchoiceUpdated, Self::Error>;
 
     /// Creates a new payload with the given payload and parent beacon block root.

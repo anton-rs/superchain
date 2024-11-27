@@ -1,8 +1,8 @@
 //! Contains an online implementation of the `BeaconClient` trait.
 
+use alloy_eips::eip4844::IndexedBlobHash;
 use alloy_rpc_types_beacon::sidecar::{BeaconBlobBundle, BlobData};
 use async_trait::async_trait;
-use kona_derive::sources::IndexedBlobHash;
 use reqwest::Client;
 use std::{
     boxed::Box,

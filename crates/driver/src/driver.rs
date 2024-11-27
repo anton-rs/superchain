@@ -154,6 +154,14 @@ where
         }
     }
 
+    /// Loops until the engine client is online and receives a response from the engine.
+    async fn await_engine_ready(&self) {
+        while !self.engine_driver.engine_ready().await {
+            self.check_shutdown().await;
+            sleep(Duration::from_secs(1)).await;
+        }
+    }
+
     // Exits if a SIGINT signal is received
     // fn check_shutdown(&self) -> Result<(), DriverError> {
     //     if *self.shutdown_recv.borrow() {
