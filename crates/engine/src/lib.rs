@@ -10,7 +10,7 @@ mod traits;
 pub use traits::Engine;
 
 mod errors;
-pub use errors::EngineApiError;
+pub use errors::EngineError;
 
 mod controller;
 pub use controller::EngineController;

@@ -27,7 +27,7 @@ use url::Url;
 
 use hilo_providers_alloy::AlloyL2ChainProvider;
 
-use crate::{Engine, EngineApiError};
+use crate::{Engine, EngineError};
 
 /// A Hyper HTTP client with a JWT authentication layer.
 type HyperAuthClient<B = Full<Bytes>> = HyperClient<B, AuthService<Client<HttpConnector, B>>>;
@@ -62,13 +62,13 @@ impl EngineClient {
 
 #[async_trait]
 impl Engine for EngineClient {
-    type Error = EngineApiError;
+    type Error = EngineError;
 
     async fn get_payload(
         &self,
         payload_id: PayloadId,
     ) -> Result<OpExecutionPayloadEnvelopeV3, Self::Error> {
-        self.engine.get_payload_v3(payload_id).await.map_err(|_| EngineApiError::PayloadError)
+        self.engine.get_payload_v3(payload_id).await.map_err(|_| EngineError::PayloadError)
     }
 
     async fn forkchoice_update(
@@ -76,10 +76,7 @@ impl Engine for EngineClient {
         state: ForkchoiceState,
         attr: Option<OpPayloadAttributes>,
     ) -> Result<ForkchoiceUpdated, Self::Error> {
-        self.engine
-            .fork_choice_updated_v2(state, attr)
-            .await
-            .map_err(|_| EngineApiError::PayloadError)
+        self.engine.fork_choice_updated_v2(state, attr).await.map_err(|_| EngineError::PayloadError)
     }
 
     async fn new_payload(
@@ -90,7 +87,7 @@ impl Engine for EngineClient {
         self.engine
             .new_payload_v3(payload, parent_beacon_block_root)
             .await
-            .map_err(|_| EngineApiError::PayloadError)
+            .map_err(|_| EngineError::PayloadError)
     }
 
     async fn l2_block_ref_by_label(
@@ -100,11 +97,11 @@ impl Engine for EngineClient {
         let number = match numtag {
             BlockNumberOrTag::Number(n) => n,
             BlockNumberOrTag::Latest => {
-                self.rpc.latest_block_number().await.map_err(|_| EngineApiError::PayloadError)?
+                self.rpc.latest_block_number().await.map_err(|_| EngineError::LatestBlockNumber)?
             }
-            _ => return Err(EngineApiError::PayloadError),
+            _ => return Err(EngineError::InvalidBlockTag),
         };
-        self.rpc.l2_block_info_by_number(number).await.map_err(|_| EngineApiError::PayloadError)
+        self.rpc.l2_block_info_by_number(number).await.map_err(|_| EngineError::L2BlockInfoFetch)
     }
 }
 

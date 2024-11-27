@@ -14,7 +14,7 @@ use std::{sync::Arc, time::Duration};
 use tokio::time::sleep;
 use url::Url;
 
-use crate::{Engine, EngineApiError, EngineClient};
+use crate::{Engine, EngineClient, EngineError};
 
 /// L1 epoch block
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
@@ -94,7 +94,7 @@ impl EngineController {
 
 #[async_trait]
 impl Executor for EngineController {
-    type Error = EngineApiError;
+    type Error = EngineError;
 
     /// Waits for the engine to be ready.
     async fn wait_until_ready(&mut self) {
