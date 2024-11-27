@@ -79,8 +79,7 @@ impl Node {
     /// Creates and starts the [HiloDriver] which handles the derivation sync process.
     async fn start_driver(&self) -> Result<(), NodeError> {
         let cfg = self.config.clone().into();
-        let exec = self.config.executor();
-        let mut driver = HiloDriver::standalone(cfg, exec).await?;
+        let mut driver = HiloDriver::standalone(cfg).await?;
         driver.start().await?;
         Ok(())
     }

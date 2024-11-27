@@ -2,7 +2,6 @@
 
 use crate::SyncMode;
 use alloy_rpc_types_engine::JwtSecret;
-use hilo_engine::EngineController;
 use op_alloy_genesis::RollupConfig;
 use serde::{Deserialize, Serialize};
 use url::Url;
@@ -55,13 +54,6 @@ pub struct Config {
     pub cache_size: usize,
 }
 
-impl Config {
-    /// Constructs a new [EngineController] from the config.
-    pub fn executor(&self) -> EngineController {
-        EngineController::new(self.l2_engine_url.clone(), self.jwt_secret)
-    }
-}
-
 impl From<Config> for hilo_driver::Config {
     fn from(config: Config) -> Self {
         hilo_driver::Config {
@@ -74,6 +66,7 @@ impl From<Config> for hilo_driver::Config {
             rollup_config: config.rollup_config,
             rpc_url: config.rpc_url,
             cache_size: config.cache_size,
+            jwt_secret: config.jwt_secret,
         }
     }
 }

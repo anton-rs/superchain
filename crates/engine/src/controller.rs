@@ -2,19 +2,19 @@
 //!
 //! See: <https://github.com/ethereum-optimism/optimism/blob/develop/op-node/rollup/engine/engine_controller.go#L46>
 
-use url::Url;
-use std::time::Duration;
-use tokio::time::sleep;
-use kona_driver::Executor;
+use alloy_consensus::{Header, Sealed};
 use alloy_primitives::B256;
-use async_trait::async_trait;
-use alloy_consensus::{Sealed, Header};
 use alloy_rpc_types_engine::{ForkchoiceState, JwtSecret};
+use async_trait::async_trait;
+use kona_driver::Executor;
 use op_alloy_genesis::RollupConfig;
 use op_alloy_protocol::BlockInfo;
 use op_alloy_rpc_types_engine::OpPayloadAttributes;
+use std::time::Duration;
+use tokio::time::sleep;
+use url::Url;
 
-use crate::{EngineApiError, Engine, EngineClient};
+use crate::{Engine, EngineApiError, EngineClient};
 
 /// L1 epoch block
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
@@ -25,6 +25,12 @@ pub struct Epoch {
     pub hash: B256,
     /// The block timestamp
     pub timestamp: u64,
+}
+
+impl From<BlockInfo> for Epoch {
+    fn from(block: BlockInfo) -> Self {
+        Self { number: block.number, hash: block.hash, timestamp: block.timestamp }
+    }
 }
 
 /// The engine controller.
@@ -88,10 +94,7 @@ impl Executor for EngineController {
     async fn wait_until_ready(&mut self) {
         let forkchoice = self.create_forkchoice_state();
         // Loop until the forkchoice is updated
-        while !self.client
-            .forkchoice_update(forkchoice, None)
-            .await
-            .is_ok() {
+        while !self.client.forkchoice_update(forkchoice, None).await.is_ok_and(|u| u.is_valid()) {
             sleep(Duration::from_secs(1)).await;
         }
     }

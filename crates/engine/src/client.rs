@@ -1,9 +1,5 @@
 //! Contains the engine api client.
 
-use async_trait::async_trait;
-use http_body_util::Full;
-use tower::ServiceBuilder;
-use url::Url;
 use alloy_eips::eip1898::BlockNumberOrTag;
 use alloy_network::AnyNetwork;
 use alloy_primitives::{Bytes, B256};
@@ -19,9 +15,13 @@ use alloy_transport_http::{
     },
     AuthLayer, AuthService, Http, HyperClient,
 };
+use async_trait::async_trait;
+use http_body_util::Full;
 use op_alloy_protocol::L2BlockInfo;
 use op_alloy_provider::ext::engine::OpEngineApi;
 use op_alloy_rpc_types_engine::{OpExecutionPayloadEnvelopeV3, OpPayloadAttributes};
+use tower::ServiceBuilder;
+use url::Url;
 
 use crate::{Engine, EngineApiError};
 
