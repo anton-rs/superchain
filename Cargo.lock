@@ -2817,6 +2817,7 @@ dependencies = [
  "alloy-rpc-types-eth",
  "alloy-transport-http",
  "async-trait",
+ "hilo-providers-alloy",
  "http-body-util",
  "kona-driver",
  "op-alloy-genesis",

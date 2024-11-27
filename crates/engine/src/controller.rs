@@ -10,7 +10,7 @@ use kona_driver::Executor;
 use op_alloy_genesis::RollupConfig;
 use op_alloy_protocol::BlockInfo;
 use op_alloy_rpc_types_engine::OpPayloadAttributes;
-use std::time::Duration;
+use std::{sync::Arc, time::Duration};
 use tokio::time::sleep;
 use url::Url;
 
@@ -56,12 +56,18 @@ impl EngineController {
     /// Creates a new engine controller.
     pub fn new(
         l2_engine_url: Url,
+        l2_rpc_url: Url,
         jwt_secret: JwtSecret,
         finalized_head: BlockInfo,
         finalized_epoch: Epoch,
         config: &RollupConfig,
     ) -> Self {
-        let client = EngineClient::new_http(l2_engine_url.clone(), jwt_secret);
+        let client = EngineClient::new_http(
+            l2_engine_url.clone(),
+            l2_rpc_url,
+            Arc::new(config.clone()),
+            jwt_secret,
+        );
         Self {
             blocktime: config.block_time,
             unsafe_head: finalized_head,
@@ -93,15 +99,31 @@ impl Executor for EngineController {
     /// Waits for the engine to be ready.
     async fn wait_until_ready(&mut self) {
         let forkchoice = self.create_forkchoice_state();
-        // Loop until the forkchoice is updated
-        while !self.client.forkchoice_update(forkchoice, None).await.is_ok_and(|u| u.is_valid()) {
+        while self.client.forkchoice_update(forkchoice, None).await.is_err() {
             sleep(Duration::from_secs(1)).await;
         }
     }
 
     /// Updates the safe head.
-    fn update_safe_head(&mut self, _: Sealed<Header>) {
-        todo!()
+    fn update_safe_head(&mut self, header: Sealed<Header>) {
+        if self.safe_head.number < header.number {
+            self.safe_head = BlockInfo {
+                number: header.number,
+                hash: header.hash_slow(),
+                timestamp: header.timestamp,
+                parent_hash: header.parent_hash,
+            };
+            self.safe_epoch = self.safe_head.into();
+        }
+
+        if header.number > self.unsafe_head.number {
+            self.unsafe_head = BlockInfo {
+                number: header.number,
+                hash: header.hash_slow(),
+                timestamp: header.timestamp,
+                parent_hash: header.parent_hash,
+            };
+        }
     }
 
     /// Execute the given payload attributes.
