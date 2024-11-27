@@ -47,13 +47,13 @@ impl StandaloneContext {
     /// Create a new standalone context that polls for new chains.
     pub async fn new(l1_rpc_url: Url) -> TransportResult<Self> {
         if l1_rpc_url.scheme().contains("http") {
-            debug!("Polling for new blocks via HTTP");
+            info!("Polling for new blocks via HTTP");
             Self::with_http_poller(l1_rpc_url).await
         } else if l1_rpc_url.scheme().contains("ws") {
-            debug!("Subscribing to new blocks via websocket");
+            info!("Subscribing to new blocks via websocket");
             Self::with_ws_subscriber(l1_rpc_url).await
         } else if l1_rpc_url.scheme().contains("file") {
-            debug!("Subscribing to new blocks via IPC");
+            info!("Subscribing to new blocks via IPC");
             Self::with_ipc_subscriber(l1_rpc_url).await
         } else {
             Err(TransportErrorKind::custom_str("Unsupported URL scheme"))
