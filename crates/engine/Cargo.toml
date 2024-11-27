@@ -13,6 +13,9 @@ repository.workspace = true
 rust-version.workspace = true
 
 [dependencies]
+# Hilo
+hilo-providers-alloy.workspace = true
+
 # Kona
 kona-driver.workspace = true
 

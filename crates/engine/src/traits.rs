@@ -38,7 +38,7 @@ pub trait Engine {
 
     /// Returns the [L2BlockInfo] for the given label.
     async fn l2_block_ref_by_label(
-        &self,
+        &mut self,
         label: BlockNumberOrTag,
     ) -> Result<L2BlockInfo, Self::Error>;
 }

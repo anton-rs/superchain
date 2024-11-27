@@ -80,6 +80,7 @@ where
         let pipeline = self.init_pipeline(cursor.clone()).await?;
         let exec = EngineController::new(
             self.cfg.l2_engine_url.clone(),
+            self.cfg.l2_rpc_url.clone(),
             self.cfg.jwt_secret,
             cursor.origin(),
             cursor.l2_safe_head().block_info.into(),
