@@ -132,6 +132,7 @@ where
 
         // Wait until the engine is ready
         driver.wait_for_executor().await;
+        info!("Engine ready");
 
         // Step 3: Start the processing loop
         loop {
@@ -147,6 +148,7 @@ where
                     }
                 },
                 Some(notification) = self.ctx.recv_notification() => {
+                    info!("Received chain notification");
                     self.handle_notification(notification, &mut driver).await?;
                 }
             }
