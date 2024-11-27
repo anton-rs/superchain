@@ -4,8 +4,9 @@ use alloy_transport::TransportResult;
 use kona_derive::{errors::PipelineErrorKind, traits::SignalReceiver, types::ResetSignal};
 use kona_driver::{Driver, PipelineCursor, TipCursor};
 use std::sync::Arc;
+// use tokio::sync::watch::{channel, Receiver};
 
-use hilo_engine::{EngineApi, HiloExecutorConstructor};
+use hilo_engine::EngineController;
 use hilo_providers_local::{InMemoryChainProvider, InMemoryL2ChainProvider};
 
 use crate::{
@@ -14,8 +15,7 @@ use crate::{
 };
 
 /// A driver from [kona_driver] that uses hilo-types.
-pub type KonaDriver =
-    Driver<EngineApi, HiloExecutorConstructor, HiloPipeline, HiloDerivationPipeline>;
+pub type KonaDriver = Driver<EngineController, HiloPipeline, HiloDerivationPipeline>;
 
 /// An error that can happen when running the driver.
 #[derive(Debug, thiserror::Error)]
@@ -29,6 +29,9 @@ pub enum DriverError {
     /// Kona's driver unexpectedly errored.
     #[error("kona driver error")]
     DriverErrored,
+    /// Shutdown signal received.
+    #[error("shutdown signal received")]
+    Shutdown,
 }
 
 /// HiloDriver is a wrapper around the `Driver` that
@@ -39,15 +42,13 @@ pub struct HiloDriver<C: Context> {
     pub ctx: C,
     /// The driver config.
     pub cfg: Config,
-    /// A constructor for execution.
-    pub exec: Option<HiloExecutorConstructor>,
 }
 
 impl HiloDriver<StandaloneContext> {
     /// Creates a new [HiloDriver] with a standalone context.
-    pub async fn standalone(cfg: Config, exec: HiloExecutorConstructor) -> TransportResult<Self> {
+    pub async fn standalone(cfg: Config) -> TransportResult<Self> {
         let ctx = StandaloneContext::new(cfg.l1_rpc_url.clone()).await?;
-        Ok(Self::new(cfg, ctx, exec))
+        Ok(Self::new(cfg, ctx))
     }
 }
 
@@ -56,8 +57,8 @@ where
     C: Context,
 {
     /// Constructs a new [HiloDriver].
-    pub fn new(cfg: Config, ctx: C, exec: HiloExecutorConstructor) -> Self {
-        Self { cfg, ctx, exec: Some(exec) }
+    pub fn new(cfg: Config, ctx: C) -> Self {
+        Self { cfg, ctx }
     }
 
     /// Initializes the [HiloPipeline].
@@ -77,7 +78,13 @@ where
     pub async fn init_driver(&mut self) -> Result<KonaDriver, ConfigError> {
         let cursor = self.cfg.tip_cursor().await?;
         let pipeline = self.init_pipeline(cursor.clone()).await?;
-        let exec = self.exec.take().expect("Executor not set");
+        let exec = EngineController::new(
+            self.cfg.l2_engine_url.clone(),
+            self.cfg.jwt_secret,
+            cursor.origin(),
+            cursor.l2_safe_head().block_info.into(),
+            &self.cfg.rollup_config,
+        );
         Ok(Driver::new(cursor, exec, pipeline))
     }
 
@@ -122,6 +129,9 @@ where
         let mut driver = self.init_driver().await?;
         info!("Driver initialized");
 
+        // Wait until the engine is ready
+        driver.wait_for_executor().await;
+
         // Step 3: Start the processing loop
         loop {
             tokio::select! {
@@ -141,6 +151,16 @@ where
             }
         }
     }
+
+    // Exits if a SIGINT signal is received
+    // fn check_shutdown(&self) -> Result<(), DriverError> {
+    //     if *self.shutdown_recv.borrow() {
+    //         tracing::warn!("shutting down");
+    //         std::process::exit(1);
+    //     }
+    //
+    //     Ok(())
+    // }
 
     /// Wait for the L2 genesis' corresponding L1 block to be available in the L1 chain.
     async fn wait_for_l2_genesis_l1_block(&mut self) {

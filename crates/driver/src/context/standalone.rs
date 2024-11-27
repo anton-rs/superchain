@@ -199,6 +199,7 @@ impl Context for StandaloneContext {
 
         let header = self.new_block_rx.recv().await?;
         let block_num = header.number;
+        info!("Received new block: {}", block_num);
 
         let entry = self.reorg_cache.entry(block_num).or_default();
         entry.insert(header.hash, header.clone());

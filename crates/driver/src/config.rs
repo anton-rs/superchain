@@ -1,5 +1,6 @@
 //! Configuration for the Hilo Driver.
 
+use alloy_rpc_types_engine::JwtSecret;
 use kona_derive::traits::ChainProvider;
 use kona_driver::PipelineCursor;
 use op_alloy_genesis::RollupConfig;
@@ -46,8 +47,28 @@ pub struct Config {
     pub rollup_config: RollupConfig,
     /// The hilo-node RPC server
     pub rpc_url: Option<Url>,
+    /// Engine API JWT Secret.
+    /// This is used to authenticate with the engine API
+    #[serde(deserialize_with = "deserialize_jwt_secret", serialize_with = "as_hex")]
+    pub jwt_secret: JwtSecret,
     /// The cache size for in-memory providers.
     pub cache_size: usize,
+}
+
+fn as_hex<S>(v: &JwtSecret, serializer: S) -> Result<S::Ok, S::Error>
+where
+    S: serde::ser::Serializer,
+{
+    let encoded = alloy_primitives::hex::encode(v.as_bytes());
+    serializer.serialize_str(&encoded)
+}
+
+fn deserialize_jwt_secret<'de, D>(deserializer: D) -> Result<JwtSecret, D::Error>
+where
+    D: serde::de::Deserializer<'de>,
+{
+    let s: &str = serde::de::Deserialize::deserialize(deserializer)?;
+    JwtSecret::from_hex(s).map_err(serde::de::Error::custom)
 }
 
 impl Config {
@@ -122,6 +143,11 @@ impl Config {
             .block_info_by_number(l1_origin_number)
             .await
             .map_err(|e| ConfigError::ChainProvider(e.to_string()))?;
-        Ok(PipelineCursor::new(channel_timeout, l1_origin))
+        let mut cursor = PipelineCursor::new(channel_timeout, l1_origin);
+        // TODO: construct a valid tip cursor
+        let tip =
+            kona_driver::TipCursor::new(safe_head_info, Default::default(), Default::default());
+        cursor.advance(l1_origin, tip);
+        Ok(cursor)
     }
 }

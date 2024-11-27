@@ -28,11 +28,15 @@ alloy-transport-http = { workspace = true, features = ["jwt-auth"] }
 alloy-rpc-types-engine = { workspace = true, features = ["jwt", "serde"] }
 
 # Op Alloy
+op-alloy-genesis.workspace = true
 op-alloy-provider.workspace = true
+op-alloy-protocol.workspace = true
 op-alloy-rpc-types-engine.workspace = true
 
 # Misc
+async-trait.workspace = true
 url.workspace = true
+tokio.workspace = true
 tracing.workspace = true
 tower.workspace = true
 http-body-util.workspace = true

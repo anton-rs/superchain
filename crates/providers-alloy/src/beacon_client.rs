@@ -1,8 +1,8 @@
 //! Contains an online implementation of the `BeaconClient` trait.
 
+use alloy_eips::eip4844::IndexedBlobHash;
 use alloy_rpc_types_beacon::sidecar::{BeaconBlobBundle, BlobData};
 use async_trait::async_trait;
-use kona_derive::sources::IndexedBlobHash;
 use reqwest::Client;
 use std::{
     boxed::Box,
@@ -99,7 +99,11 @@ pub struct OnlineBeaconClient {
 
 impl OnlineBeaconClient {
     /// Creates a new [OnlineBeaconClient] from the provided [reqwest::Url].
-    pub fn new_http(base: String) -> Self {
+    pub fn new_http(mut base: String) -> Self {
+        // If base ends with a slash, remove it
+        if base.ends_with("/") {
+            base.remove(base.len() - 1);
+        }
         Self { base, inner: Client::new() }
     }
 }
@@ -134,7 +138,7 @@ impl BeaconClient for OnlineBeaconClient {
         let mut sidecars = Vec::with_capacity(hashes.len());
         hashes.iter().for_each(|hash| {
             if let Some(sidecar) =
-                raw_response.data.iter().find(|sidecar| sidecar.index == hash.index as u64)
+                raw_response.data.iter().find(|sidecar| sidecar.index == hash.index)
             {
                 sidecars.push(sidecar.clone());
             }

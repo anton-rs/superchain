@@ -2,7 +2,6 @@
 
 use crate::{Config, NodeError, SyncMode};
 use hilo_driver::HiloDriver;
-use tokio::sync::watch::{channel, Receiver};
 
 /// The core node runner.
 #[derive(Debug)]
@@ -13,20 +12,11 @@ pub struct Node {
     sync_mode: SyncMode,
     /// The L2 block hash to begin syncing from
     checkpoint_hash: Option<String>,
-    /// Receiver to listen for SIGINT signals
-    shutdown_recv: Receiver<bool>,
 }
 
 impl From<Config> for Node {
     fn from(config: Config) -> Self {
-        let (shutdown_sender, shutdown_recv) = channel(false);
-        ctrlc::set_handler(move || {
-            tracing::info!("shutting down");
-            shutdown_sender.send(true).expect("could not send shutdown signal");
-        })
-        .expect("could not register shutdown handler");
-
-        Self { config, sync_mode: SyncMode::Full, checkpoint_hash: None, shutdown_recv }
+        Self { config, sync_mode: SyncMode::Full, checkpoint_hash: None }
     }
 }
 
@@ -89,20 +79,8 @@ impl Node {
     /// Creates and starts the [HiloDriver] which handles the derivation sync process.
     async fn start_driver(&self) -> Result<(), NodeError> {
         let cfg = self.config.clone().into();
-        let exec = self.config.executor();
-        let mut driver = HiloDriver::standalone(cfg, exec).await?;
+        let mut driver = HiloDriver::standalone(cfg).await?;
         driver.start().await?;
-        Ok(())
-    }
-
-    /// Exits if a SIGINT signal is received
-    #[allow(unused)]
-    fn check_shutdown(&self) -> Result<(), NodeError> {
-        if *self.shutdown_recv.borrow() {
-            tracing::warn!("shutting down");
-            std::process::exit(0);
-        }
-
         Ok(())
     }
 }
