@@ -6,7 +6,7 @@ use kona_driver::{Driver, PipelineCursor, TipCursor};
 use std::sync::Arc;
 // use tokio::sync::watch::{channel, Receiver};
 
-use hilo_engine::{EngineApi, HiloExecutorConstructor};
+use hilo_engine::{EngineClient, EngineController};
 use hilo_providers_local::{InMemoryChainProvider, InMemoryL2ChainProvider};
 
 use crate::{
@@ -15,8 +15,7 @@ use crate::{
 };
 
 /// A driver from [kona_driver] that uses hilo-types.
-pub type KonaDriver =
-    Driver<EngineApi, HiloExecutorConstructor, HiloPipeline, HiloDerivationPipeline>;
+pub type KonaDriver = Driver<EngineClient, EngineController, HiloPipeline, HiloDerivationPipeline>;
 
 /// An error that can happen when running the driver.
 #[derive(Debug, thiserror::Error)]
@@ -44,14 +43,14 @@ pub struct HiloDriver<C: Context> {
     /// The driver config.
     pub cfg: Config,
     /// A constructor for execution.
-    pub exec: Option<HiloExecutorConstructor>,
+    pub exec: Option<EngineController>,
     // Receiver to listen for SIGINT signals
     // shutdown_recv: Receiver<bool>,
 }
 
 impl HiloDriver<StandaloneContext> {
     /// Creates a new [HiloDriver] with a standalone context.
-    pub async fn standalone(cfg: Config, exec: HiloExecutorConstructor) -> TransportResult<Self> {
+    pub async fn standalone(cfg: Config, exec: EngineController) -> TransportResult<Self> {
         let ctx = StandaloneContext::new(cfg.l1_rpc_url.clone()).await?;
         Ok(Self::new(cfg, ctx, exec))
     }
@@ -62,7 +61,7 @@ where
     C: Context,
 {
     /// Constructs a new [HiloDriver].
-    pub fn new(cfg: Config, ctx: C, exec: HiloExecutorConstructor) -> Self {
+    pub fn new(cfg: Config, ctx: C, exec: EngineController) -> Self {
         // TODO: Receive shutdown signal
         // let (_shutdown_sender, shutdown_recv) = channel(false);
         // ctrlc::set_handler(move || {

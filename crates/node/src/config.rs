@@ -2,7 +2,7 @@
 
 use crate::SyncMode;
 use alloy_rpc_types_engine::JwtSecret;
-use hilo_engine::HiloExecutorConstructor;
+use hilo_engine::EngineController;
 use op_alloy_genesis::RollupConfig;
 use serde::{Deserialize, Serialize};
 use url::Url;
@@ -56,9 +56,9 @@ pub struct Config {
 }
 
 impl Config {
-    /// Constructs a new [HiloExecutorConstructor] from the config.
-    pub fn executor(&self) -> HiloExecutorConstructor {
-        HiloExecutorConstructor::new_http(self.l2_engine_url.clone(), self.jwt_secret)
+    /// Constructs a new [EngineController] from the config.
+    pub fn executor(&self) -> EngineController {
+        EngineController::new(self.l2_engine_url.clone(), self.jwt_secret)
     }
 }
 

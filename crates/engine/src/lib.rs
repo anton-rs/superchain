@@ -6,11 +6,17 @@
 mod validation;
 pub use validation::ValidationMode;
 
-mod constructor;
-pub use constructor::HiloExecutorConstructor;
+mod traits;
+pub use traits::Engine;
 
-mod api;
-pub use api::EngineApi;
+mod errors;
+pub use errors::EngineApiError;
+
+mod controller;
+pub use controller::EngineController;
+
+mod client;
+pub use client::EngineClient;
 
 mod validator;
 pub use validator::{TrustedPayloadValidator, TrustedValidationError};
