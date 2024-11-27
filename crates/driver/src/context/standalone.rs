@@ -72,6 +72,7 @@ impl StandaloneContext {
                     for hash in hashes {
                         match client.get_block_by_hash(hash, false.into()).await {
                             Ok(Some(block)) => {
+                                info!("Received new block: {}", block.header.number);
                                 if let Err(e) = new_block_tx.try_send(block.header) {
                                     error!("Failed to send new block to channel: {:?}", e);
                                 }
@@ -104,6 +105,7 @@ impl StandaloneContext {
                     loop {
                         match client.get_block(BlockId::latest(), false.into()).await {
                             Ok(Some(block)) => {
+                                info!("Received new block: {}", block.header.number);
                                 if hash == block.header.hash {
                                     // If the latest hash hasn't changed, wait before polling again
                                     tokio::time::sleep(Duration::from_secs(2)).await;

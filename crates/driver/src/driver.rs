@@ -155,16 +155,6 @@ where
         }
     }
 
-    // Exits if a SIGINT signal is received
-    // fn check_shutdown(&self) -> Result<(), DriverError> {
-    //     if *self.shutdown_recv.borrow() {
-    //         tracing::warn!("shutting down");
-    //         std::process::exit(1);
-    //     }
-    //
-    //     Ok(())
-    // }
-
     /// Wait for the L2 genesis' corresponding L1 block to be available in the L1 chain.
     async fn wait_for_l2_genesis_l1_block(&mut self) {
         loop {
