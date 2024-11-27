@@ -99,7 +99,11 @@ pub struct OnlineBeaconClient {
 
 impl OnlineBeaconClient {
     /// Creates a new [OnlineBeaconClient] from the provided [reqwest::Url].
-    pub fn new_http(base: String) -> Self {
+    pub fn new_http(mut base: String) -> Self {
+        // If base ends with a slash, remove it
+        if base.ends_with("/") {
+            base.remove(base.len() - 1);
+        }
         Self { base, inner: Client::new() }
     }
 }

@@ -122,6 +122,11 @@ impl Config {
             .block_info_by_number(l1_origin_number)
             .await
             .map_err(|e| ConfigError::ChainProvider(e.to_string()))?;
-        Ok(PipelineCursor::new(channel_timeout, l1_origin))
+        let mut cursor = PipelineCursor::new(channel_timeout, l1_origin);
+        // TODO: construct a valid tip cursor
+        let tip =
+            kona_driver::TipCursor::new(safe_head_info, Default::default(), Default::default());
+        cursor.advance(l1_origin, tip);
+        Ok(cursor)
     }
 }
