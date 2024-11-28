@@ -225,7 +225,6 @@ impl Context for StandaloneContext {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use alloy_rpc_types::Header;
 
     #[tokio::test]
     async fn test_http_poller() -> eyre::Result<()> {
