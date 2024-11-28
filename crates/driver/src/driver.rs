@@ -1,13 +1,14 @@
 //! Contains the core `HiloDriver`.
 
+use alloy_provider::ReqwestProvider;
 use alloy_transport::TransportResult;
 use kona_derive::{errors::PipelineErrorKind, traits::SignalReceiver, types::ResetSignal};
 use kona_driver::{Driver, PipelineCursor, TipCursor};
 use std::sync::Arc;
-// use tokio::sync::watch::{channel, Receiver};
 
 use hilo_engine::EngineController;
-use hilo_providers_local::{InMemoryChainProvider, InMemoryL2ChainProvider};
+use hilo_providers_alloy::AlloyL2ChainProvider;
+use hilo_providers_local::InMemoryChainProvider;
 
 use crate::{
     ChainNotification, Config, ConfigError, Context, HiloDerivationPipeline, HiloPipeline,
@@ -64,7 +65,10 @@ where
     /// Initializes the [HiloPipeline].
     pub async fn init_pipeline(&self, cursor: PipelineCursor) -> Result<HiloPipeline, ConfigError> {
         let chain_provider = InMemoryChainProvider::with_capacity(self.cfg.cache_size);
-        let l2_chain_provider = InMemoryL2ChainProvider::with_capacity(self.cfg.cache_size);
+        // let l2_chain_provider = InMemoryL2ChainProvider::with_capacity(self.cfg.cache_size);
+        let provider = ReqwestProvider::new_http(self.cfg.l2_rpc_url.clone());
+        let l2_chain_provider =
+            AlloyL2ChainProvider::new(provider, Arc::new(self.cfg.rollup_config.clone()));
         Ok(HiloPipeline::new(
             Arc::new(self.cfg.rollup_config.clone()),
             cursor,
