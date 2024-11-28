@@ -30,7 +30,6 @@ alloy-consensus.workspace = true
 alloy-rpc-types-eth.workspace = true
 alloy-rpc-types-engine = { workspace = true, features = ["jwt", "serde"] }
 alloy-provider = { workspace = true, features = ["ipc", "ws", "reqwest"] }
-alloy-rpc-types = { workspace = true, features = ["ssz"] }
 alloy-primitives = { workspace = true, features = ["map"] }
 
 # Op Alloy

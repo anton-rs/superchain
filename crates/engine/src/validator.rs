@@ -102,6 +102,8 @@ impl TrustedPayloadValidator {
                 // Withdrawals on optimism are always empty, *after* canyon (Shanghai) activation
                 withdrawals: (header.timestamp >= self.canyon_activation).then_some(Vec::default()),
                 parent_beacon_block_root: header.parent_beacon_block_root,
+                target_blobs_per_block: None,
+                max_blobs_per_block: None,
             },
             transactions: Some(transactions),
             no_tx_pool: Some(true),

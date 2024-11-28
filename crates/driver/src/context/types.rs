@@ -4,7 +4,7 @@ use std::{collections::BTreeMap, sync::Arc};
 
 use alloy_eips::eip1898::BlockNumHash;
 use alloy_primitives::{BlockNumber, U256};
-use alloy_rpc_types::Header;
+use alloy_rpc_types_eth::Header;
 use reth_execution_types::Chain;
 use reth_exex::ExExNotification;
 
@@ -140,6 +140,7 @@ fn parse_reth_header_to_alloy_rpc(block: &reth_primitives::SealedBlock) -> Heade
             excess_blob_gas: block.excess_blob_gas,
             parent_beacon_block_root: block.parent_beacon_block_root,
             requests_hash: block.requests_hash,
+            target_blobs_per_block: None,
         },
     }
 }
