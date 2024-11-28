@@ -193,7 +193,7 @@ impl InMemoryChainProviderInner {
     /// Commits [TxEnvelope]s to the provider.
     fn commit_txs(&mut self, chain: &Arc<Chain>) {
         for b in chain.blocks_iter() {
-            let txs = b.transactions().flat_map(reth_to_alloy_tx).collect();
+            let txs = b.transactions().iter().flat_map(reth_to_alloy_tx).collect();
             self.hash_to_txs.insert(b.hash(), txs);
         }
     }
@@ -318,7 +318,7 @@ pub fn reth_to_alloy_tx(tx: &reth_primitives::TransactionSigned) -> Option<TxEnv
                 value: l.value,
                 input: l.input.clone(),
             };
-            TxEnvelope::Legacy(Signed::new_unchecked(legacy_tx, sig, tx.hash))
+            TxEnvelope::Legacy(Signed::new_unchecked(legacy_tx, sig, tx.signature_hash()))
         }
         Transaction::Eip2930(e) => {
             let eip_tx = TxEip2930 {
@@ -341,7 +341,7 @@ pub fn reth_to_alloy_tx(tx: &reth_primitives::TransactionSigned) -> Option<TxEnv
                         .collect(),
                 ),
             };
-            TxEnvelope::Eip2930(Signed::new_unchecked(eip_tx, sig, tx.hash))
+            TxEnvelope::Eip2930(Signed::new_unchecked(eip_tx, sig, tx.signature_hash()))
         }
         Transaction::Eip1559(e) => {
             let eip_tx = TxEip1559 {
@@ -365,7 +365,7 @@ pub fn reth_to_alloy_tx(tx: &reth_primitives::TransactionSigned) -> Option<TxEnv
                         .collect(),
                 ),
             };
-            TxEnvelope::Eip1559(Signed::new_unchecked(eip_tx, sig, tx.hash))
+            TxEnvelope::Eip1559(Signed::new_unchecked(eip_tx, sig, tx.signature_hash()))
         }
         Transaction::Eip4844(e) => {
             let eip_tx = TxEip4844 {
@@ -394,7 +394,7 @@ pub fn reth_to_alloy_tx(tx: &reth_primitives::TransactionSigned) -> Option<TxEnv
             TxEnvelope::Eip4844(Signed::new_unchecked(
                 TxEip4844Variant::TxEip4844(eip_tx),
                 sig,
-                tx.hash,
+                tx.signature_hash(),
             ))
         }
         Transaction::Eip7702(_) => unimplemented!("EIP-7702 not implemented"),
