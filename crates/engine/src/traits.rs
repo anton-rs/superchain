@@ -4,6 +4,7 @@ use alloy_eips::eip1898::BlockNumberOrTag;
 use alloy_primitives::B256;
 use alloy_rpc_types_engine::{
     ExecutionPayloadV3, ForkchoiceState, ForkchoiceUpdated, PayloadId, PayloadStatus,
+    ExecutionPayloadEnvelopeV2,
 };
 use async_trait::async_trait;
 use op_alloy_protocol::L2BlockInfo;
@@ -17,7 +18,13 @@ pub trait Engine {
     type Error: core::fmt::Debug;
 
     /// Gets a payload for the given payload id.
-    async fn get_payload(
+    async fn get_payload_v2(
+        &self,
+        payload_id: PayloadId,
+    ) -> Result<ExecutionPayloadEnvelopeV2, Self::Error>;
+
+    /// Gets a payload for the given payload id.
+    async fn get_payload_v3(
         &self,
         payload_id: PayloadId,
     ) -> Result<OpExecutionPayloadEnvelopeV3, Self::Error>;
