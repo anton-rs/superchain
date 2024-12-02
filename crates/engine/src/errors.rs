@@ -1,5 +1,7 @@
 //! Error types
 
+use alloy_rpc_types_engine::PayloadStatus;
+
 /// An error that originated from the engine api.
 #[derive(Debug, thiserror::Error)]
 pub enum EngineError {
@@ -18,4 +20,25 @@ pub enum EngineError {
     /// Failed to get the `L2BlockInfo` for the given block number.
     #[error("Failed to get the `L2BlockInfo` for the given block number")]
     L2BlockInfoFetch,
+}
+
+/// An error that originated one level above the engine api,
+/// in the [crate::EngineController].
+#[derive(Debug, thiserror::Error)]
+pub enum EngineControllerError {
+    /// Invalid payload attributes were processed.
+    #[error("Invalid payload attributes were processed")]
+    InvalidPayloadAttributes,
+    /// Missing payload id.
+    #[error("Missing payload id")]
+    MissingPayloadId,
+    /// An error from the engine api.
+    #[error("An error from the engine api: {0}")]
+    EngineError(#[from] EngineError),
+    /// The forkchoice update was rejected with the given payload status.
+    #[error("The forkchoice update was rejected with the given payload status: {0:?}")]
+    ForkchoiceRejected(PayloadStatus),
+    /// Failed to fetch block.
+    #[error("Failed to fetch block {0}")]
+    BlockFetchFailed(u64),
 }
