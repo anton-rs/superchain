@@ -102,7 +102,19 @@ impl EngineController {
         &mut self,
         payload: &ExecutionPayloadEnvelopeV2,
     ) -> Result<(), EngineControllerError> {
-        self.push_payload(payload.clone()).await?;
+        let withdrawals = match &payload.execution_payload {
+            ExecutionPayloadFieldV2::V2(ExecutionPayloadV2 { withdrawals, .. }) => {
+                withdrawals.clone()
+            }
+            ExecutionPayloadFieldV2::V1(_) => vec![],
+        };
+        let payload_inner = payload.clone().into_v1_payload();
+        let exec_payload = ExecutionPayloadV2 { payload_inner, withdrawals };
+        let status = self.client.new_payload_v2(exec_payload).await?;
+        if !status.is_valid() && status.status != PayloadStatusEnum::Accepted {
+            return Err(EngineControllerError::InvalidPayloadAttributes);
+        }
+
         let payload = payload.clone().into_v1_payload();
         self.unsafe_head = BlockInfo {
             number: payload.block_number,
@@ -226,26 +238,6 @@ impl EngineController {
         let new_epoch = new_head.into();
         self.update_safe_head(new_head, new_epoch, true);
         self.update_forkchoice().await?;
-        Ok(())
-    }
-
-    /// Sends the given [ExecutionPayloadEnvelopeV2] to the [Engine] via `NewPayload`
-    async fn push_payload(
-        &self,
-        payload: ExecutionPayloadEnvelopeV2,
-    ) -> Result<(), EngineControllerError> {
-        let withdrawals = match &payload.execution_payload {
-            ExecutionPayloadFieldV2::V2(ExecutionPayloadV2 { withdrawals, .. }) => {
-                withdrawals.clone()
-            }
-            ExecutionPayloadFieldV2::V1(_) => vec![],
-        };
-        let payload = ExecutionPayloadV2 { payload_inner: payload.into_v1_payload(), withdrawals };
-        let status = self.client.new_payload_v2(payload).await?;
-        if !status.is_valid() && status.status != PayloadStatusEnum::Accepted {
-            return Err(EngineControllerError::InvalidPayloadAttributes);
-        }
-
         Ok(())
     }
 
