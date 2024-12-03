@@ -3827,7 +3827,7 @@ dependencies = [
 [[package]]
 name = "kona-derive"
 version = "0.1.0"
-source = "git+https://github.com/anton-rs/kona?branch=rf/fix/executor-trait#bb228e9fffd6907bb7989c757053008dc4ad8f71"
+source = "git+https://github.com/anton-rs/kona?branch=rf/fix/executor-trait#83ac16adaa63deb4a35b47d2182f01994a696a62"
 dependencies = [
  "alloy-consensus 0.7.2",
  "alloy-eips 0.7.2",
@@ -3846,7 +3846,7 @@ dependencies = [
 [[package]]
 name = "kona-driver"
 version = "0.1.0"
-source = "git+https://github.com/anton-rs/kona?branch=rf/fix/executor-trait#bb228e9fffd6907bb7989c757053008dc4ad8f71"
+source = "git+https://github.com/anton-rs/kona?branch=rf/fix/executor-trait#83ac16adaa63deb4a35b47d2182f01994a696a62"
 dependencies = [
  "alloy-consensus 0.7.2",
  "alloy-primitives",

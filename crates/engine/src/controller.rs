@@ -171,10 +171,10 @@ impl EngineController {
 
     /// Sends [OpPayloadAttributes] via a `ForkChoiceUpdated` message to the [Engine] and returns
     /// the [ExecutionPayloadEnvelopeV2] sent by the Execution Client.
-    async fn build_payload(
+    async fn new_payload(
         &self,
         attributes: OpPayloadAttributes,
-    ) -> Result<ExecutionPayloadEnvelopeV2, EngineControllerError> {
+    ) -> Result<BlockInfo, EngineControllerError> {
         let forkchoice = self.create_forkchoice_state();
 
         let update = self.client.forkchoice_update(forkchoice, Some(attributes)).await?;
@@ -185,7 +185,27 @@ impl EngineController {
 
         let id = update.payload_id.ok_or(EngineControllerError::MissingPayloadId)?;
 
-        self.client.get_payload_v2(id).await.map_err(|e| e.into())
+        let payload = self.client.get_payload_v2(id).await.map_err(|e| e.into())?;
+
+        let withdrawals = match &payload.execution_payload {
+            ExecutionPayloadFieldV2::V2(ExecutionPayloadV2 { withdrawals, .. }) => {
+                withdrawals.clone()
+            }
+            ExecutionPayloadFieldV2::V1(_) => vec![],
+        };
+        let payload = ExecutionPayloadV2 { payload_inner: payload.into_v1_payload(), withdrawals };
+        let status = self.client.new_payload_v2(payload).await?;
+        if !status.is_valid() && status.status != PayloadStatusEnum::Accepted {
+            return Err(EngineControllerError::InvalidPayloadAttributes);
+        }
+
+        let v1_payload = payload.clone().into_v1_payload();
+        Ok(BlockInfo {
+            number: v1_payload.block_number,
+            hash: v1_payload.block_hash,
+            parent_hash: v1_payload.parent_hash,
+            timestamp: v1_payload.timestamp,
+        })
     }
 
     /// Initiates validation & production of a new block:
@@ -200,21 +220,10 @@ impl EngineController {
         &mut self,
         attributes: OpPayloadAttributes,
     ) -> Result<(), EngineControllerError> {
-        let payload = self.build_payload(attributes).await?;
-        let v1_payload = payload.clone().into_v1_payload();
-
-        let new_head = BlockInfo {
-            number: v1_payload.block_number,
-            hash: v1_payload.block_hash,
-            parent_hash: v1_payload.parent_hash,
-            timestamp: v1_payload.timestamp,
-        };
+        let new_head = self.new_payload(attributes).await?;
         let new_epoch = new_head.into();
-
-        self.push_payload(payload).await?;
         self.update_safe_head(new_head, new_epoch, true);
         self.update_forkchoice().await?;
-
         Ok(())
     }
 
