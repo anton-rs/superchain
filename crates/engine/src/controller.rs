@@ -169,8 +169,9 @@ impl EngineController {
         Ok(())
     }
 
-    /// Sends [OpPayloadAttributes] via a `ForkChoiceUpdated` message to the [Engine] and returns
-    /// the [ExecutionPayloadEnvelopeV2] sent by the Execution Client.
+    /// Sends [OpPayloadAttributes] via a `ForkChoiceUpdated` message to the [Engine].
+    /// If the payload is valid, the engine will create a new block and update the `safe_head`,
+    /// `safe_epoch`, and `unsafe_head`.
     async fn new_payload(
         &self,
         attributes: OpPayloadAttributes,
@@ -185,7 +186,7 @@ impl EngineController {
 
         let id = update.payload_id.ok_or(EngineControllerError::MissingPayloadId)?;
 
-        let payload = self.client.get_payload_v2(id).await.map_err(|e| e.into())?;
+        let payload = self.client.get_payload_v2(id).await?;
 
         let withdrawals = match &payload.execution_payload {
             ExecutionPayloadFieldV2::V2(ExecutionPayloadV2 { withdrawals, .. }) => {
@@ -193,19 +194,20 @@ impl EngineController {
             }
             ExecutionPayloadFieldV2::V1(_) => vec![],
         };
-        let payload = ExecutionPayloadV2 { payload_inner: payload.into_v1_payload(), withdrawals };
-        let status = self.client.new_payload_v2(payload).await?;
+        let payload_inner = payload.into_v1_payload();
+        let block_info = BlockInfo {
+            number: payload_inner.block_number,
+            hash: payload_inner.block_hash,
+            parent_hash: payload_inner.parent_hash,
+            timestamp: payload_inner.timestamp,
+        };
+        let payload = ExecutionPayloadV2 { payload_inner, withdrawals };
+        let status = self.client.new_payload_v2(payload.clone()).await?;
         if !status.is_valid() && status.status != PayloadStatusEnum::Accepted {
             return Err(EngineControllerError::InvalidPayloadAttributes);
         }
 
-        let v1_payload = payload.clone().into_v1_payload();
-        Ok(BlockInfo {
-            number: v1_payload.block_number,
-            hash: v1_payload.block_hash,
-            parent_hash: v1_payload.parent_hash,
-            timestamp: v1_payload.timestamp,
-        })
+        Ok(block_info)
     }
 
     /// Initiates validation & production of a new block:
