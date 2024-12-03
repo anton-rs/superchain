@@ -6,7 +6,8 @@ use alloy_primitives::{Bytes, B256};
 use alloy_provider::{ReqwestProvider, RootProvider};
 use alloy_rpc_client::RpcClient;
 use alloy_rpc_types_engine::{
-    ExecutionPayloadV3, ForkchoiceState, ForkchoiceUpdated, JwtSecret, PayloadId, PayloadStatus,
+    ExecutionPayloadEnvelopeV2, ExecutionPayloadInputV2, ExecutionPayloadV2, ExecutionPayloadV3,
+    ForkchoiceState, ForkchoiceUpdated, JwtSecret, PayloadId, PayloadStatus,
 };
 use alloy_transport_http::{
     hyper_util::{
@@ -64,7 +65,14 @@ impl EngineClient {
 impl Engine for EngineClient {
     type Error = EngineError;
 
-    async fn get_payload(
+    async fn get_payload_v2(
+        &self,
+        payload_id: PayloadId,
+    ) -> Result<ExecutionPayloadEnvelopeV2, Self::Error> {
+        self.engine.get_payload_v2(payload_id).await.map_err(|_| EngineError::PayloadError)
+    }
+
+    async fn get_payload_v3(
         &self,
         payload_id: PayloadId,
     ) -> Result<OpExecutionPayloadEnvelopeV3, Self::Error> {
@@ -79,7 +87,20 @@ impl Engine for EngineClient {
         self.engine.fork_choice_updated_v2(state, attr).await.map_err(|_| EngineError::PayloadError)
     }
 
-    async fn new_payload(
+    async fn new_payload_v2(
+        &self,
+        payload: ExecutionPayloadV2,
+    ) -> Result<PayloadStatus, Self::Error> {
+        self.engine
+            .new_payload_v2(ExecutionPayloadInputV2 {
+                execution_payload: payload.payload_inner,
+                withdrawals: Some(payload.withdrawals),
+            })
+            .await
+            .map_err(|_| EngineError::PayloadError)
+    }
+
+    async fn new_payload_v3(
         &self,
         payload: ExecutionPayloadV3,
         parent_beacon_block_root: B256,
