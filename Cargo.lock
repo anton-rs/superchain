@@ -274,7 +274,7 @@ dependencies = [
  "alloy-sol-types",
  "serde",
  "serde_json",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tracing",
 ]
 
@@ -323,7 +323,7 @@ dependencies = [
  "futures-utils-wasm",
  "serde",
  "serde_json",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
 ]
 
 [[package]]
@@ -417,7 +417,7 @@ dependencies = [
  "schnellru",
  "serde",
  "serde_json",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tokio",
  "tracing",
  "url",
@@ -539,7 +539,7 @@ dependencies = [
  "alloy-serde 0.7.2",
  "serde",
  "serde_with",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
 ]
 
 [[package]]
@@ -681,7 +681,7 @@ dependencies = [
  "auto_impl",
  "elliptic-curve",
  "k256",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
 ]
 
 [[package]]
@@ -766,7 +766,7 @@ dependencies = [
  "futures-utils-wasm",
  "serde",
  "serde_json",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tokio",
  "tower",
  "tracing",
@@ -2969,7 +2969,7 @@ dependencies = [
  "reth-exex",
  "reth-primitives",
  "serde",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tokio",
  "tracing",
  "url",
@@ -2997,7 +2997,7 @@ dependencies = [
  "op-alloy-protocol",
  "op-alloy-provider",
  "op-alloy-rpc-types-engine",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tokio",
  "tower",
  "tracing",
@@ -3039,7 +3039,7 @@ dependencies = [
  "op-alloy-registry",
  "serde",
  "serde_json",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tracing",
  "url",
 ]
@@ -3066,7 +3066,7 @@ dependencies = [
  "parking_lot",
  "reqwest",
  "serde",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tokio",
  "tracing",
  "url",
@@ -3827,7 +3827,7 @@ dependencies = [
 [[package]]
 name = "kona-derive"
 version = "0.1.0"
-source = "git+https://github.com/anton-rs/kona?branch=rf/fix/executor-trait#525151e574df9ba0b9deaae64975af0ac7483ea8"
+source = "git+https://github.com/anton-rs/kona?branch=rf/fix/executor-trait#bb228e9fffd6907bb7989c757053008dc4ad8f71"
 dependencies = [
  "alloy-consensus 0.7.2",
  "alloy-eips 0.7.2",
@@ -3839,14 +3839,14 @@ dependencies = [
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tracing",
 ]
 
 [[package]]
 name = "kona-driver"
 version = "0.1.0"
-source = "git+https://github.com/anton-rs/kona?branch=rf/fix/executor-trait#525151e574df9ba0b9deaae64975af0ac7483ea8"
+source = "git+https://github.com/anton-rs/kona?branch=rf/fix/executor-trait#bb228e9fffd6907bb7989c757053008dc4ad8f71"
 dependencies = [
  "alloy-consensus 0.7.2",
  "alloy-primitives",
@@ -3857,7 +3857,7 @@ dependencies = [
  "op-alloy-genesis",
  "op-alloy-protocol",
  "op-alloy-rpc-types-engine",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tracing",
 ]
 
@@ -4972,7 +4972,7 @@ dependencies = [
  "derive_more",
  "serde",
  "serde_with",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
 ]
 
 [[package]]
@@ -4988,7 +4988,7 @@ dependencies = [
  "alloy-serde 0.7.2",
  "derive_more",
  "serde",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
 ]
 
 [[package]]
@@ -5003,7 +5003,7 @@ dependencies = [
  "alloy-sol-types",
  "serde",
  "serde_repr",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
 ]
 
 [[package]]
@@ -5025,7 +5025,7 @@ dependencies = [
  "op-alloy-consensus 0.7.2",
  "op-alloy-genesis",
  "serde",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tracing",
  "unsigned-varint 0.8.0",
 ]
@@ -5092,7 +5092,7 @@ dependencies = [
  "op-alloy-protocol",
  "serde",
  "snap",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
 ]
 
 [[package]]
@@ -5539,7 +5539,7 @@ dependencies = [
  "rustc-hash 2.1.0",
  "rustls",
  "socket2",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tokio",
  "tracing",
 ]
@@ -5558,7 +5558,7 @@ dependencies = [
  "rustls",
  "rustls-pki-types",
  "slab",
- "thiserror 2.0.3",
+ "thiserror 2.0.4",
  "tinyvec",
  "tracing",
  "web-time",
@@ -8263,11 +8263,11 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "2.0.3"
+version = "2.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c006c85c7651b3cf2ada4584faa36773bd07bac24acfb39f3c431b36d7e667aa"
+checksum = "2f49a1853cf82743e3b7950f77e0f4d622ca36cf4317cba00c767838bac8d490"
 dependencies = [
- "thiserror-impl 2.0.3",
+ "thiserror-impl 2.0.4",
 ]
 
 [[package]]
@@ -8283,9 +8283,9 @@ dependencies = [
 
 [[package]]
 name = "thiserror-impl"
-version = "2.0.3"
+version = "2.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f077553d607adc1caf65430528a576c757a71ed73944b66ebb58ef2bbd243568"
+checksum = "8381894bb3efe0c4acac3ded651301ceee58a15d47c2e34885ed1908ad667061"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -9444,9 +9444,9 @@ dependencies = [
 
 [[package]]
 name = "xml-rs"
-version = "0.8.23"
+version = "0.8.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "af310deaae937e48a26602b730250b4949e125f468f11e6990be3e5304ddd96f"
+checksum = "ea8b391c9a790b496184c29f7f93b9ed5b16abb306c05415b68bcc16e4d06432"
 
 [[package]]
 name = "xmltree"

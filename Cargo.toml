@@ -56,29 +56,29 @@ kona-driver = { version = "0.1.0", default-features = false }
 
 # Alloy
 alloy-rlp = { version = "0.3.9", default-features = false }
-alloy-eips = { version = "0.7.0", default-features = false }
-alloy-serde = { version = "0.7.0", default-features = false }
-alloy-signer = { version = "0.7.0", default-features = false }
-alloy-network = { version = "0.7.0", default-features = false }
-alloy-provider = { version = "0.7.0", default-features = false }
-alloy-consensus = { version = "0.7.0", default-features = false }
-alloy-rpc-types = { version = "0.7.0", default-features = false }
-alloy-transport = { version = "0.7.0", default-features = false }
-alloy-rpc-client = { version = "0.7.0", default-features = false }
-alloy-primitives = { version = "0.8.13", default-features = false }
-alloy-rpc-types-eth = { version = "0.7.0", default-features = false }
-alloy-node-bindings = { version = "0.7.0", default-features = false }
-alloy-transport-http = { version = "0.7.0", default-features = false }
-alloy-rpc-types-beacon = { version = "0.7.0", default-features = false }
-alloy-rpc-types-engine = { version = "0.7.0", default-features = false }
+alloy-eips = { version = "0.7.2", default-features = false }
+alloy-serde = { version = "0.7.2", default-features = false }
+alloy-signer = { version = "0.7.2", default-features = false }
+alloy-network = { version = "0.7.2", default-features = false }
+alloy-provider = { version = "0.7.2", default-features = false }
+alloy-consensus = { version = "0.7.2", default-features = false }
+alloy-rpc-types = { version = "0.7.2", default-features = false }
+alloy-transport = { version = "0.7.2", default-features = false }
+alloy-rpc-client = { version = "0.7.2", default-features = false }
+alloy-primitives = { version = "0.8.14", default-features = false }
+alloy-rpc-types-eth = { version = "0.7.2", default-features = false }
+alloy-node-bindings = { version = "0.7.2", default-features = false }
+alloy-transport-http = { version = "0.7.2", default-features = false }
+alloy-rpc-types-beacon = { version = "0.7.2", default-features = false }
+alloy-rpc-types-engine = { version = "0.7.2", default-features = false }
 
 # OP Alloy
-op-alloy-genesis = { version = "0.7.1", default-features = false }
-op-alloy-provider = { version = "0.7.1", default-features = false }
-op-alloy-protocol = { version = "0.7.1", default-features = false }
-op-alloy-registry = { version = "0.7.1", default-features = false }
-op-alloy-consensus = { version = "0.7.1", default-features = false }
-op-alloy-rpc-types-engine = { version = "0.7.1", default-features = false }
+op-alloy-genesis = { version = "0.7.2", default-features = false }
+op-alloy-provider = { version = "0.7.2", default-features = false }
+op-alloy-protocol = { version = "0.7.2", default-features = false }
+op-alloy-registry = { version = "0.7.2", default-features = false }
+op-alloy-consensus = { version = "0.7.2", default-features = false }
+op-alloy-rpc-types-engine = { version = "0.7.2", default-features = false }
 
 # Reth
 reth-exex = { git = "https://github.com/paradigmxyz/reth", rev = "aea5613" }
@@ -87,12 +87,12 @@ reth-primitives = { git = "https://github.com/paradigmxyz/reth", rev = "aea5613"
 reth-execution-types = { git = "https://github.com/paradigmxyz/reth", rev = "aea5613" }
 
 # Serialization
-serde = { version = "1.0.214", default-features = false }
-serde_json = { version = "1.0.132", default-features = false }
+serde = { version = "1.0.215", default-features = false }
+serde_json = { version = "1.0.133", default-features = false }
 
 # Tracing
-tracing = { version = "0.1.40", default-features = false }
-tracing-subscriber = { version = "0.3.18", default-features = false }
+tracing = { version = "0.1.41", default-features = false }
+tracing-subscriber = { version = "0.3.19", default-features = false }
 metrics-exporter-prometheus = { version = "0.16.0", default-features = false }
 
 # Networking
@@ -100,31 +100,31 @@ snap = "1.1.1"
 discv5 = "0.9.0"
 libp2p = "0.54.1"
 openssl = "0.10.68"
-libp2p-identity = "0.2.9"
+libp2p-identity = "0.2.10"
 
 # Testing
-arbtest = "0.3"
-arbitrary = "1"
+arbtest = "0.3.1"
+arbitrary = "1.4.1"
 
 # CLI
-clap = "4.5.20"
-figment = { version = "0.10.8", features = ["toml", "env"] }
+clap = "4.5.21"
+figment = { version = "0.10.19", features = ["toml", "env"] }
 
 # Misc
-url = "2.5.2"
+url = "2.5.4"
 lru = "0.12.5"
 eyre = "0.6.12"
 again = "0.1.2"
-tokio = "1.41.0"
+tokio = "1.42.0"
 futures = "0.3.31"
 reqwest = "0.12.9"
-tower = "0.5"
+tower = "0.5.1"
 http-body-util = "0.1.2"
 parking_lot = "0.12.3"
 async-trait = "0.1.83"
 futures-timer = "3.0.3"
 unsigned-varint = "0.8.0"
-thiserror = { version = "2.0", default-features = false }
+thiserror = { version = "2.0.4", default-features = false }
 derive_more = { version = "1.0.0", default-features = false }
 lazy_static = { version = "1.5.0", default-features = false }
-ctrlc = { version = "3.2.3", features = ["termination"] }
+ctrlc = { version = "3.4.5", features = ["termination"] }
