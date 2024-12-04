@@ -25,7 +25,7 @@ alloy-consensus.workspace = true
 alloy-network.workspace = true
 alloy-rpc-client.workspace = true
 alloy-rpc-types-eth.workspace = true
-alloy-provider = { workspace = true, features = ["ipc", "reqwest"] }
+alloy-provider = { workspace = true, features = ["ipc", "reqwest", "engine-api"] }
 alloy-primitives = { workspace = true, features = ["map"] }
 alloy-transport-http = { workspace = true, features = ["jwt-auth"] }
 alloy-rpc-types-engine = { workspace = true, features = ["jwt", "serde"] }

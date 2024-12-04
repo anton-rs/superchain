@@ -4,7 +4,12 @@
 
 use alloy_consensus::{Header, Sealed};
 use alloy_primitives::B256;
+use alloy_rpc_types_engine::{
+    ExecutionPayloadEnvelopeV2, ExecutionPayloadFieldV2, ExecutionPayloadV2, ForkchoiceState,
+    JwtSecret, PayloadStatusEnum,
+};
 use async_trait::async_trait;
+use hilo_providers_alloy::AlloyL2ChainProvider;
 use kona_driver::Executor;
 use op_alloy_consensus::OpBlock;
 use op_alloy_genesis::RollupConfig;
@@ -14,31 +19,7 @@ use std::{sync::Arc, time::Duration};
 use tokio::time::sleep;
 use url::Url;
 
-use hilo_providers_alloy::AlloyL2ChainProvider;
-
-use alloy_rpc_types_engine::{
-    ExecutionPayloadEnvelopeV2, ExecutionPayloadFieldV2, ExecutionPayloadV2, ForkchoiceState,
-    JwtSecret, PayloadStatusEnum,
-};
-
-use crate::{Engine, EngineClient, EngineControllerError};
-
-/// L1 epoch block
-#[derive(Copy, Clone, Debug, Default, PartialEq, Eq)]
-pub struct Epoch {
-    /// The block number
-    pub number: u64,
-    /// The block hash
-    pub hash: B256,
-    /// The block timestamp
-    pub timestamp: u64,
-}
-
-impl From<BlockInfo> for Epoch {
-    fn from(block: BlockInfo) -> Self {
-        Self { number: block.number, hash: block.hash, timestamp: block.timestamp }
-    }
-}
+use crate::{Engine, EngineClient, EngineControllerError, Epoch};
 
 /// The engine controller.
 #[derive(Debug, Clone)]
@@ -149,22 +130,6 @@ impl EngineController {
         self.client.forkchoice_update(forkchoice, None).await.is_ok()
     }
 
-    /// Returns which fork choice version to use based on the timestamp
-    /// and rollup config.
-    pub fn fork_choice_version(&self, timestamp: u64) -> u64 {
-        // TODO: replace this with https://github.com/alloy-rs/op-alloy/pull/321
-        //       once it's merged and updated in kona.
-        if self.ecotone_timestamp.is_some_and(|t| timestamp >= t) {
-            // Cancun
-            3
-        } else if self.canyon_timestamp.is_some_and(|t| timestamp >= t) {
-            // Shanghai
-            2
-        } else {
-            1
-        }
-    }
-
     /// Updates the forkchoice by sending `engine_forkchoiceUpdatedV2` (v3 post Ecotone) to the
     /// engine with no payload.
     async fn skip_attributes(
@@ -181,47 +146,6 @@ impl EngineController {
         Ok(())
     }
 
-    /// Sends [OpPayloadAttributes] via a `ForkChoiceUpdated` message to the [Engine].
-    /// If the payload is valid, the engine will create a new block and update the `safe_head`,
-    /// `safe_epoch`, and `unsafe_head`.
-    async fn new_payload(
-        &self,
-        attributes: OpPayloadAttributes,
-    ) -> Result<BlockInfo, EngineControllerError> {
-        let forkchoice = self.create_forkchoice_state();
-
-        let update = self.client.forkchoice_update(forkchoice, Some(attributes)).await?;
-
-        if !update.payload_status.status.is_valid() {
-            return Err(EngineControllerError::InvalidPayloadAttributes);
-        }
-
-        let id = update.payload_id.ok_or(EngineControllerError::MissingPayloadId)?;
-
-        let payload = self.client.get_payload_v2(id).await?;
-
-        let withdrawals = match &payload.execution_payload {
-            ExecutionPayloadFieldV2::V2(ExecutionPayloadV2 { withdrawals, .. }) => {
-                withdrawals.clone()
-            }
-            ExecutionPayloadFieldV2::V1(_) => vec![],
-        };
-        let payload_inner = payload.into_v1_payload();
-        let block_info = BlockInfo {
-            number: payload_inner.block_number,
-            hash: payload_inner.block_hash,
-            parent_hash: payload_inner.parent_hash,
-            timestamp: payload_inner.timestamp,
-        };
-        let payload = ExecutionPayloadV2 { payload_inner, withdrawals };
-        let status = self.client.new_payload_v2(payload.clone()).await?;
-        if !status.is_valid() && status.status != PayloadStatusEnum::Accepted {
-            return Err(EngineControllerError::InvalidPayloadAttributes);
-        }
-
-        Ok(block_info)
-    }
-
     /// Initiates validation & production of a new block:
     /// - Sends the [OpPayloadAttributes] to the engine via `engine_forkchoiceUpdatedV2` (V3 post
     ///   Ecotone) and retrieves the [ExecutionPayloadEnvelopeV2]
@@ -234,7 +158,8 @@ impl EngineController {
         &mut self,
         attributes: OpPayloadAttributes,
     ) -> Result<(), EngineControllerError> {
-        let new_head = self.new_payload(attributes).await?;
+        let forkchoice = self.create_forkchoice_state();
+        let new_head = self.client.accept_payload(forkchoice, attributes).await?;
         let new_epoch = new_head.into();
         self.update_safe_head(new_head, new_epoch, true);
         self.update_forkchoice().await?;

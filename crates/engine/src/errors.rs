@@ -20,6 +20,15 @@ pub enum EngineError {
     /// Failed to get the `L2BlockInfo` for the given block number.
     #[error("Failed to get the `L2BlockInfo` for the given block number")]
     L2BlockInfoFetch,
+    /// Invalid payload attributes were received from a fork choice update.
+    #[error("Invalid payload attributes were received from a fork choice update")]
+    InvalidForkChoiceAttributes,
+    /// Invalid payload attributes were received from a new payload method.
+    #[error("Invalid payload attributes were received from a new payload method")]
+    InvalidNewPayloadAttributes,
+    /// Missing payload id.
+    #[error("Missing payload id")]
+    MissingPayloadId,
 }
 
 /// An error that originated one level above the engine api,
@@ -29,9 +38,6 @@ pub enum EngineControllerError {
     /// Invalid payload attributes were processed.
     #[error("Invalid payload attributes were processed")]
     InvalidPayloadAttributes,
-    /// Missing payload id.
-    #[error("Missing payload id")]
-    MissingPayloadId,
     /// An error from the engine api.
     #[error("An error from the engine api: {0}")]
     EngineError(#[from] EngineError),
