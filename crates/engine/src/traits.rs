@@ -3,8 +3,8 @@
 use alloy_eips::eip1898::BlockNumberOrTag;
 use alloy_primitives::B256;
 use alloy_rpc_types_engine::{
-    ExecutionPayloadEnvelopeV2, ExecutionPayloadV2, ExecutionPayloadV3, ForkchoiceState,
-    ForkchoiceUpdated, PayloadId, PayloadStatus,
+    ExecutionPayloadEnvelopeV2, ExecutionPayloadV1, ExecutionPayloadV2, ExecutionPayloadV3,
+    ForkchoiceState, ForkchoiceUpdated, PayloadId, PayloadStatus,
 };
 use async_trait::async_trait;
 use op_alloy_protocol::L2BlockInfo;
@@ -16,6 +16,12 @@ use op_alloy_rpc_types_engine::{OpExecutionPayloadEnvelopeV3, OpPayloadAttribute
 #[async_trait]
 pub trait Engine {
     type Error: core::fmt::Debug;
+
+    /// Gets a payload for the given payload id.
+    async fn get_payload_v1(
+        &self,
+        payload_id: PayloadId,
+    ) -> Result<ExecutionPayloadV1, Self::Error>;
 
     /// Gets a payload for the given payload id.
     async fn get_payload_v2(
@@ -35,6 +41,12 @@ pub trait Engine {
         state: ForkchoiceState,
         attr: Option<OpPayloadAttributes>,
     ) -> Result<ForkchoiceUpdated, Self::Error>;
+
+    /// Creates a new payload with the given [ExecutionPayloadV1].
+    async fn new_payload_v1(
+        &self,
+        payload: ExecutionPayloadV1,
+    ) -> Result<PayloadStatus, Self::Error>;
 
     /// Creates a new payload with the given [ExecutionPayloadV2].
     async fn new_payload_v2(

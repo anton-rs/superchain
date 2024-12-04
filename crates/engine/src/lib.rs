@@ -15,6 +15,9 @@ pub use errors::{EngineControllerError, EngineError};
 mod controller;
 pub use controller::EngineController;
 
+mod epoch;
+pub use epoch::Epoch;
+
 mod client;
 pub use client::EngineClient;
 
