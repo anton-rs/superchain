@@ -19,27 +19,27 @@ use op_alloy_protocol::{BlockInfo, L2BlockInfo};
 use op_alloy_rpc_types_engine::OpAttributesWithParent;
 use std::{boxed::Box, sync::Arc};
 
-use hilo_providers_alloy::{AlloyL2ChainProvider, DurableBlobProvider};
-use hilo_providers_local::InMemoryChainProvider;
+use hilo_providers_alloy::{AlloyChainProvider, AlloyL2ChainProvider, DurableBlobProvider};
+// use hilo_providers_local::InMemoryChainProvider;
 
 /// Hilo Derivation Pipeline.
 pub type HiloDerivationPipeline =
     DerivationPipeline<HiloAttributesQueue<HiloDataProvider>, AlloyL2ChainProvider>;
 
 /// Hilo Ethereum data source.
-pub type HiloDataProvider = EthereumDataSource<InMemoryChainProvider, DurableBlobProvider>;
+pub type HiloDataProvider = EthereumDataSource<AlloyChainProvider, DurableBlobProvider>;
 
 /// Hilo payload attributes builder for the `AttributesQueue` stage of the derivation
 /// pipeline.
 pub type HiloAttributesBuilder =
-    StatefulAttributesBuilder<InMemoryChainProvider, AlloyL2ChainProvider>;
+    StatefulAttributesBuilder<AlloyChainProvider, AlloyL2ChainProvider>;
 
 /// Hilo attributes queue for the derivation pipeline.
 pub type HiloAttributesQueue<DAP> = AttributesQueue<
     BatchProvider<
         BatchStream<
             ChannelReader<
-                ChannelProvider<FrameQueue<L1Retrieval<DAP, L1Traversal<InMemoryChainProvider>>>>,
+                ChannelProvider<FrameQueue<L1Retrieval<DAP, L1Traversal<AlloyChainProvider>>>>,
             >,
             AlloyL2ChainProvider,
         >,
@@ -55,7 +55,7 @@ pub struct HiloPipeline {
     pub pipeline: HiloDerivationPipeline,
     /// The chain provider.
     #[allow(unused)]
-    pub chain_provider: InMemoryChainProvider,
+    pub chain_provider: AlloyChainProvider,
     /// The L2 chain provider.
     #[allow(unused)]
     pub l2_chain_provider: AlloyL2ChainProvider,
@@ -67,7 +67,7 @@ impl HiloPipeline {
         cfg: Arc<RollupConfig>,
         sync_start: PipelineCursor,
         blob_provider: DurableBlobProvider,
-        chain_provider: InMemoryChainProvider,
+        chain_provider: AlloyChainProvider,
         l2_chain_provider: AlloyL2ChainProvider,
     ) -> Self {
         let attributes = StatefulAttributesBuilder::new(
@@ -92,7 +92,7 @@ impl HiloPipeline {
 impl DriverPipeline<HiloDerivationPipeline> for HiloPipeline {
     /// Flushes provider caches on re-orgs.
     fn flush(&mut self) {
-        self.chain_provider.flush();
+        // self.chain_provider.flush();
         // self.l2_chain_provider.flush();
     }
 }

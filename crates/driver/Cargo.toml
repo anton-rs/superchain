@@ -15,7 +15,7 @@ rust-version.workspace = true
 [dependencies]
 # Local
 hilo-engine.workspace = true
-hilo-providers-local.workspace = true
+# hilo-providers-local.workspace = true
 hilo-providers-alloy.workspace = true
 
 # Kona

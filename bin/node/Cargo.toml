@@ -31,5 +31,5 @@ tracing.workspace = true
 serde_json = { workspace = true, features = ["std"] }
 clap = { workspace = true, features = ["derive", "env"] }
 tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
-tracing-subscriber = { workspace = true, features = ["env-filter", "fmt"] }
+tracing-subscriber = { workspace = true, features = ["env-filter", "fmt", "ansi"] }
 metrics-exporter-prometheus = { workspace = true, features = ["http-listener"] }

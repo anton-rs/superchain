@@ -7,8 +7,7 @@ use kona_driver::{Driver, PipelineCursor, TipCursor};
 use std::sync::Arc;
 
 use hilo_engine::EngineController;
-use hilo_providers_alloy::AlloyL2ChainProvider;
-use hilo_providers_local::InMemoryChainProvider;
+use hilo_providers_alloy::{AlloyChainProvider, AlloyL2ChainProvider};
 
 use crate::{
     ChainNotification, Config, ConfigError, Context, HiloDerivationPipeline, HiloPipeline,
@@ -64,8 +63,10 @@ where
 
     /// Initializes the [HiloPipeline].
     pub async fn init_pipeline(&self, cursor: PipelineCursor) -> Result<HiloPipeline, ConfigError> {
-        let chain_provider = InMemoryChainProvider::with_capacity(self.cfg.cache_size);
+        // let chain_provider = InMemoryChainProvider::with_capacity(self.cfg.cache_size);
         // let l2_chain_provider = InMemoryL2ChainProvider::with_capacity(self.cfg.cache_size);
+        let provider = ReqwestProvider::new_http(self.cfg.l1_rpc_url.clone());
+        let l1_chain_provider = AlloyChainProvider::new(provider);
         let provider = ReqwestProvider::new_http(self.cfg.l2_rpc_url.clone());
         let l2_chain_provider =
             AlloyL2ChainProvider::new(provider, Arc::new(self.cfg.rollup_config.clone()));
@@ -73,7 +74,7 @@ where
             Arc::new(self.cfg.rollup_config.clone()),
             cursor,
             self.cfg.blob_provider().await?,
-            chain_provider.clone(),
+            l1_chain_provider,
             l2_chain_provider,
         ))
     }
@@ -156,16 +157,6 @@ where
             }
         }
     }
-
-    // Exits if a SIGINT signal is received
-    // fn check_shutdown(&self) -> Result<(), DriverError> {
-    //     if *self.shutdown_recv.borrow() {
-    //         tracing::warn!("shutting down");
-    //         std::process::exit(1);
-    //     }
-    //
-    //     Ok(())
-    // }
 
     /// Wait for the L2 genesis' corresponding L1 block to be available in the L1 chain.
     async fn wait_for_l2_genesis_l1_block(&mut self) {
