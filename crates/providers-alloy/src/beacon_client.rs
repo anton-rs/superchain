@@ -99,11 +99,8 @@ pub struct OnlineBeaconClient {
 
 impl OnlineBeaconClient {
     /// Creates a new [OnlineBeaconClient] from the provided [reqwest::Url].
-    pub fn new_http(mut base: String) -> Self {
-        // If base ends with a slash, remove it
-        if base.ends_with("/") {
-            base.remove(base.len() - 1);
-        }
+    pub fn new_http(base: String) -> Self {
+        let base = base.as_str().trim_end_matches('/').to_string();
         Self { base, inner: Client::new() }
     }
 }
@@ -114,13 +111,11 @@ impl BeaconClient for OnlineBeaconClient {
 
     async fn config_spec(&self) -> Result<APIConfigResponse, Self::Error> {
         let first = self.inner.get(format!("{}/{}", self.base, SPEC_METHOD)).send().await?;
-        println!("config spec: {:?}", first);
         first.json::<APIConfigResponse>().await
     }
 
     async fn beacon_genesis(&self) -> Result<APIGenesisResponse, Self::Error> {
         let first = self.inner.get(format!("{}/{}", self.base, GENESIS_METHOD)).send().await?;
-        println!("genesis spec: {:?}", first);
         first.json::<APIGenesisResponse>().await
     }
 
@@ -134,7 +129,6 @@ impl BeaconClient for OnlineBeaconClient {
             .get(format!("{}/{}/{}", self.base, SIDECARS_METHOD_PREFIX, slot))
             .send()
             .await?;
-        println!("blob sidecars: {:?}", raw_response);
         let raw_response = raw_response.json::<BeaconBlobBundle>().await?;
 
         // Filter the sidecars by the hashes, in-order.
