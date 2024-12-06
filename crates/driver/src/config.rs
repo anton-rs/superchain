@@ -1,8 +1,10 @@
 //! Configuration for the Hilo Driver.
 
+use alloy_consensus::{Header, Sealed};
+use alloy_primitives::B256;
 use alloy_rpc_types_engine::JwtSecret;
 use kona_derive::traits::ChainProvider;
-use kona_driver::PipelineCursor;
+use kona_driver::{PipelineCursor, TipCursor};
 use op_alloy_genesis::RollupConfig;
 use op_alloy_protocol::{BatchValidationProvider, BlockInfo, L2BlockInfo};
 use serde::{Deserialize, Serialize};
@@ -124,6 +126,26 @@ impl Config {
         Ok((l1_block_info, l2_block_info))
     }
 
+    /// Returns the safe header.
+    pub async fn safe_header(&self, num: u64) -> Result<Sealed<Header>, ConfigError> {
+        let mut l2_provider = self.l2_provider();
+        let block = l2_provider
+            .block_by_number(num)
+            .await
+            .map_err(|e| ConfigError::L2ChainProvider(e.to_string()))?;
+        Ok(Sealed::new(block.header))
+    }
+
+    /// Returns the output at the given block number.
+    pub async fn safe_output(&self, num: u64) -> Result<B256, ConfigError> {
+        let mut l2_provider = self.l2_provider();
+        let output = l2_provider
+            .output_at_block(num)
+            .await
+            .map_err(|e| ConfigError::L2ChainProvider(e.to_string()))?;
+        Ok(output)
+    }
+
     /// Constructs a [PipelineCursor] from the origin.
     pub async fn tip_cursor(&self) -> Result<PipelineCursor, ConfigError> {
         // Load the safe head info.
@@ -144,11 +166,12 @@ impl Config {
             .await
             .map_err(|e| ConfigError::ChainProvider(e.to_string()))?;
         let mut cursor = PipelineCursor::new(channel_timeout, l1_origin);
-        // TODO: construct a valid tip cursor
-        let tip =
-            kona_driver::TipCursor::new(safe_head_info, Default::default(), Default::default());
-        info!("Starting with tip cursor: {:?}", tip);
-        println!("Starting with tip cursor: {:?}", tip);
+
+        // Construct the tip cursor
+        let header = self.safe_header(safe_head_info.block_info.number).await?;
+        let output = self.safe_output(safe_head_info.block_info.number).await?;
+        let tip = TipCursor::new(safe_head_info, header, output);
+        info!("Starting at tip: {}", tip.l2_safe_head.block_info.number);
         cursor.advance(l1_origin, tip);
         Ok(cursor)
     }

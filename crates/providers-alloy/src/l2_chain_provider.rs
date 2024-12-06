@@ -1,6 +1,6 @@
 //! Providers that use alloy provider types on the backend.
 
-use alloy_primitives::{Bytes, U64};
+use alloy_primitives::{Bytes, B256, U64};
 use alloy_provider::{Provider, ReqwestProvider};
 use alloy_rlp::Decodable;
 use alloy_transport::{RpcError, TransportErrorKind, TransportResult};
@@ -64,6 +64,23 @@ impl AlloyL2ChainProvider {
         let inner = ReqwestProvider::new_http(url);
         Self::new(inner, rollup_config)
     }
+
+    /// Returns the output at the given block number.
+    pub async fn output_at_block(
+        &mut self,
+        number: u64,
+    ) -> Result<B256, AlloyL2ChainProviderError> {
+        let raw_output: TransportResult<Bytes> =
+            self.inner.raw_request("optimism_outputAtBlock".into(), [U64::from(number)]).await;
+        let raw_output: Bytes = match raw_output {
+            Ok(b) => b,
+            Err(_) => {
+                return Err(AlloyL2ChainProviderError::OutputNotFound(number));
+            }
+        };
+        B256::decode(&mut raw_output.as_ref())
+            .map_err(|_| AlloyL2ChainProviderError::OutputDecode(number))
+    }
 }
 
 /// An error for the [AlloyL2ChainProvider].
@@ -81,6 +98,12 @@ pub enum AlloyL2ChainProviderError {
     /// Failed to convert the block into a [SystemConfig].
     #[error("Failed to convert block {0} into SystemConfig")]
     SystemConfigConversion(u64),
+    /// Output was not found for the given block number.
+    #[error("Output not found for block {0}")]
+    OutputNotFound(u64),
+    /// Failed to decode the output.
+    #[error("Failed to decode output for block {0}")]
+    OutputDecode(u64),
 }
 
 impl From<AlloyL2ChainProviderError> for PipelineErrorKind {
@@ -97,6 +120,12 @@ impl From<AlloyL2ChainProviderError> for PipelineErrorKind {
             ),
             AlloyL2ChainProviderError::SystemConfigConversion(_) => PipelineErrorKind::Temporary(
                 PipelineError::Provider("system config conversion failed".to_string()),
+            ),
+            AlloyL2ChainProviderError::OutputNotFound(_) => PipelineErrorKind::Temporary(
+                PipelineError::Provider("output not found".to_string()),
+            ),
+            AlloyL2ChainProviderError::OutputDecode(_) => PipelineErrorKind::Temporary(
+                PipelineError::Provider("output decode failed".to_string()),
             ),
         }
     }
