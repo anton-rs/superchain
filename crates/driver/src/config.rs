@@ -169,7 +169,14 @@ impl Config {
 
         // Construct the tip cursor
         let header = self.safe_header(safe_head_info.block_info.number).await?;
-        let output = self.safe_output(safe_head_info.block_info.number).await?;
+        let output = match self.safe_output(safe_head_info.block_info.number).await {
+            Ok(output) => output,
+            Err(e) => {
+                warn!("Failed to load output at tip: {}", e);
+                info!("Using default output at tip");
+                B256::default()
+            }
+        };
         let tip = TipCursor::new(safe_head_info, header, output);
         info!("Starting at tip: {}", tip.l2_safe_head.block_info.number);
         cursor.advance(l1_origin, tip);
