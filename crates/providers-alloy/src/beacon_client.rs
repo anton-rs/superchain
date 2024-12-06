@@ -114,11 +114,13 @@ impl BeaconClient for OnlineBeaconClient {
 
     async fn config_spec(&self) -> Result<APIConfigResponse, Self::Error> {
         let first = self.inner.get(format!("{}/{}", self.base, SPEC_METHOD)).send().await?;
+        println!("config spec: {:?}", first);
         first.json::<APIConfigResponse>().await
     }
 
     async fn beacon_genesis(&self) -> Result<APIGenesisResponse, Self::Error> {
         let first = self.inner.get(format!("{}/{}", self.base, GENESIS_METHOD)).send().await?;
+        println!("genesis spec: {:?}", first);
         first.json::<APIGenesisResponse>().await
     }
 
@@ -132,6 +134,7 @@ impl BeaconClient for OnlineBeaconClient {
             .get(format!("{}/{}/{}", self.base, SIDECARS_METHOD_PREFIX, slot))
             .send()
             .await?;
+        println!("blob sidecars: {:?}", raw_response);
         let raw_response = raw_response.json::<BeaconBlobBundle>().await?;
 
         // Filter the sidecars by the hashes, in-order.
