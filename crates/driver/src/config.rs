@@ -147,6 +147,7 @@ impl Config {
         // TODO: construct a valid tip cursor
         let tip =
             kona_driver::TipCursor::new(safe_head_info, Default::default(), Default::default());
+        info!(target: "config", "Starting with tip cursor: {:?}", tip);
         cursor.advance(l1_origin, tip);
         Ok(cursor)
     }
